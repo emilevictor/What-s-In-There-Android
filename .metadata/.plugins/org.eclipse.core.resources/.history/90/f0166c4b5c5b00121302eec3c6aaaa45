@@ -1,0 +1,35 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp">
+
+
+    <TextView
+        android:id="@+id/campusLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/campusLabel"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    
+    <Spinner android:id="@+id/campusChoiceSpinner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        />
+
+    
+    <EditText android:id="@+id/room_textfield"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@+string/room_textfield" />
+    
+    <Button android:id="@+id/button_send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@+string/button_send"
+        android:onClick="findRoomButtonPressed" />
+
+</LinearLayout>

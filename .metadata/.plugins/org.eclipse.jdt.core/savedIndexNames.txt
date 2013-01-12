@@ -1,0 +1,6 @@
+INDEX VERSION 1.126+/Users/emilevictor/Dropbox/Uni/Android/.metadata/.plugins/org.eclipse.jdt.core
+4112375513.index
+765453901.index
+885751019.index
+394014451.index
+1574911128.index

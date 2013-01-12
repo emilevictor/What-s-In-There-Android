@@ -1,0 +1,72 @@
+package com.emilevictor.wit;
+
+import java.util.Calendar;
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+ort android.widget.Spinner;
+
+public class MainActivity extends Activity {
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		
+		/*
+		 * Set up the campus spinner
+		 */
+		
+		Spinner campusSpinner = (Spinner) findViewById(R.id.campusChoiceSpinner);
+		
+		//Create an arrayadapter using the string array and a default spinner layout
+		ArrayAdapter<CharSequence> campusAdapter = ArrayAdapter.createFromResource(this,
+				R.array.campuses, android.R.layout.simple_spinner_item);
+		
+		//Specify the layout to use when the list of choices appears
+		campusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		
+		//Apply the adapter to the spinner
+		campusSpinner.setAdapter(campusAdapter);
+		
+		/*
+		 * Set up the day spinner
+		 */
+		
+		//Get the day of the week
+		Calendar rightNow = Calendar.getInstance();
+		int day = rightNow.get(Calendar.DAY_OF_WEEK);
+		
+		Spinner daySpinner = (Spinner) findViewById(R.id.daysSpinner);
+		
+		ArrayAdapter<CharSequence> dayAdapter = ArrayAdapter.createFromResource(this,R.array.days,
+				android.R.layout.simple_spinner_item);
+		
+		dayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		
+		daySpinner.setAdapter(dayAdapter);
+		
+		CharSequence currentDay = dayAdapter.getItem(day);
+		currentDay = currentDay + " (today)";
+
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.activity_main, menu);
+		return true;
+	}
+	
+	public void findRoomButtonPressed(View view) {
+    	Intent intent = new Intent(this, FindRoomContentsActivity.class);
+    	
+    	
+    	startActivity(intent);
+	}
+
+}

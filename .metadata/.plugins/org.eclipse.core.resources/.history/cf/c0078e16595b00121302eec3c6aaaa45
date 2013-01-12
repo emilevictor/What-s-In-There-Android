@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">What\'s In There - UQ</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="room_textfield">Building number and room, e.g. 7-116</string>
+    <string name="button_send">Find classes in this room</string>
+    <string name="title_activity_find_room_contents">FindRoomContentsActivity</string>
+	<string name="stlucia_radioButton">St Lucia</string>
+	<string name="ipswich_radioButton">Ipswich</string>
+	<string name="gatton_radioButton">Gatton</string>
+</resources>
