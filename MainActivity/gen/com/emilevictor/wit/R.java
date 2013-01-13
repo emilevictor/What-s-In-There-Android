@@ -48,6 +48,7 @@ public final class R {
         public static final int room_textfield=0x7f040003;
         public static final int stlucia_radioButton=0x7f040006;
         public static final int title_activity_find_room_contents=0x7f040005;
+        public static final int waiting_on_connection=0x7f04000c;
     }
     public static final class style {
         /** 

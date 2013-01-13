@@ -33,5 +33,7 @@
 	
 	<string name="dayLabel">Choose which day to search for:</string>
 	
+	<string name="waiting_on_connection">Wait a second, I\'m not connected to the internet yet. Check your settings.</string>
+	
 	
 </resources>
