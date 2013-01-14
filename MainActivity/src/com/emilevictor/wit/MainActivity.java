@@ -27,6 +27,9 @@ public class MainActivity extends Activity {
 	public static final String ANY = "Any";
 	private static final String buildingsXMLUrl =
 			"http://rota.eait.uq.edu.au/buildings.xml";
+	
+	private Integer room;
+	private Integer building;
 
 
 
@@ -117,7 +120,18 @@ public class MainActivity extends Activity {
 			List<String> roomAndBuilding;
 			try {
 				roomAndBuilding = rbp.giveMeRoomAndBuildingSeparately();
-				buildingXMLParser.getBuildingIdFromNumber(roomAndBuilding.get(0),buildings);
+				String returnedBuildingString = buildingXMLParser.getBuildingIdFromNumber(roomAndBuilding.get(0),buildings);
+				
+				//The building was not found - oh noes!
+				if (returnedBuildingString.equals("NOTFOUND"))
+				{
+					
+				} else {
+					this.building = Integer.getInteger(returnedBuildingString);
+					this.room = Integer.getInteger(roomAndBuilding.get(1));
+					
+					
+				}
 				startActivity(intent);
 			} catch (InvalidInputException e) {
 				
