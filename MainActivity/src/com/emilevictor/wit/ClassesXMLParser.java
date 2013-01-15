@@ -20,39 +20,8 @@ public class ClassesXMLParser {
 
 
 
-	public static class Class {
-		public String courseCode;
-		public String semesterId;
-		public String semesterNum;
-		public String semesterYear;
-		public String campusCode;
-		public String day;
-		public String startTime;
-		public String finishTime;
-		public String room;
-		public String classType;
-		public String buildingName;
-
-
-
-
-		private Class (String courseCode, String semesterId, String semesterNum,
-				String semesterYear, String campusCode,
-				String day, String startTime, String finishTime,
-				String room, String classType) {
-			this.courseCode = courseCode;
-			this.semesterId = semesterId;
-			this.semesterNum = semesterNum;
-			this.semesterYear = semesterYear;
-			this.campusCode = campusCode;
-			this.day = day;
-			this.startTime = startTime;
-			this.finishTime = finishTime;
-			this.room = room;
-			this.classType = classType;
-		}
-	}
 	
+
 	private static Class readGroup(XmlPullParser parser, Class inputClass) throws XmlPullParserException, IOException
 	{
 		parser.require(XmlPullParser.START_TAG, ns, "group");
@@ -62,9 +31,9 @@ public class ClassesXMLParser {
 			if (parser.getEventType() != XmlPullParser.START_TAG) {
 				continue;
 			}
-			
+
 			String name = parser.getName();
-			
+
 			if (name.equals("id"))
 			{
 				skip(parser);
@@ -78,25 +47,25 @@ public class ClassesXMLParser {
 				skip(parser);
 			}
 		}
-		
+
 		parser.require(XmlPullParser.END_TAG, ns, "group");
-		
-		
+
+
 		return inputClass;
 	}
-	
+
 	private static Class readSeries(XmlPullParser parser, Class inputClass) throws XmlPullParserException, IOException
 	{
 		parser.require(XmlPullParser.START_TAG, ns, "series");
-		
+
 		while (parser.next() != XmlPullParser.END_TAG)
 		{
 			if (parser.getEventType() != XmlPullParser.START_TAG) {
 				continue;
 			}
-			
+
 			String name = parser.getName();
-			
+
 			if (name.equals("id"))
 			{
 				skip(parser);
@@ -111,7 +80,7 @@ public class ClassesXMLParser {
 		parser.require(XmlPullParser.END_TAG, ns, "series");
 		return inputClass;
 	}
-	
+
 	private static Class readOffering(XmlPullParser parser, Class inputClass) throws XmlPullParserException, IOException
 	{
 		parser.require(XmlPullParser.START_TAG, ns, "offering");
@@ -120,9 +89,9 @@ public class ClassesXMLParser {
 			if (parser.getEventType() != XmlPullParser.START_TAG) {
 				continue;
 			}
-			
+
 			String name = parser.getName();
-			
+
 			if (name.equals("id"))
 			{
 				skip(parser);
@@ -152,7 +121,7 @@ public class ClassesXMLParser {
 		parser.require(XmlPullParser.END_TAG, ns, "offering");
 		return inputClass;
 	}
-	
+
 	private static Class readCampus(XmlPullParser parser, Class inputClass) throws XmlPullParserException, IOException
 	{
 		parser.require(XmlPullParser.START_TAG,ns,"campus");
@@ -161,9 +130,9 @@ public class ClassesXMLParser {
 			if (parser.getEventType() != XmlPullParser.START_TAG) {
 				continue;
 			}
-			
+
 			String name = parser.getName();
-			
+
 			if (name.equals("code"))
 			{
 				inputClass.campusCode = readText(parser);
@@ -172,11 +141,11 @@ public class ClassesXMLParser {
 				skip(parser);
 			}
 		}
-		
+
 		parser.require(XmlPullParser.END_TAG,ns,"campus");
 		return inputClass;
 	}
-	
+
 	private static Class readSemester(XmlPullParser parser, Class inputClass) throws XmlPullParserException, IOException
 	{
 		parser.require(XmlPullParser.START_TAG,ns,"semester");
@@ -185,9 +154,9 @@ public class ClassesXMLParser {
 			if (parser.getEventType() != XmlPullParser.START_TAG) {
 				continue;
 			}
-			
+
 			String name = parser.getName();
-			
+
 			if (name.equals("id"))
 			{
 				inputClass.semesterId = readText(parser);
@@ -202,17 +171,17 @@ public class ClassesXMLParser {
 				inputClass.semesterYear = readText(parser);
 			}
 		}
-		
+
 		parser.require(XmlPullParser.END_TAG,ns,"semester");
 		return inputClass;
 	}
 
-	private static Class readClass(XmlPullParser parser) throws XmlPullParserException, IOException {
+	private static Class readClass(XmlPullParser parser) throws XmlPullParserException, IOException, ClassNotCompleteException {
 		parser.require(XmlPullParser.START_TAG, ns, "session");
 		//String id = null;
 		//String number = null;
 		Class cls = new Class(null,null,null,null,null,null,null,null,null,null);
-		
+
 		while (parser.next() != XmlPullParser.END_TAG) {
 			if (parser.getEventType() != XmlPullParser.START_TAG) {
 				continue;
@@ -241,9 +210,29 @@ public class ClassesXMLParser {
 				skip(parser);
 			}
 		}
-		return cls;
+
+		if (cls.buildingName != null &&
+				cls.campusCode != null &&
+				cls.classType != null &&
+				cls.courseCode != null &&
+				cls.day != null &&
+				cls.finishTime != null &&
+				cls.room != null &&
+				cls.semesterId != null &&
+				cls.semesterNum != null &&
+				cls.semesterYear != null &&
+				cls.startTime != null &&
+				cls.finishTime != null
+				)
+		{
+			return cls;
+		} else {
+			throw new ClassNotCompleteException("The class that was returned was " +
+					"not complete - there was missing information.");
+		}
+
 	}
-	
+
 	private static Class readBuilding(XmlPullParser parser, Class inputClass) throws XmlPullParserException, IOException
 	{
 		parser.require(XmlPullParser.START_TAG, ns, "building");
@@ -252,9 +241,9 @@ public class ClassesXMLParser {
 			if (parser.getEventType() != XmlPullParser.START_TAG) {
 				continue;
 			}
-			
+
 			String name = parser.getName();
-			
+
 			if (name.equals("name"))
 			{
 				inputClass.buildingName = readText(parser);
@@ -288,7 +277,12 @@ public class ClassesXMLParser {
 			String name = parser.getName();
 			// Starts by looking for the entry tag
 			if (name.equals("session")) {
-				sessions.add(readClass(parser));
+				try {
+					sessions.add(readClass(parser));
+				} catch (ClassNotCompleteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			} else {
 				skip(parser);
 			}
@@ -296,7 +290,7 @@ public class ClassesXMLParser {
 		return sessions;
 	}
 
-	public static List parse (InputStream in) throws XmlPullParserException, IOException {
+	public static List<Class> parse (InputStream in) throws XmlPullParserException, IOException {
 		try {
 			XmlPullParser parser = Xml.newPullParser();
 			parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);

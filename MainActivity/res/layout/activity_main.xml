@@ -55,5 +55,21 @@
 	    android:layout_height="wrap_content"
 	    android:text="@+string/button_send"
 	    android:onClick="findRoomButtonPressed"/>
+    
+    <ProgressBar
+        android:id="@+id/progressBar"
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"
+         style="@android:style/Widget.ProgressBar.Horizontal"
+         android:layout_marginRight="5dp"
+         android:layout_marginLeft="5dp" />
+    
+    <TextView
+        android:id="@+id/progressText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        />
 
 </LinearLayout>

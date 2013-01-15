@@ -22,9 +22,9 @@ public class buildingXMLParser {
 	{
 		for (Building building : buildings)
 		{
-			if (building.id.equals(realBuildingNumber))
+			if (building.number.equals(realBuildingNumber))
 			{
-				return building.number;
+				return building.id;
 			}
 		}
 		return "NOTFOUND";
