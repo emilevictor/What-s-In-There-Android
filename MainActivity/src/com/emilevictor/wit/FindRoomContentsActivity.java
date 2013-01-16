@@ -32,63 +32,94 @@ public class FindRoomContentsActivity extends Activity {
 		
 		String currentHourString = "";
 		String portionOfDay = "";
+		Class foundClass = null;
 		for (int hour = 8; hour <= 23;)
 		{
 			if (hour < 12)
 			{
 				currentHourString = hour + ":00 AM";
 				portionOfDay = "AM";
-			} else {
+			} else if (hour == 12) {
+				portionOfDay = "PM";
+				currentHourString = "12:00 PM";
+			}else {
+			
 				currentHourString = (hour-12) + ":00 PM";
 				portionOfDay = "PM";
 			}
+			boolean weFoundOne = false;
+			boolean hourAlreadyIncremented = false;
 			
 			for (Class currentClass : thisSemestersClasses)
 			{
 				if (currentClass.startTime.equals(currentHourString)) {
-					todaysClassesSortedWithSpacers[hour-8] = currentClass;
-					hour += 1;
-				} else if (!currentClass.startTime.equals(currentHourString) && hour == 8)
-				{
-					Class blankClass = new Class();
-					blankClass.courseCode = "Room free";
-					blankClass.startTime = currentHourString;
-					blankClass.classType = "F";
-					todaysClassesSortedWithSpacers[hour-8] = blankClass;
-					hour += 1;
-				} else {
-					
-					Class blankClass = new Class();
-					blankClass.courseCode = "Room free";
-					blankClass.startTime = currentHourString;
-					blankClass.classType = "F";
-					todaysClassesSortedWithSpacers[hour-8] = blankClass;
-					hour +=1;
-					
+					foundClass = currentClass;
+					weFoundOne = true;
+					break;
 				}
 				
-				if (currentClass.finishTime.equals(hour + ":50 " + portionOfDay))
+			}
+			if (weFoundOne)
+			{
+				todaysClassesSortedWithSpacers[hour-8] = foundClass;
+				
+				//If it is only an hour long
+				if (foundClass.finishTime.equals(hour + ":50 " + portionOfDay))
 				{
-					//hour += 1;
-				} else {
-					//hour +=1;
+					//Do nothing
 					
-					/*if (hour < 12)
+					
+					//If it is two hours long, add one to the hour and insert it again, but make the start time the new hour.
+				} else if (foundClass.finishTime.equals((hour+1) + ":50 " + portionOfDay)) {
+					hour += 1;
+					//recalculate the time string
+					if (hour < 12)
 					{
 						currentHourString = hour + ":00 AM";
 						portionOfDay = "AM";
-					} else {
+					} else if (hour == 12) {
+						portionOfDay = "PM";
+						currentHourString = "12:00 PM";
+					}else {
+					
 						currentHourString = (hour-12) + ":00 PM";
 						portionOfDay = "PM";
 					}
 					
+					//Create a new dummy class
 					Class blankClass = new Class();
-					blankClass.courseCode = "Room free";
+					blankClass.courseCode = "-- " + foundClass.courseCode + " continues";
 					blankClass.startTime = currentHourString;
-					blankClass.classType = "F";
-					todaysClassesSortedWithSpacers[hour-8] = blankClass;*/
+					blankClass.classType = foundClass.classType;
+					todaysClassesSortedWithSpacers[hour-8] = blankClass;
+					
+					//rarer case, three hour long class.
+				} else if (foundClass.finishTime.equals((hour+1) + ":50 " + portionOfDay))
+				{
 					
 				}
+			} else {
+				Class blankClass = new Class();
+				blankClass.courseCode = "Room free";
+				blankClass.startTime = currentHourString;
+				blankClass.classType = "F";
+				todaysClassesSortedWithSpacers[hour-8] = blankClass;
+			}
+			
+			hour += 1;
+			
+			
+		}
+		
+		for (int i = 0; i < 18 ; i++)
+		{
+			if (todaysClassesSortedWithSpacers[i] == null)
+			{
+				Class blankClass = new Class();
+				blankClass.courseCode = "Room free";
+				blankClass.startTime = currentHourString;
+				blankClass.classType = "F";
+				todaysClassesSortedWithSpacers[i] = blankClass;
 			}
 		}
 		

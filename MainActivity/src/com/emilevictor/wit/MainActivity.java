@@ -126,13 +126,13 @@ public class MainActivity extends Activity {
 					"Thursday", "Friday", "Saturday"};
 			dayMap = new HashMap<String,Integer>();
 			
-			dayMap.put("Sun", 1);
-			dayMap.put("Mon",2);
-			dayMap.put("Tue",3);
-			dayMap.put("Wed", 4);
-			dayMap.put("Thu", 5);
-			dayMap.put("Fri", 6);
-			dayMap.put("Sat", 7);
+			dayMap.put("Sun", 0);
+			dayMap.put("Mon",1);
+			dayMap.put("Tue",2);
+			dayMap.put("Wed", 3);
+			dayMap.put("Thu", 4);
+			dayMap.put("Fri", 5);
+			dayMap.put("Sat", 6);
 			
 
 			daysStringArray[day] = daysStringArray[day] + " (today)";
@@ -318,10 +318,11 @@ public class MainActivity extends Activity {
 								for (Class cls : classes)
 								{
 									
-									
+									Log.d("selectedDay, dayMap day, cls.day", ((Integer)selectedDay).toString() + " " +  dayMap.get(cls.day) + " " + cls.day);
 									if (cls.semesterId.equals(Settings.currentSemesterNumber)
 											&& dayMap.get(cls.day) == selectedDay)
 									{
+										
 										intent.putExtra("CLASS"+String.valueOf(numberOfClassesToday), cls);
 										numberOfClassesToday += 1;
 									}
