@@ -9,9 +9,6 @@ import java.util.List;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.os.AsyncTask;
-import android.util.Log;
-
-import com.emilevictor.wit.buildingXMLParser.Building;
 
 
 public class RetreiveClassesTask extends AsyncTask<String, Void, List<Class>> {
@@ -34,7 +31,6 @@ public class RetreiveClassesTask extends AsyncTask<String, Void, List<Class>> {
         return stream;
     }
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	protected List<Class> doInBackground(String... urlPlusRoomPlusBuilding) {
 		

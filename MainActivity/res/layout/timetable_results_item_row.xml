@@ -1,34 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="70dp"
-    android:orientation="horizontal"
-    android:padding="10dp" >
+    android:orientation="horizontal" >
     
     <TextView android:id="@+id/timeOfDay"
+        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
         android:gravity="center_vertical"
         android:textStyle="bold"
-        android:textSize="22sp"
+        android:textSize="16sp"
         android:textColor="#000000"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_alignParentLeft="true"
+        
         />
         
     
     <TextView android:id="@+id/classType"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:gravity="center_vertical"
-        android:layout_marginRight="15dp"
+        android:layout_marginRight="10dp"
         android:layout_marginTop="5dp"
-        android:paddingLeft="15dp"
+        android:paddingLeft="10dp"
         android:layout_marginBottom="5dp"
+        android:layout_gravity="left"
         android:background="#49075e"
         android:text="L"
         android:textColor="#FFFFFF"
+        android:layout_alignParentRight="true"
         android:textSize="18sp"/>
     
     <TextView android:id="@+id/courseCode"
@@ -36,10 +38,12 @@
         android:layout_height="fill_parent"
         android:gravity="center_vertical"
         android:textStyle="bold"
-        android:textSize="22sp"
+        android:textSize="16sp"
         android:textColor="#000000"
+        android:layout_toRightOf="@id/timeOfDay"
         android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginBottom="5dp" />
     
 
-</LinearLayout>
+</RelativeLayout>

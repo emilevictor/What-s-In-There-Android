@@ -1,6 +1,10 @@
 package com.emilevictor.wit;
 
 public class NoBuildingFoundException extends Exception {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3030286743120115139L;
 	String exception;
 	public NoBuildingFoundException(){
 		super();

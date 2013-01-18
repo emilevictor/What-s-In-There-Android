@@ -7,7 +7,12 @@ public class RoomBuildingParser {
 	private String inputFromForm;
 	
 	public class InvalidInputException extends Exception {
-	    public InvalidInputException(String message) {
+	    /**
+		 * 
+		 */
+		private static final long serialVersionUID = -1857854769415033105L;
+
+		public InvalidInputException(String message) {
 	        super(message);
 	    }
 	}

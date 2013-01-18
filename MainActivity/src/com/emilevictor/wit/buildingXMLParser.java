@@ -18,11 +18,12 @@ public class buildingXMLParser {
 
 	}
 
-	public static String getBuildingIdFromNumber(String realBuildingNumber, List<Building> buildings)
+	public static String getBuildingIdFromNumber(String realBuildingNumber, String currentCampusCode, List<Building> buildings)
 	{
 		for (Building building : buildings)
 		{
-			if (building.number.equals(realBuildingNumber))
+			if (building.number.equals(realBuildingNumber)
+					&& building.campusCode.equals(currentCampusCode))
 			{
 				return building.id;
 			}
@@ -34,10 +35,12 @@ public class buildingXMLParser {
 	public static class Building {
 		public final String id;
 		public final String number;
+		public final String campusCode;
 
-		private Building(String id, String number) {
+		private Building(String id, String number, String campusCode) {
 			this.id = id;
 			this.number = number;
+			this.campusCode = campusCode;
 		}
 	}
 
@@ -45,6 +48,7 @@ public class buildingXMLParser {
 		parser.require(XmlPullParser.START_TAG, ns, "building");
 		String id = null;
 		String number = null;
+		String campusCode = null;
 		while (parser.next() != XmlPullParser.END_TAG) {
 			if (parser.getEventType() != XmlPullParser.START_TAG) {
 				continue;
@@ -54,11 +58,15 @@ public class buildingXMLParser {
 				id = readId(parser);
 			} else if (name.equals("number")) {
 				number = readNumber(parser);
-			} else {
+			} else if (name.equals("campus")) {
+				campusCode = readCampus(parser);
+			}else {
+
 				skip(parser);
 			}
 		}
-		return new Building(id,number);
+
+		return new Building(id,number,campusCode);
 	}
 
 
@@ -75,6 +83,28 @@ public class buildingXMLParser {
 		String title = readText(parser);
 		parser.require(XmlPullParser.END_TAG, ns, "number");
 		return title;
+	}
+
+	private static String readCampus (XmlPullParser parser) throws IOException, XmlPullParserException {
+		parser.require(XmlPullParser.START_TAG, ns, "campus");
+		String campusCode = null;
+		while (parser.next() != XmlPullParser.END_TAG)
+		{
+			if (parser.getEventType() != XmlPullParser.START_TAG) {
+				continue;
+			}
+
+			String name = parser.getName();
+
+			if (name.equals("code"))
+			{
+				campusCode = readText(parser);
+			} else {
+				skip(parser);
+			}
+		}
+		parser.require(XmlPullParser.END_TAG, ns, "campus");
+		return campusCode;
 	}
 
 	private static String readText(XmlPullParser parser) throws IOException, XmlPullParserException {

@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".FindRoomContentsActivity"
+    android:orientation="vertical"
     android:weightSum="1.0" >
 
 	<ListView
@@ -10,5 +11,15 @@
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
 	    android:layout_weight="0.9" />
+	
+	<TextView
+	    android:id="@+id/errorMessage"
+	    android:text="@string/error_message_no_results"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:textColor="#990000"
+	    android:textAppearance="?android:attr/textAppearanceMedium"
+	    android:layout_weight="0.1"
+	    />
 
 </LinearLayout>

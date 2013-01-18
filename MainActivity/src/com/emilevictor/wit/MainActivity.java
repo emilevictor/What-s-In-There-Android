@@ -1,7 +1,6 @@
 package com.emilevictor.wit;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -11,12 +10,14 @@ import java.util.concurrent.ExecutionException;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -35,12 +36,12 @@ public class MainActivity extends Activity {
 	private static final String buildingsXMLUrl =
 			"http://rota.eait.uq.edu.au/buildings.xml";
 
-	private Integer room;
-	private Integer building;
+	private String room;
+	private String building;
 	private ProgressBar progressBar;
 	private TextView progressText;
 	private TextView campusLabel;
-	private Spinner campusChoiceSpinner;
+	public Spinner campusChoiceSpinner;
 	private TextView buildingRoomInstructionLabel;
 	private EditText roomTextfield;
 	private TextView dayLabel;
@@ -162,7 +163,6 @@ public class MainActivity extends Activity {
 
 
 
-		@SuppressWarnings("unchecked")
 		public void findRoomButtonPressed(View view) throws IOException, XmlPullParserException, InterruptedException, ExecutionException {
 			final Intent intent = new Intent(this, FindRoomContentsActivity.class);
 			//Show progress bar, hide everything else!
@@ -176,7 +176,12 @@ public class MainActivity extends Activity {
 			this.daysSpinner.setVisibility(View.INVISIBLE);
 			this.buttonSend.setVisibility(View.INVISIBLE);
 
-
+			//Hide the keyboard
+			InputMethodManager imm = (InputMethodManager)getSystemService(
+				      Context.INPUT_METHOD_SERVICE);
+				imm.hideSoftInputFromWindow(this.roomTextfield.getWindowToken(), 0);
+			
+			
 			selectedDay = this.daysSpinner.getSelectedItemPosition();
 			//Progress bar animation runnable
 
@@ -202,7 +207,7 @@ public class MainActivity extends Activity {
 				            @Override
 				            public void run() {
 				                // This gets executed on the UI thread so it can safely modify Views
-				            	progressText.setText("Hoarding purple paint...");
+				            	progressText.setText("Waiting for eduroam to be reasonable...");
 				            }
 				        });
 						progressBarHandler.postDelayed(animationRunnable,10);
@@ -261,7 +266,15 @@ public class MainActivity extends Activity {
 							progressBarHandler.postDelayed(animationRunnable,10);
 							
 							roomAndBuilding = rbp.giveMeRoomAndBuildingSeparately();
-							String returnedBuildingString = buildingXMLParser.getBuildingIdFromNumber(roomAndBuilding.get(0),buildings);
+							
+							//Campus code generation
+							
+							String[] campusCodes = {"STLUC","IPSWC", "GATTN", "HERST"};
+							
+							String currentCampus = campusCodes[campusChoiceSpinner.getSelectedItemPosition()];
+							
+							String returnedBuildingString = buildingXMLParser.getBuildingIdFromNumber(roomAndBuilding.get(0),
+																										currentCampus,buildings);
 
 							//The building was not found - oh noes!
 							if (returnedBuildingString.equals("NOTFOUND"))
@@ -270,8 +283,8 @@ public class MainActivity extends Activity {
 							} else {
 								//The building was successfully found.
 
-								building = Integer.valueOf(returnedBuildingString);
-								room = Integer.valueOf(roomAndBuilding.get(1));
+								building = returnedBuildingString;
+								room = roomAndBuilding.get(1);
 								
 								Log.d("The building id that was requested",building.toString());
 								Log.d("The room that was requested",room.toString());
@@ -291,7 +304,7 @@ public class MainActivity extends Activity {
 								List<Class> classes = null;
 								RetreiveClassesTask retClasses = new RetreiveClassesTask();
 								//Construct the custom API url for the GET request
-								String classesAPIUrl = "http://rota.eait.uq.edu.au/building/"+building.toString()+"/room/"+room.toString()+"/sessions.xml";
+								String classesAPIUrl = "http://rota.eait.uq.edu.au/building/"+building+"/room/"+room+"/sessions.xml";
 								
 								//TODO REMOVE ME
 								Log.d("API URL", classesAPIUrl);
@@ -299,8 +312,6 @@ public class MainActivity extends Activity {
 								
 								
 								classes = retClasses.execute(classesAPIUrl).get();
-								List<Class> thisSemesterClasses = new ArrayList<Class>();
-								
 								// Update the progress bar
 								progressStatus = 85;
 								progressBarHandler.post(new Runnable() {
@@ -320,7 +331,8 @@ public class MainActivity extends Activity {
 									
 									Log.d("selectedDay, dayMap day, cls.day", ((Integer)selectedDay).toString() + " " +  dayMap.get(cls.day) + " " + cls.day);
 									if (cls.semesterId.equals(Settings.currentSemesterNumber)
-											&& dayMap.get(cls.day) == selectedDay)
+											&& dayMap.get(cls.day) == selectedDay
+											)
 									{
 										
 										intent.putExtra("CLASS"+String.valueOf(numberOfClassesToday), cls);
@@ -372,7 +384,9 @@ public class MainActivity extends Activity {
 							});
 							
 							
-							
+							//Reset the progress bar
+							progressStatus = 0;
+							progressBar.setProgress(progressStatus);
 							
 							//Finally, go to the results page.
 							startActivity(intent);

@@ -5,9 +5,19 @@
     android:orientation="vertical"
     tools:context=".MainActivity"
     android:paddingLeft="16dp"
-    android:paddingRight="16dp">
+    android:paddingRight="16dp"
+    android:background="#FFFFFF">
 
-
+	<ImageView 
+	    android:id="@+id/header"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:src="@drawable/header"
+	    android:adjustViewBounds="true"
+	    android:scaleType="fitCenter"
+	    android:layout_gravity="center_horizontal|top"
+	    />
+    
     <TextView
         android:id="@+id/campusLabel"
         android:layout_width="wrap_content"
@@ -29,7 +39,7 @@
         
     
     <EditText android:id="@+id/room_textfield"
-        android:inputType="phone"
+        android:inputType="text"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:paddingTop="17dp" />
@@ -71,5 +81,13 @@
         android:text=""
         android:textAppearance="?android:attr/textAppearanceLarge"
         />
-
+    
+    <TextView
+        android:id="@+id/authorCredits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+		android:text="@string/emileVictorCredits"
+		android:textAppearance="?android:attr/textAppearanceMedium"
+		android:layout_gravity="bottom"
+		/>
 </LinearLayout>

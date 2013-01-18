@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 public class TimetableResultsAdapter extends ArrayAdapter<Class>{
@@ -26,6 +25,7 @@ public class TimetableResultsAdapter extends ArrayAdapter<Class>{
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
         TimetableResultHolder holder = null;
+        
         
         if(row == null)
         {
@@ -48,6 +48,11 @@ public class TimetableResultsAdapter extends ArrayAdapter<Class>{
         holder.classType.setText(cls.classType);
         holder.courseCode.setText(cls.courseCode);
         holder.timeOfDay.setText(cls.startTime);
+        
+        if (cls.classType.equals("F"))
+        {
+        	holder.classType.setBackgroundColor(0xFF009900);
+        }
         
         return row;
     }

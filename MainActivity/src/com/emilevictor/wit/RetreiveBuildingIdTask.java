@@ -9,8 +9,6 @@ import java.util.List;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.os.AsyncTask;
-import android.util.Log;
-
 import com.emilevictor.wit.buildingXMLParser.Building;
 
 
