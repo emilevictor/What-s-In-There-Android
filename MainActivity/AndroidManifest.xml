@@ -6,7 +6,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    
+
     <uses-sdk
         android:minSdkVersion="11"
         android:targetSdkVersion="16" />
@@ -17,6 +17,14 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
+            android:name="com.emilevictor.wit.InputWITClassActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.emilevictor.wit.FindRoomContentsActivity"
+            android:label="@string/title_activity_find_room_contents" >
+        </activity>
+        <activity
             android:name="com.emilevictor.wit.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
@@ -26,8 +34,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.emilevictor.wit.FindRoomContentsActivity"
-            android:label="@string/title_activity_find_room_contents" >
+            android:name="com.emilevictor.wit.WhatIsThis"
+            android:label="@string/title_activity_what_is_this" >
+        </activity>
+        <activity
+            android:name="com.emilevictor.wit.WheresMyClass"
+            android:label="@string/title_activity_wheres_my_class" >
         </activity>
     </application>
 

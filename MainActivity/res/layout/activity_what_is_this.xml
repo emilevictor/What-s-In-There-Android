@@ -1,0 +1,35 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    tools:context=".WhatIsThis" >
+
+    <ImageView
+        android:id="@+id/header"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/bw_logo"  />
+
+    
+    <TextView
+        android:id="@+id/WITexplanationTitle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:text="@string/WITexplanationTitle"
+        android:layout_marginBottom="50dp"/>
+    
+    <TextView
+        android:id="@+id/WITexplanation"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_gravity="center_horizontal|top"
+        android:text="@string/WITexplanation"/>
+    
+    
+
+    
+
+</LinearLayout>

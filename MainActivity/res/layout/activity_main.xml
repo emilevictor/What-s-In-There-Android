@@ -1,93 +1,50 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:background="#FFFFFF">
+    android:orientation="vertical"
+	android:background="#000000">
 
-	<ImageView 
+    	<ImageView 
+    	    android:paddingTop="100dp"
 	    android:id="@+id/header"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
-	    android:src="@drawable/header"
+	    android:src="@drawable/bw_logo"
 	    android:adjustViewBounds="true"
 	    android:scaleType="fitCenter"
 	    android:layout_gravity="center_horizontal|top"
 	    />
-    
-    <TextView
-        android:id="@+id/campusLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/campusLabel"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-    
-    <Spinner android:id="@+id/campusChoiceSpinner"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" 
-        />
+    	
+    	<Button
+    	    android:id="@+id/enterWhatsInThereButton"
+    	    android:text="@string/witMainPageButtonText"
+    	    android:layout_width="400dp"
+    	    android:layout_height="100dp"
+    	    android:onClick="openWIT"
+    	    android:layout_gravity="center_horizontal|top"
+    	    />
+    	
+    	    	<Button
+    	    android:id="@+id/wheresMyClassBtn"
+    	    android:text="@string/wheresMyClassBtnText"
+    	    android:layout_width="400dp"
+    	    android:layout_height="100dp"
+    	    android:onClick="wheresMyClassPage"
+    	    android:layout_gravity="center_horizontal|top"
+    	    />
+    	    	
+    	   <Button
+    	    android:id="@+id/whatIsThisBtnText"
+    	    android:text="@string/whatIsThisBtnText"
+    	    android:layout_width="400dp"
+    	    android:layout_height="100dp"
+    	    android:onClick="whatIsThisPage"
+    	    android:layout_marginTop="50dp"
+    	    android:layout_gravity="center_horizontal|top"
+    	    />
+    	
+    	
 
-    <TextView
-        android:id="@+id/buildingRoomInstructionLabel"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/buildingRoomInstructionLabel"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-        
-    
-    <EditText android:id="@+id/room_textfield"
-        android:inputType="text"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="17dp" />
-    
-
-    
-    <TextView
-        android:paddingTop="17dp"
-        android:id="@+id/dayLabel"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/dayLabel"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-        
-    
-    <Spinner android:id="@+id/daysSpinner"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        />
-    
-    <Button android:id="@+id/button_send"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:text="@+string/button_send"
-	    android:onClick="findRoomButtonPressed"/>
-    
-    <ProgressBar
-        android:id="@+id/progressBar"
-         android:layout_width="fill_parent"
-         android:layout_height="wrap_content"
-         style="@android:style/Widget.ProgressBar.Horizontal"
-         android:layout_marginRight="5dp"
-         android:layout_marginLeft="5dp" />
-    
-    <TextView
-        android:id="@+id/progressText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        />
-    
-    <TextView
-        android:id="@+id/authorCredits"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-		android:text="@string/emileVictorCredits"
-		android:textAppearance="?android:attr/textAppearanceMedium"
-		android:layout_gravity="bottom"
-		/>
 </LinearLayout>

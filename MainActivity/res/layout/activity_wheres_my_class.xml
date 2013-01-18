@@ -1,0 +1,35 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".WheresMyClass" >
+
+    <ImageView
+        android:id="@+id/header"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/bw_logo"  />
+
+
+    <TextView
+        android:id="@+id/enterYourCourseCodeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/enterYourCourseCodeLabelTxt"
+        android:textSize="22sp" />
+
+    <EditText
+        android:id="@+id/courseCodeTextfield"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="e.g. SCAM1000" />
+    
+    <Button android:id="@+id/button_findClass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_findClass_text"
+		android:onClick="findClass"
+		/>
+
+</LinearLayout>

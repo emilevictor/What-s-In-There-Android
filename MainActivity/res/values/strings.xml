@@ -7,37 +7,50 @@
     <string name="room_textfield">Building number and room, e.g. 7-116</string>
     <string name="button_send">Find classes in this room</string>
     <string name="title_activity_find_room_contents">Timetable Results</string>
-	<string name="stlucia_radioButton">St Lucia</string>
-	<string name="ipswich_radioButton">Ipswich</string>
-	<string name="gatton_radioButton">Gatton</string>
-	
-	<string-array name="campuses">
+    <string name="stlucia_radioButton">St Lucia</string>
+    <string name="ipswich_radioButton">Ipswich</string>
+    <string name="gatton_radioButton">Gatton</string>
+
+    <string-array name="campuses">
         <item>St. Lucia</item>
         <item>Ipswich</item>
         <item>Gatton</item>
         <item>Herston</item>
     </string-array>
+    <string-array name="days">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+    </string-array>
+
+    <string name="buildingRoomInstructionLabel">Building number and room, e.g. 78-116</string>
+    <string name="campusLabel">Choose your campus:</string>
+    <string name="dayLabel">Choose which day to search for:</string>
+    <string name="waiting_on_connection">Wait a second, I\'m not connected to the internet yet. Check your settings.</string>
+    <string name="error_message_no_results">This room is either available all day, or like the room of requirement, is not present in UQ databases.</string>
+    <string name="emileVictorCredits">App by Emile Victor</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <!-- The main page -->
+    <string name="witMainPageButtonText">Reverse Timetable Lookup</string>
+    <string name="wheresMyClassBtnText">Where\'s My Class?</string>
+    <string name="whatIsThisBtnText">What is this?</string>
+    <string name="title_activity_what_is_this">WhatIsThis</string>
+
+    <!-- What is this page -->
+    <string name="WITexplanationTitle">What is This application?</string>
+    <string name="WITexplanation">What\'s In There and its associated function "Where\'s my class" is an application which
+        aids UQ students of all campuses in their day to day studies. The reverse timetable function will look at UQ\'s databases
+        and figure out the daily timetable for a room. It allows you to better plan your studies for a day and make better use of UQ\'s facilities.
+        The \"where\'s my class\" function allows you to see a timetable of all of the lectures, practicals and tutorials of any given class, and their locations.\n\nThis application was coded by Emile Victor and utilises the UQ Rota API.</string>
+    <string name="title_activity_wheres_my_class">Where\'s my Class?</string>
+
+    <!-- Where's My Class? -->
+    <string name="enterYourCourseCodeLabelTxt">Enter your course code:</string>
+    <string name="button_findClass_text">Find My Class</string>
     
-	<string-array name="days">
-	    <item>Monday</item>
-	    <item>Tuesday</item>
-	    <item>Wednesday</item>
-	    <item>Thursday</item>
-	    <item>Friday</item>
-	    <item>Saturday</item>
-	    <item>Sunday</item>
-	</string-array>
-    
-	<string name="buildingRoomInstructionLabel">Building number and room, e.g. 78-116</string>
-	
-	<string name="campusLabel">Choose your campus:</string>
-	
-	<string name="dayLabel">Choose which day to search for:</string>
-	
-	<string name="waiting_on_connection">Wait a second, I\'m not connected to the internet yet. Check your settings.</string>
-	
-	<string name="error_message_no_results">This room is either available all day, or like the room of requirement, is not present in UQ databases.</string>
-	
-	<string name="emileVictorCredits">App by Emile Victor</string>
-	
 </resources>

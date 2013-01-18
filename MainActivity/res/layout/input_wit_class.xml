@@ -1,0 +1,92 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp">
+
+	<ImageView 
+	    android:id="@+id/header"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:src="@drawable/bw_logo"
+	    android:adjustViewBounds="true"
+	    android:scaleType="fitCenter"
+	    android:layout_gravity="center_horizontal|top"
+	    />
+    
+    <TextView
+        android:id="@+id/campusLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/campusLabel"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    
+    <Spinner android:id="@+id/campusChoiceSpinner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        />
+
+    <TextView
+        android:id="@+id/buildingRoomInstructionLabel"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/buildingRoomInstructionLabel"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+        
+    
+    <EditText android:id="@+id/room_textfield"
+        android:inputType="text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="17dp" />
+    
+
+    
+    <TextView
+        android:paddingTop="17dp"
+        android:id="@+id/dayLabel"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/dayLabel"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+        
+    
+    <Spinner android:id="@+id/daysSpinner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        />
+    
+    <Button android:id="@+id/button_send"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="@+string/button_send"
+	    android:onClick="findRoomButtonPressed"/>
+    
+    <ProgressBar
+        android:id="@+id/progressBar"
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"
+         style="@android:style/Widget.ProgressBar.Horizontal"
+         android:layout_marginRight="5dp"
+         android:layout_marginLeft="5dp" />
+    
+    <TextView
+        android:id="@+id/progressText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        />
+    
+    <TextView
+        android:id="@+id/authorCredits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+		android:text="@string/emileVictorCredits"
+		android:textAppearance="?android:attr/textAppearanceMedium"
+		android:layout_gravity="bottom"
+		/>
+</LinearLayout>

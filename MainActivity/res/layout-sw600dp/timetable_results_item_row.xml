@@ -9,28 +9,27 @@
         android:layout_width="wrap_content"
         android:gravity="center_vertical"
         android:textStyle="bold"
-        android:textSize="16sp"
+        android:textSize="22sp"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
         android:layout_alignParentLeft="true"
-        android:textColor="#FFFFFF"
+        
         />
         
     
     <TextView android:id="@+id/classType"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:gravity="center_vertical"
-        android:layout_marginRight="10dp"
+        android:layout_marginRight="15dp"
         android:layout_marginTop="5dp"
-        android:paddingLeft="10dp"
+        android:paddingLeft="15dp"
         android:layout_marginBottom="5dp"
         android:layout_gravity="left"
         android:background="#49075e"
         android:text="L"
-        android:textColor="#FFFFFF"
         android:layout_alignParentRight="true"
-        android:textSize="18sp"/>
+        android:textSize="24sp"/>
     
     <TextView android:id="@+id/courseCode"
         android:layout_width="fill_parent"
@@ -41,8 +40,7 @@
         android:layout_toRightOf="@id/timeOfDay"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginBottom="5dp"
-        android:textColor="#FFFFFF" />
+        android:layout_marginBottom="5dp" />
     
 
 </RelativeLayout>
