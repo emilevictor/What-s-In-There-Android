@@ -1,4 +1,4 @@
-package com.emilevictor.wit;
+package com.emilevictor.wit.whats_in_there;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,13 +9,18 @@ import java.util.List;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.os.AsyncTask;
-import com.emilevictor.wit.buildingXMLParser.Building;
+
+import com.emilevictor.wit.helpers.Class;
 
 
-public class RetreiveBuildingIdTask extends AsyncTask<String, Void, List<Building>> {
+public class RetreiveClassesTask extends AsyncTask<String, Void, List<Class>> {
 
-    private InputStream downloadUrl(String urlString) throws IOException {
-        URL url = new URL(urlString);
+    private InputStream downloadUrl(String urlPlusRoomPlusBuilding) throws IOException {
+    	
+
+    	
+    	
+        URL url = new URL(urlPlusRoomPlusBuilding);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setReadTimeout(10000 /* milliseconds */);
         conn.setConnectTimeout(15000 /* milliseconds */);
@@ -23,23 +28,28 @@ public class RetreiveBuildingIdTask extends AsyncTask<String, Void, List<Buildin
         conn.setDoInput(true);
         // Starts the query
         conn.connect();
+        
         InputStream stream = conn.getInputStream();
         return stream;
     }
 	
-	@SuppressWarnings("unchecked")
 	@Override
-	protected List<Building> doInBackground(String... urls) {
+	protected List<Class> doInBackground(String... urlPlusRoomPlusBuilding) {
+		
+    	//urlPlusRoomPlusBuilding[0] url
+    	//urlPlusRoomPlusBuilding[1] room
+    	//urlPlusRoomPlusBuilding[2] building
+		
 		InputStream stream = null;
 		
 		try {
-			stream = downloadUrl(urls[0]);
+			stream = downloadUrl(urlPlusRoomPlusBuilding[0]);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
-			return buildingXMLParser.parse(stream);
+			return ClassesXMLParser.parse(stream);
 		} catch (XmlPullParserException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -47,7 +57,6 @@ public class RetreiveBuildingIdTask extends AsyncTask<String, Void, List<Buildin
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		// TODO Auto-generated method stub
 		return null;
 	}
 

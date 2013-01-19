@@ -17,7 +17,6 @@
 	    android:text="@string/error_message_no_results"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
-	    android:textColor="#990000"
 	    android:textAppearance="?android:attr/textAppearanceMedium"
 	    android:layout_weight="0.1"
 	    />

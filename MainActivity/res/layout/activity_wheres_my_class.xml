@@ -9,8 +9,7 @@
         android:id="@+id/header"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/bw_logo"  />
-
+        android:src="@drawable/bw_logo" />
 
     <TextView
         android:id="@+id/enterYourCourseCodeLabel"
@@ -25,11 +24,39 @@
         android:layout_height="wrap_content"
         android:hint="e.g. SCAM1000" />
     
-    <Button android:id="@+id/button_findClass"
+        <TextView
+        android:paddingTop="17dp"
+        android:id="@+id/dayLabelWMC"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/dayLabel"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    
+        <Spinner android:id="@+id/daysSpinnerWheresMyClass"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <Button
+        android:id="@+id/button_findClass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/button_findClass_text"
-		android:onClick="findClass"
-		/>
+        android:onClick="findClass"
+        android:text="@string/button_findClass_text" />
+
+    <ProgressBar
+        android:id="@+id/progressBarWheresMyClass"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp" />
+
+    <TextView
+        android:id="@+id/progressTextWheresMyClass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </LinearLayout>

@@ -1,4 +1,4 @@
-package com.emilevictor.wit;
+package com.emilevictor.wit.wheres_my_class;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,15 +10,13 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import android.os.AsyncTask;
 
+import com.emilevictor.wit.whats_in_there.buildingXMLParser.Building;
 
-public class RetreiveClassesTask extends AsyncTask<String, Void, List<Class>> {
 
-    private InputStream downloadUrl(String urlPlusRoomPlusBuilding) throws IOException {
-    	
+public class RetreiveCourseIDTask extends AsyncTask<String, Void, String> {
 
-    	
-    	
-        URL url = new URL(urlPlusRoomPlusBuilding);
+    private InputStream downloadUrl(String urlString) throws IOException {
+        URL url = new URL(urlString);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setReadTimeout(10000 /* milliseconds */);
         conn.setConnectTimeout(15000 /* milliseconds */);
@@ -26,28 +24,23 @@ public class RetreiveClassesTask extends AsyncTask<String, Void, List<Class>> {
         conn.setDoInput(true);
         // Starts the query
         conn.connect();
-        
         InputStream stream = conn.getInputStream();
         return stream;
     }
 	
+	@SuppressWarnings("unchecked")
 	@Override
-	protected List<Class> doInBackground(String... urlPlusRoomPlusBuilding) {
-		
-    	//urlPlusRoomPlusBuilding[0] url
-    	//urlPlusRoomPlusBuilding[1] room
-    	//urlPlusRoomPlusBuilding[2] building
-		
+	protected String doInBackground(String... urls) {
 		InputStream stream = null;
 		
 		try {
-			stream = downloadUrl(urlPlusRoomPlusBuilding[0]);
+			stream = downloadUrl(urls[0]);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
-			return ClassesXMLParser.parse(stream);
+			return CourseIDFinder.parse(stream);
 		} catch (XmlPullParserException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -55,6 +48,7 @@ public class RetreiveClassesTask extends AsyncTask<String, Void, List<Class>> {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		// TODO Auto-generated method stub
 		return null;
 	}
 

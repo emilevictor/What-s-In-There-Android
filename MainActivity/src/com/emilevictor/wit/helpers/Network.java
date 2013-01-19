@@ -1,4 +1,4 @@
-package com.emilevictor.wit;
+package com.emilevictor.wit.helpers;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

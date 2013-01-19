@@ -1,4 +1,4 @@
-package com.emilevictor.wit;
+package com.emilevictor.wit.helpers;
 
 import java.io.BufferedReader;
 import java.io.IOException;

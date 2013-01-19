@@ -52,5 +52,6 @@
     <!-- Where's My Class? -->
     <string name="enterYourCourseCodeLabelTxt">Enter your course code:</string>
     <string name="button_findClass_text">Find My Class</string>
-    
+    <string name="title_activity_wheres_my_class_results">Results for your course</string>
+
 </resources>

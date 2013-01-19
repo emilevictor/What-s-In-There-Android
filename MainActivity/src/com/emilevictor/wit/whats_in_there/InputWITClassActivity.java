@@ -1,4 +1,4 @@
-package com.emilevictor.wit;
+package com.emilevictor.wit.whats_in_there;
 
 import java.io.IOException;
 import java.util.Calendar;
@@ -26,8 +26,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.emilevictor.wit.RoomBuildingParser.InvalidInputException;
-import com.emilevictor.wit.buildingXMLParser.Building;
+import com.emilevictor.wit.R;
+import com.emilevictor.wit.helpers.Class;
+import com.emilevictor.wit.helpers.Network;
+import com.emilevictor.wit.helpers.Settings;
+import com.emilevictor.wit.whats_in_there.RoomBuildingParser.InvalidInputException;
+import com.emilevictor.wit.whats_in_there.buildingXMLParser.Building;
 
 public class InputWITClassActivity extends Activity {
 
@@ -47,7 +51,7 @@ public class InputWITClassActivity extends Activity {
 	private TextView dayLabel;
 	private Spinner daysSpinner;
 	private Button buttonSend;
-	
+
 	public Map<String,Integer> dayMap;
 	public int selectedDay;
 	private int day;
@@ -64,8 +68,8 @@ public class InputWITClassActivity extends Activity {
 
 			}
 		}};
-		
-		
+
+
 
 
 
@@ -126,7 +130,7 @@ public class InputWITClassActivity extends Activity {
 			String[] daysStringArray = {"Sunday", "Monday", "Tuesday", "Wednesday",
 					"Thursday", "Friday", "Saturday"};
 			dayMap = new HashMap<String,Integer>();
-			
+
 			dayMap.put("Sun", 0);
 			dayMap.put("Mon",1);
 			dayMap.put("Tue",2);
@@ -134,7 +138,7 @@ public class InputWITClassActivity extends Activity {
 			dayMap.put("Thu", 4);
 			dayMap.put("Fri", 5);
 			dayMap.put("Sat", 6);
-			
+
 
 			daysStringArray[day] = daysStringArray[day] + " (today)";
 
@@ -178,10 +182,10 @@ public class InputWITClassActivity extends Activity {
 
 			//Hide the keyboard
 			InputMethodManager imm = (InputMethodManager)getSystemService(
-				      Context.INPUT_METHOD_SERVICE);
-				imm.hideSoftInputFromWindow(this.roomTextfield.getWindowToken(), 0);
-			
-			
+					Context.INPUT_METHOD_SERVICE);
+			imm.hideSoftInputFromWindow(this.roomTextfield.getWindowToken(), 0);
+
+
 			selectedDay = this.daysSpinner.getSelectedItemPosition();
 			//Progress bar animation runnable
 
@@ -204,12 +208,12 @@ public class InputWITClassActivity extends Activity {
 						// Update the progress bar
 						progressStatus = 10;
 						progressBarHandler.post(new Runnable() {
-				            @Override
-				            public void run() {
-				                // This gets executed on the UI thread so it can safely modify Views
-				            	progressText.setText("Waiting for eduroam to be reasonable...");
-				            }
-				        });
+							@Override
+							public void run() {
+								// This gets executed on the UI thread so it can safely modify Views
+								progressText.setText("Waiting for eduroam to be reasonable...");
+							}
+						});
 						progressBarHandler.postDelayed(animationRunnable,10);
 
 						List<Building> buildings = null;
@@ -229,52 +233,52 @@ public class InputWITClassActivity extends Activity {
 						// Update the progress bar
 						progressStatus = 25;
 						progressBarHandler.post(new Runnable() {
-				            @Override
-				            public void run() {
-				                // This gets executed on the UI thread so it can safely modify Views
-				            	progressText.setText("Feeding bush turkeys...");
-				            }
-				        });
+							@Override
+							public void run() {
+								// This gets executed on the UI thread so it can safely modify Views
+								progressText.setText("Feeding bush turkeys...");
+							}
+						});
 						progressBarHandler.postDelayed(animationRunnable,10);
-						
+
 						EditText roomInput = (EditText) findViewById(R.id.room_textfield);
 						RoomBuildingParser rbp = new RoomBuildingParser(roomInput.getText().toString());
 						// Update the progress bar
-						
+
 						progressBarHandler.post(new Runnable() {
-				            @Override
-				            public void run() {
-				                // This gets executed on the UI thread so it can safely modify Views
-				            	progressText.setText("Finding your room...");
-				            }
-				        });
+							@Override
+							public void run() {
+								// This gets executed on the UI thread so it can safely modify Views
+								progressText.setText("Finding your room...");
+							}
+						});
 						progressStatus = 40;
 						progressBarHandler.postDelayed(animationRunnable,10);
-						
+
 						List<String> roomAndBuilding;
 						try {
 							// Update the progress bar
 							progressStatus = 50;
 							progressBarHandler.post(new Runnable() {
-					            @Override
-					            public void run() {
-					                // This gets executed on the UI thread so it can safely modify Views
-					            	progressText.setText("Waiting for mysi-net to load, as usual...");
-					            }
-					        });
-							
+								@Override
+								public void run() {
+									// This gets executed on the UI thread so it can safely modify Views
+									progressText.setText("Waiting for mysi-net to load, as usual...");
+								}
+							});
+
 							progressBarHandler.postDelayed(animationRunnable,10);
-							
+
 							roomAndBuilding = rbp.giveMeRoomAndBuildingSeparately();
-							
+
 							//Campus code generation
-							
+
 							String[] campusCodes = {"STLUC","IPSWC", "GATTN", "HERST"};
-							
+
 							String currentCampus = campusCodes[campusChoiceSpinner.getSelectedItemPosition()];
-							
+
 							String returnedBuildingString = buildingXMLParser.getBuildingIdFromNumber(roomAndBuilding.get(0),
-																										currentCampus,buildings);
+									currentCampus,buildings);
 
 							//The building was not found - oh noes!
 							if (returnedBuildingString.equals("NOTFOUND"))
@@ -285,77 +289,77 @@ public class InputWITClassActivity extends Activity {
 
 								building = returnedBuildingString;
 								room = roomAndBuilding.get(1);
-								
+
 								Log.d("The building id that was requested",building.toString());
 								Log.d("The room that was requested",room.toString());
 
 								// Update the progress bar
 								progressStatus = 70;
 								progressBarHandler.post(new Runnable() {
-						            @Override
-						            public void run() {
-						                // This gets executed on the UI thread so it can safely modify Views
-						            	progressText.setText("Hitting up UQ APIs...");
-						            }
-						        });
+									@Override
+									public void run() {
+										// This gets executed on the UI thread so it can safely modify Views
+										progressText.setText("Hitting up UQ APIs...");
+									}
+								});
 								progressBarHandler.postDelayed(animationRunnable,10);
-								
+
 								//Here we need to execute the task to hit the API for room contents.
 								List<Class> classes = null;
 								RetreiveClassesTask retClasses = new RetreiveClassesTask();
 								//Construct the custom API url for the GET request
 								String classesAPIUrl = "http://rota.eait.uq.edu.au/building/"+building+"/room/"+room+"/sessions.xml";
-								
+
 								//TODO REMOVE ME
 								Log.d("API URL", classesAPIUrl);
 
-								
-								
+
+
 								classes = retClasses.execute(classesAPIUrl).get();
 								// Update the progress bar
 								progressStatus = 85;
 								progressBarHandler.post(new Runnable() {
-						            @Override
-						            public void run() {
-						                // This gets executed on the UI thread so it can safely modify Views
-						            	progressText.setText("Finding the right class...");
-						            }
-						        });
+									@Override
+									public void run() {
+										// This gets executed on the UI thread so it can safely modify Views
+										progressText.setText("Finding the right class...");
+									}
+								});
 								progressBarHandler.postDelayed(animationRunnable,10);
-								
+
 								//Find this semester's classes - the returned classes may not include the right ones.
 								int numberOfClassesToday = 0; //This is used to keep track of the number being sent through intent.
-								
+
 								for (Class cls : classes)
 								{
-									
+
 									Log.d("selectedDay, dayMap day, cls.day", ((Integer)selectedDay).toString() + " " +  dayMap.get(cls.day) + " " + cls.day);
 									if (cls.semesterId.equals(Settings.currentSemesterNumber)
 											&& dayMap.get(cls.day) == selectedDay
 											)
 									{
-										
+
 										intent.putExtra("CLASS"+String.valueOf(numberOfClassesToday), cls);
 										numberOfClassesToday += 1;
 									}
 								}
-								
+
 								Log.d("Number of classes", String.valueOf(numberOfClassesToday));
-								
+
 								//Provide the intent with some of the information that we gathered here.
 								intent.putExtra("numberOfClassesToday", numberOfClassesToday);
-								
-								
+
+
 
 								// Update the progress bar
 								progressStatus = 100;
 								progressBarHandler.post(new Runnable() {
-						            @Override
-						            public void run() {
-						                // This gets executed on the UI thread so it can safely modify Views
-						            	progressText.setText("And we're done here!");
-						            }
-						        });
+									@Override
+									public void run() {
+										// This gets executed on the UI thread so it can safely modify Views
+										progressText.setText("And we're done here!");
+									}
+								});
 								progressBarHandler.postDelayed(animationRunnable,10);
 
 
@@ -363,7 +367,7 @@ public class InputWITClassActivity extends Activity {
 
 							//Go to the results page.
 							progressBarHandler.removeCallbacks(animationRunnable);
-							
+
 							//Remove the progress bar from the main UI before going to the new page.
 							progressBarHandler.post(new Runnable() {
 
@@ -378,16 +382,16 @@ public class InputWITClassActivity extends Activity {
 									dayLabel.setVisibility(View.VISIBLE);
 									daysSpinner.setVisibility(View.VISIBLE);
 									buttonSend.setVisibility(View.VISIBLE);
-									
+
 								}
-								
+
 							});
-							
-							
+
+
 							//Reset the progress bar
 							progressStatus = 0;
 							progressBar.setProgress(progressStatus);
-							
+
 							//Finally, go to the results page.
 							startActivity(intent);
 						} catch (InvalidInputException e) {

@@ -1,4 +1,10 @@
-package com.emilevictor.wit;
+package com.emilevictor.wit.whats_in_there;
+
+import com.emilevictor.wit.R;
+import com.emilevictor.wit.R.id;
+import com.emilevictor.wit.R.layout;
+import com.emilevictor.wit.R.menu;
+import com.emilevictor.wit.helpers.Class;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -35,14 +41,14 @@ public class FindRoomContentsActivity extends Activity {
 			
 			errorMessage.setVisibility(View.VISIBLE);
 
-			listView.setVisibility(View.INVISIBLE);
+			listView.setVisibility(View.GONE);
 			
 			errorMessage.setPadding(15, 100, 15, 15);
 			
 			
 		} else {
 			
-			errorMessage.setVisibility(View.INVISIBLE);
+			errorMessage.setVisibility(View.GONE);
 			errorMessage.setPadding(0,0,0,0);
 			
 			//Get all of the bundled classes from the main activity.

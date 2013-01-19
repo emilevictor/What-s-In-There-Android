@@ -22,28 +22,32 @@ public final class R {
     public static final class id {
         public static final int WITexplanation=0x7f080007;
         public static final int WITexplanationTitle=0x7f080006;
-        public static final int authorCredits=0x7f080014;
-        public static final int buildingRoomInstructionLabel=0x7f08000d;
-        public static final int button_findClass=0x7f08000a;
-        public static final int button_send=0x7f080011;
-        public static final int campusChoiceSpinner=0x7f08000c;
-        public static final int campusLabel=0x7f08000b;
-        public static final int classType=0x7f080017;
-        public static final int courseCode=0x7f080018;
+        public static final int authorCredits=0x7f080018;
+        public static final int buildingRoomInstructionLabel=0x7f080011;
+        public static final int button_findClass=0x7f08000c;
+        public static final int button_send=0x7f080015;
+        public static final int campusChoiceSpinner=0x7f080010;
+        public static final int campusLabel=0x7f08000f;
+        public static final int classType=0x7f08001b;
+        public static final int courseCode=0x7f08001c;
         public static final int courseCodeTextfield=0x7f080009;
-        public static final int dayLabel=0x7f08000f;
-        public static final int daysSpinner=0x7f080010;
+        public static final int dayLabel=0x7f080013;
+        public static final int dayLabelWMC=0x7f08000a;
+        public static final int daysSpinner=0x7f080014;
+        public static final int daysSpinnerWheresMyClass=0x7f08000b;
         public static final int enterWhatsInThereButton=0x7f080003;
         public static final int enterYourCourseCodeLabel=0x7f080008;
         public static final int errorMessage=0x7f080001;
         public static final int header=0x7f080002;
-        public static final int menu_settings=0x7f080019;
-        public static final int progressBar=0x7f080012;
-        public static final int progressText=0x7f080013;
-        public static final int room_textfield=0x7f08000e;
-        public static final int timeOfDay=0x7f080016;
+        public static final int menu_settings=0x7f08001d;
+        public static final int progressBar=0x7f080016;
+        public static final int progressBarWheresMyClass=0x7f08000d;
+        public static final int progressText=0x7f080017;
+        public static final int progressTextWheresMyClass=0x7f08000e;
+        public static final int room_textfield=0x7f080012;
+        public static final int timeOfDay=0x7f08001a;
         public static final int timetableResults=0x7f080000;
-        public static final int txtHeader=0x7f080015;
+        public static final int txtHeader=0x7f080019;
         public static final int whatIsThisBtnText=0x7f080005;
         public static final int wheresMyClassBtn=0x7f080004;
     }
@@ -52,15 +56,17 @@ public final class R {
         public static final int activity_main=0x7f030001;
         public static final int activity_what_is_this=0x7f030002;
         public static final int activity_wheres_my_class=0x7f030003;
-        public static final int input_wit_class=0x7f030004;
-        public static final int timetable_results_header_row=0x7f030005;
-        public static final int timetable_results_item_row=0x7f030006;
+        public static final int activity_wheres_my_class_results=0x7f030004;
+        public static final int input_wit_class=0x7f030005;
+        public static final int timetable_results_header_row=0x7f030006;
+        public static final int timetable_results_item_row=0x7f030007;
     }
     public static final class menu {
         public static final int activity_find_room_contents=0x7f070000;
         public static final int activity_main=0x7f070001;
         public static final int activity_what_is_this=0x7f070002;
         public static final int activity_wheres_my_class=0x7f070003;
+        public static final int activity_wheres_my_class_results=0x7f070004;
     }
     public static final class string {
         public static final int WITexplanation=0x7f040015;
@@ -88,6 +94,7 @@ public final class R {
         public static final int title_activity_main=0x7f04000f;
         public static final int title_activity_what_is_this=0x7f040013;
         public static final int title_activity_wheres_my_class=0x7f040016;
+        public static final int title_activity_wheres_my_class_results=0x7f040019;
         public static final int waiting_on_connection=0x7f04000c;
         public static final int whatIsThisBtnText=0x7f040012;
         public static final int wheresMyClassBtnText=0x7f040011;

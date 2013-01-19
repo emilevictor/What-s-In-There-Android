@@ -1,4 +1,4 @@
-package com.emilevictor.wit;
+package com.emilevictor.wit.helpers;
 
 import java.io.Serializable;
 
@@ -22,7 +22,7 @@ public class Class implements Serializable{
 
 
 
-	Class (String courseCode, String semesterId, String semesterNum,
+	public Class (String courseCode, String semesterId, String semesterNum,
 			String semesterYear, String campusCode,
 			String day, String startTime, String finishTime,
 			String room, String classType) {
@@ -38,7 +38,7 @@ public class Class implements Serializable{
 		this.classType = classType;
 	}
 	
-	Class() {
+	public Class() {
 		this.courseCode = "";
 		this.semesterId = "";
 		this.semesterNum = "";

@@ -1,4 +1,4 @@
-package com.emilevictor.wit;
+package com.emilevictor.wit.whats_in_there;
 
 import java.util.ArrayList;
 import java.util.List;

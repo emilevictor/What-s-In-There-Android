@@ -1,4 +1,4 @@
-package com.emilevictor.wit;
+package com.emilevictor.wit.whats_in_there;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,6 +9,8 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.util.Xml;
+
+import com.emilevictor.wit.helpers.Class;
 
 public class ClassesXMLParser {
 	private static final String ns = null;

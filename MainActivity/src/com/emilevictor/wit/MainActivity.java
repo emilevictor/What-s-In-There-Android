@@ -1,5 +1,8 @@
 package com.emilevictor.wit;
 
+import com.emilevictor.wit.about_page.WhatIsThis;
+import com.emilevictor.wit.wheres_my_class.WheresMyClass;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,7 +26,7 @@ public class MainActivity extends Activity {
 	
 	public void openWIT(View view)
 	{
-		final Intent intent = new Intent(this, InputWITClassActivity.class);
+		final Intent intent = new Intent(this, com.emilevictor.wit.whats_in_there.InputWITClassActivity.class);
 		
 		startActivity(intent);
 

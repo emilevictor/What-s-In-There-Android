@@ -1,4 +1,8 @@
-package com.emilevictor.wit;
+package com.emilevictor.wit.whats_in_there;
+
+import com.emilevictor.wit.R;
+import com.emilevictor.wit.R.id;
+import com.emilevictor.wit.helpers.Class;
 
 import android.app.Activity;
 import android.content.Context;
