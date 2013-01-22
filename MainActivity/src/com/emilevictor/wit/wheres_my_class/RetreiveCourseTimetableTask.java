@@ -4,12 +4,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
+
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.os.AsyncTask;
 
+import com.emilevictor.wit.helpers.Class;
 
-public class RetreiveCourseIDTask extends AsyncTask<String, Void, String> {
+
+public class RetreiveCourseTimetableTask extends AsyncTask<String, Void, List<Class>> {
 
     private InputStream downloadUrl(String urlString) throws IOException {
         URL url = new URL(urlString);
@@ -25,7 +29,7 @@ public class RetreiveCourseIDTask extends AsyncTask<String, Void, String> {
     }
 	
 	@Override
-	protected String doInBackground(String... urls) {
+	protected List<Class> doInBackground(String... urls) {
 		InputStream stream = null;
 		
 		try {
@@ -35,7 +39,7 @@ public class RetreiveCourseIDTask extends AsyncTask<String, Void, String> {
 			e.printStackTrace();
 		}
 		try {
-			return CourseIDFinder.parse(stream);
+			return CourseTimetableXMLParser.parse(stream);
 		} catch (XmlPullParserException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

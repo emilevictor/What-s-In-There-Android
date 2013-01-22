@@ -9,6 +9,7 @@ import java.util.concurrent.ExecutionException;
 
 import org.xmlpull.v1.XmlPullParserException;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +17,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
@@ -26,6 +28,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.emilevictor.wit.MainActivity;
 import com.emilevictor.wit.R;
 import com.emilevictor.wit.helpers.Class;
 import com.emilevictor.wit.helpers.Network;
@@ -70,7 +73,12 @@ public class InputWITClassActivity extends Activity {
 		}};
 
 
-
+		@Override
+	    public boolean onOptionsItemSelected(MenuItem menuItem)
+	    {       
+	        startActivity(new Intent(InputWITClassActivity.this,MainActivity.class)); 
+	        return true;
+	    }
 
 
 
@@ -81,6 +89,10 @@ public class InputWITClassActivity extends Activity {
 
 			setContentView(R.layout.input_wit_class);
 
+			//Add a back button to the action bar
+			ActionBar actionBar = getActionBar();
+			actionBar.setDisplayHomeAsUpEnabled(true);
+			
 			//Make all objects available for 
 			this.progressBar = (ProgressBar) findViewById(R.id.progressBar);
 			this.progressText = (TextView) findViewById(R.id.progressText);
@@ -412,7 +424,16 @@ public class InputWITClassActivity extends Activity {
 
 
 					} else {
-						Toast.makeText(getApplicationContext(), R.string.waiting_on_connection, Toast.LENGTH_LONG).show();
+						//Show the toast telling the user that they need to connect to wifi.
+						progressBarHandler.post(new Runnable() {
+
+							@Override
+							public void run() {
+								Toast.makeText(getApplicationContext(), R.string.waiting_on_connection, Toast.LENGTH_LONG).show();
+							}
+
+						});
+						
 					}
 
 

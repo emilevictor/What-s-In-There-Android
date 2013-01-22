@@ -1,14 +1,14 @@
 package com.emilevictor.wit.whats_in_there;
 
 import com.emilevictor.wit.R;
-import com.emilevictor.wit.R.id;
-import com.emilevictor.wit.R.layout;
-import com.emilevictor.wit.R.menu;
 import com.emilevictor.wit.helpers.Class;
 
+import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -19,10 +19,21 @@ public class FindRoomContentsActivity extends Activity {
 	private TextView errorMessage;
 
 	@Override
+    public boolean onOptionsItemSelected(MenuItem menuItem)
+    {       
+        startActivity(new Intent(FindRoomContentsActivity.this,InputWITClassActivity.class)); 
+        return true;
+    }
+	
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_find_room_contents);
 
+		//Add a back button to the action bar
+		ActionBar actionBar = getActionBar();
+		actionBar.setDisplayHomeAsUpEnabled(true);
+		
 		//Unpack the classes
 		Bundle extras = getIntent().getExtras();
 		int numberOfClassesToday = extras.getInt("numberOfClassesToday");
@@ -93,9 +104,6 @@ public class FindRoomContentsActivity extends Activity {
 					//Calculate one hour ahead string, two hours ahead string and three hours ahead string.
 					String oneHourAhead = "";
 					String twoHoursAhead = "";
-					String threeHoursAhead = "";
-
-
 					if ((hour+1) < 12)
 					{
 						oneHourAhead = (hour+1) + ":50 AM";
@@ -116,11 +124,8 @@ public class FindRoomContentsActivity extends Activity {
 
 					if ((hour+3) < 12)
 					{
-						threeHoursAhead = (hour+3) + ":50 AM";
 					} else if ((hour+3) == 12) {
-						threeHoursAhead = "12:50 PM";
 					}else {
-						threeHoursAhead = ((hour+3)-12) + ":50 PM";
 					}
 
 

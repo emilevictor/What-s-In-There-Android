@@ -18,6 +18,7 @@ public class Class implements Serializable{
 	public String room;
 	public String classType;
 	public String buildingName;
+	public String buildingNumber;
 
 
 

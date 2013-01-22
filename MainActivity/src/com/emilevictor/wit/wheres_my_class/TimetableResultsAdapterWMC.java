@@ -1,4 +1,4 @@
-package com.emilevictor.wit.whats_in_there;
+package com.emilevictor.wit.wheres_my_class;
 
 import com.emilevictor.wit.R;
 import com.emilevictor.wit.helpers.Class;
@@ -11,13 +11,13 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class TimetableResultsAdapter extends ArrayAdapter<Class>{
+public class TimetableResultsAdapterWMC extends ArrayAdapter<Class>{
 
     Context context; 
     int layoutResourceId;    
     Class data[] = null;
     
-    public TimetableResultsAdapter(Context context, int layoutResourceId, Class[] data) {
+    public TimetableResultsAdapterWMC(Context context, int layoutResourceId, Class[] data) {
         super(context, layoutResourceId, data);
         this.layoutResourceId = layoutResourceId;
         this.context = context;
@@ -36,9 +36,11 @@ public class TimetableResultsAdapter extends ArrayAdapter<Class>{
             row = inflater.inflate(layoutResourceId, parent, false);
             
             holder = new TimetableResultHolder();
-            holder.classType = (TextView)row.findViewById(R.id.classType);
-            holder.courseCode = (TextView)row.findViewById(R.id.courseCode);
-            holder.timeOfDay = (TextView)row.findViewById(R.id.timeOfDay);
+            holder.classType = (TextView)row.findViewById(R.id.classTypeWMC);
+            holder.timeOfDay = (TextView)row.findViewById(R.id.timeOfDayWMC);
+            holder.locationText = (TextView)row.findViewById(R.id.locationTextWMC);
+
+            
             
             row.setTag(holder);
         }
@@ -49,8 +51,9 @@ public class TimetableResultsAdapter extends ArrayAdapter<Class>{
         
         Class cls = data[position];
         holder.classType.setText(cls.classType);
-        holder.courseCode.setText(cls.courseCode);
         holder.timeOfDay.setText(cls.startTime);
+        holder.locationText.setText("Room " + cls.room + ", " + cls.buildingName);
+        
         
         if (cls.classType.equals("F"))
         {
@@ -63,7 +66,7 @@ public class TimetableResultsAdapter extends ArrayAdapter<Class>{
     static class TimetableResultHolder
     {
         TextView classType;
-        TextView courseCode;
         TextView timeOfDay;
+        TextView locationText;
     }
 }

@@ -1,14 +1,24 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".WheresMyClassResults" >
+    tools:context=".FindRoomContentsActivity"
+    android:orientation="vertical"
+    android:weightSum="1.0" >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/hello_world" />
+	<ListView
+	    android:id="@+id/timetableResultsWMC"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:layout_weight="0.9" />
+	
+	<TextView
+	    android:id="@+id/errorMessageWMC"
+	    android:text="@string/error_message_no_results"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:textAppearance="?android:attr/textAppearanceMedium"
+	    android:layout_weight="0.1"
+	    />
 
-</RelativeLayout>
+</LinearLayout>

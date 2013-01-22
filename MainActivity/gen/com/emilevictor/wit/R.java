@@ -22,32 +22,38 @@ public final class R {
     public static final class id {
         public static final int WITexplanation=0x7f080007;
         public static final int WITexplanationTitle=0x7f080006;
-        public static final int authorCredits=0x7f080018;
-        public static final int buildingRoomInstructionLabel=0x7f080011;
+        public static final int authorCredits=0x7f08001a;
+        public static final int buildingRoomInstructionLabel=0x7f080013;
         public static final int button_findClass=0x7f08000c;
-        public static final int button_send=0x7f080015;
-        public static final int campusChoiceSpinner=0x7f080010;
-        public static final int campusLabel=0x7f08000f;
-        public static final int classType=0x7f08001b;
-        public static final int courseCode=0x7f08001c;
+        public static final int button_send=0x7f080017;
+        public static final int campusChoiceSpinner=0x7f080012;
+        public static final int campusLabel=0x7f080011;
+        public static final int classType=0x7f08001d;
+        public static final int classTypeWMC=0x7f080021;
+        public static final int courseCode=0x7f08001e;
         public static final int courseCodeTextfield=0x7f080009;
-        public static final int dayLabel=0x7f080013;
+        public static final int dayLabel=0x7f080015;
         public static final int dayLabelWMC=0x7f08000a;
-        public static final int daysSpinner=0x7f080014;
+        public static final int daysSpinner=0x7f080016;
         public static final int daysSpinnerWheresMyClass=0x7f08000b;
         public static final int enterWhatsInThereButton=0x7f080003;
         public static final int enterYourCourseCodeLabel=0x7f080008;
         public static final int errorMessage=0x7f080001;
+        public static final int errorMessageWMC=0x7f080010;
         public static final int header=0x7f080002;
-        public static final int menu_settings=0x7f08001d;
-        public static final int progressBar=0x7f080016;
+        public static final int locationTextWMC=0x7f080022;
+        public static final int menu_settings=0x7f080023;
+        public static final int progressBar=0x7f080018;
         public static final int progressBarWheresMyClass=0x7f08000d;
-        public static final int progressText=0x7f080017;
+        public static final int progressText=0x7f080019;
         public static final int progressTextWheresMyClass=0x7f08000e;
-        public static final int room_textfield=0x7f080012;
-        public static final int timeOfDay=0x7f08001a;
+        public static final int room_textfield=0x7f080014;
+        public static final int timeOfDay=0x7f08001c;
+        public static final int timeOfDayWMC=0x7f080020;
         public static final int timetableResults=0x7f080000;
-        public static final int txtHeader=0x7f080019;
+        public static final int timetableResultsWMC=0x7f08000f;
+        public static final int txtHeader=0x7f08001b;
+        public static final int txtHeaderWMC=0x7f08001f;
         public static final int whatIsThisBtnText=0x7f080005;
         public static final int wheresMyClassBtn=0x7f080004;
     }
@@ -60,6 +66,8 @@ public final class R {
         public static final int input_wit_class=0x7f030005;
         public static final int timetable_results_header_row=0x7f030006;
         public static final int timetable_results_item_row=0x7f030007;
+        public static final int wmc_timetable_results_header_row=0x7f030008;
+        public static final int wmc_timetable_results_item_row=0x7f030009;
     }
     public static final class menu {
         public static final int activity_find_room_contents=0x7f070000;
@@ -83,6 +91,7 @@ public final class R {
         /**  Where's My Class? 
          */
         public static final int enterYourCourseCodeLabelTxt=0x7f040017;
+        public static final int error_course_doesnt_exist=0x7f04001a;
         public static final int error_message_no_results=0x7f04000d;
         public static final int gatton_radioButton=0x7f040008;
         public static final int hello_world=0x7f040001;

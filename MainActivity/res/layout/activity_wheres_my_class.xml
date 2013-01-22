@@ -22,7 +22,8 @@
         android:id="@+id/courseCodeTextfield"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="e.g. SCAM1000" />
+        android:hint="e.g. CSSE2310"
+        android:inputType="textPersonName"/>
     
         <TextView
         android:paddingTop="17dp"
