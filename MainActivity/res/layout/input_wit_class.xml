@@ -3,31 +3,30 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity"
     android:paddingLeft="16dp"
-    android:paddingRight="16dp">
+    android:paddingRight="16dp"
+    tools:context=".MainActivity" >
 
-	<ImageView 
-	    android:id="@+id/header"
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:src="@drawable/bw_logo"
-	    android:adjustViewBounds="true"
-	    android:scaleType="fitCenter"
-	    android:layout_gravity="center_horizontal|top"
-	    />
-    
+    <ImageView
+        android:id="@+id/header"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|top"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/bw_logo" />
+
     <TextView
         android:id="@+id/campusLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/campusLabel"
         android:textAppearance="?android:attr/textAppearanceMedium" />
-    
-    <Spinner android:id="@+id/campusChoiceSpinner"
+
+    <Spinner
+        android:id="@+id/campusChoiceSpinner"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" 
-        />
+        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/buildingRoomInstructionLabel"
@@ -35,58 +34,55 @@
         android:layout_height="wrap_content"
         android:text="@string/buildingRoomInstructionLabel"
         android:textAppearance="?android:attr/textAppearanceMedium" />
-        
-    
-    <EditText android:id="@+id/room_textfield"
-        android:inputType="text"
+
+    <EditText
+        android:id="@+id/room_textfield"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:inputType="text"
         android:paddingTop="17dp" />
-    
 
-    
     <TextView
-        android:paddingTop="17dp"
         android:id="@+id/dayLabel"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="17dp"
         android:text="@string/dayLabel"
         android:textAppearance="?android:attr/textAppearanceMedium" />
-        
-    
-    <Spinner android:id="@+id/daysSpinner"
+
+    <Spinner
+        android:id="@+id/daysSpinner"
         android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/button_send"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        />
-    
-    <Button android:id="@+id/button_send"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:text="@+string/button_send"
-	    android:onClick="findRoomButtonPressed"/>
-    
+        android:onClick="findRoomButtonPressed"
+        android:text="@+string/button_send" />
+
     <ProgressBar
         android:id="@+id/progressBar"
-         android:layout_width="fill_parent"
-         android:layout_height="wrap_content"
-         style="@android:style/Widget.ProgressBar.Horizontal"
-         android:layout_marginRight="5dp"
-         android:layout_marginLeft="5dp" />
-    
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp" />
+
     <TextView
         android:id="@+id/progressText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=""
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        />
-    
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
     <TextView
         android:id="@+id/authorCredits"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-		android:text="@string/emileVictorCredits"
-		android:textAppearance="?android:attr/textAppearanceMedium"
-		android:layout_gravity="bottom"
-		/>
+        android:layout_gravity="bottom"
+        android:text="@string/emileVictorCredits"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
 </LinearLayout>

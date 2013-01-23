@@ -1,6 +1,7 @@
 package com.emilevictor.wit;
 
 import com.emilevictor.wit.about_page.WhatIsThis;
+import com.emilevictor.wit.computeravailability.ComputerAvailability;
 import com.emilevictor.wit.wheres_my_class.WheresMyClass;
 
 import android.app.Activity;
@@ -42,6 +43,13 @@ public class MainActivity extends Activity {
 	public void wheresMyClassPage(View view)
 	{
 		final Intent intent = new Intent(this, WheresMyClass.class);
+		
+		startActivity(intent);
+	}
+	
+	public void computerAvailabilityPage(View view)
+	{
+		final Intent intent = new Intent(this, ComputerAvailability.class);
 		
 		startActivity(intent);
 	}

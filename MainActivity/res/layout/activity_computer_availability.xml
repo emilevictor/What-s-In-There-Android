@@ -1,0 +1,37 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ComputerAvailability" >
+
+    <TextView
+        android:id="@+id/libraryChoiceLabel"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/libraryChoiceText" />
+
+    <Spinner
+        android:id="@+id/libraryChoiceSpinner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/libraryLevelLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/libraryLevelLabelText" />
+
+    <Spinner
+        android:id="@+id/levelChoiceSpinner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/chooseLibraryBtn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/chooseLibraryBtnText"
+        android:onClick="getFloorplanPage" />
+
+</LinearLayout>

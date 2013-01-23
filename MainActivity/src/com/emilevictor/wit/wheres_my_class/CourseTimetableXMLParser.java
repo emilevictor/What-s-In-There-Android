@@ -17,6 +17,7 @@ public class CourseTimetableXMLParser {
 	private static final String ns = null;
 	private static List<Class> sessions;
 	private static String courseCode;
+	private static String groupNumber;
 
 	public CourseTimetableXMLParser() {
 
@@ -131,7 +132,7 @@ public class CourseTimetableXMLParser {
 			}
 		}
 		cls.courseCode = courseCode;
-		cls.classType = currentSeriesType;
+		cls.classType = currentSeriesType + groupNumber;
 		parser.require(XmlPullParser.END_TAG,ns,"session");
 
 		if (cls.buildingName != null &&
@@ -166,7 +167,10 @@ public class CourseTimetableXMLParser {
 				
 				readSessions(currentSeriesType,parser);
 				
+			} else if (name.equals("name")) {
+				groupNumber = readText(parser);
 			}else {
+			
 				skip(parser);
 			}
 		}
@@ -254,6 +258,7 @@ public class CourseTimetableXMLParser {
 	public static List<Class> parse (InputStream in) throws XmlPullParserException, IOException {
 		sessions = new ArrayList<Class>();
 		courseCode = "";
+		groupNumber = "";
 
 		try {
 			XmlPullParser parser = Xml.newPullParser();

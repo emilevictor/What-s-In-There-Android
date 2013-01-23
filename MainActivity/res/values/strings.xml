@@ -53,5 +53,47 @@
     <string name="enterYourCourseCodeLabelTxt">Enter your course code:</string>
     <string name="button_findClass_text">Find My Class</string>
     <string name="title_activity_wheres_my_class_results">Results for your course</string>
-	<string name="error_course_doesnt_exist">Error: the course either doesn\'t exist this semester or doesn\'t exist at all. Check your spelling.</string>
+    <string name="error_course_doesnt_exist">Error: the course either doesn\'t exist this semester or doesn\'t exist at all. Check your spelling.</string>
+    <string name="title_activity_computer_availability">Computer Availability</string>
+
+    <!-- Computer availability -->
+    <string name="libraryChoiceText">Choose a library:</string>
+    <string name="floorChoiceText">Choose a floor:</string>
+    <string name="chooseLibraryBtnText">Get available computers</string>
+    <string name="libraryLevelLabelText">Choose a floor level:</string>
+
+    <string-array name="libraries">
+        <item>SS&amp;H</item>
+        <item>Architecture &amp; Music</item>
+
+        <!-- <item>Dorothy Hill Engineering &amp; Sciences </item> -->
+        <item>Dentistry</item>
+        <item>Biol Sciences</item>
+        <item>Herston Health Sciences</item>
+        <item>Fryer Postgraduate</item>
+        <!-- <item>Fryer</item> -->
+        <!-- <item>Gatton</item> -->
+        <!-- <item>Graduate Economics &amp; Business </item> -->
+
+
+        <!-- <item>Ipswich</item> -->
+        <!-- <item>Mater McAuley</item> -->
+        <!-- <item>PACE Health Sciences</item> -->
+        <!-- <item>Princess Alexandra Hospital</item> -->
+        <!-- <item>Rural Clinical School</item> -->
+        <!-- <item>Walter Harrison Law Library</item> -->
+    </string-array>
+    <string-array name="levels">
+        <item>Lvl1</item>
+        <item>Lvl2</item>
+        <item>Lvl3</item>
+        <item>Lvl4</item>
+        <item>Lvl5</item>
+        <item>Lvl6</item>
+        <item>Lvl7</item>
+        <item>Lvl8</item>
+    </string-array>
+
+    <string name="title_activity_library_floor_plan">Computer Availability</string>
+
 </resources>
