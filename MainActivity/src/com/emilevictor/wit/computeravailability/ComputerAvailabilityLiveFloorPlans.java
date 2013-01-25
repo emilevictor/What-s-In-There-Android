@@ -18,7 +18,7 @@ import com.emilevictor.wit.MainActivity;
 import com.emilevictor.wit.R;
 import com.emilevictor.wit.helpers.Settings;
 
-public class ComputerAvailability extends Activity {
+public class ComputerAvailabilityLiveFloorPlans extends Activity {
 
 	private Spinner libraryChoiceSpinner;
 	private Spinner libraryLevelSpinner;
@@ -28,7 +28,7 @@ public class ComputerAvailability extends Activity {
 	@Override
     public boolean onOptionsItemSelected(MenuItem menuItem)
     {       
-        startActivity(new Intent(ComputerAvailability.this,MainActivity.class)); 
+        startActivity(new Intent(ComputerAvailabilityLiveFloorPlans.this,MainActivity.class)); 
         return true;
     }
 	

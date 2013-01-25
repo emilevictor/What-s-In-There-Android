@@ -1,0 +1,38 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <LinearLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#000000"
+        android:orientation="vertical"
+        tools:context=".BusMenu" >
+
+        <ImageView
+            android:id="@+id/header"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|top"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/bw_logo"
+            android:contentDescription="@string/headerImageContentDescription"/>
+
+        <Button
+            android:id="@+id/chancellorsPlaceBusBtn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:onClick="chancellorsPlace"
+            android:text="@string/chancellorsPlaceBusBtnText" />
+
+        <Button
+            android:id="@+id/UQLakesBusBtn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:onClick="UQLakes"
+            android:text="@string/UQLakesBusBtnText" />
+    </LinearLayout>
+
+</ScrollView>

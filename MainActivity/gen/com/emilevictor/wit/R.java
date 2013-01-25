@@ -32,115 +32,145 @@ public final class R {
         public static final int ic_launcher=0x7f020002;
     }
     public static final class id {
-        public static final int WITexplanation=0x7f08000e;
-        public static final int WITexplanationTitle=0x7f08000d;
-        public static final int authorCredits=0x7f080021;
-        public static final int buildingRoomInstructionLabel=0x7f08001a;
-        public static final int button_findClass=0x7f080013;
-        public static final int button_send=0x7f08001e;
-        public static final int campusChoiceSpinner=0x7f080019;
-        public static final int campusLabel=0x7f080018;
-        public static final int chooseLibraryBtn=0x7f080004;
-        public static final int classType=0x7f080024;
-        public static final int classTypeWMC=0x7f080028;
-        public static final int computerAvailabilityBtn=0x7f08000b;
-        public static final int courseCode=0x7f080025;
-        public static final int courseCodeTextfield=0x7f080010;
-        public static final int dayLabel=0x7f08001c;
-        public static final int dayLabelWMC=0x7f080011;
-        public static final int daysSpinner=0x7f08001d;
-        public static final int daysSpinnerWheresMyClass=0x7f080012;
-        public static final int enterWhatsInThereButton=0x7f080009;
-        public static final int enterYourCourseCodeLabel=0x7f08000f;
-        public static final int errorMessage=0x7f080006;
-        public static final int errorMessageWMC=0x7f080017;
-        public static final int header=0x7f080008;
-        public static final int levelChoiceSpinner=0x7f080003;
-        public static final int libraryChoiceLabel=0x7f080000;
-        public static final int libraryChoiceSpinner=0x7f080001;
-        public static final int libraryFloorPlan=0x7f080007;
-        public static final int libraryLevelLabel=0x7f080002;
-        public static final int locationTextWMC=0x7f080029;
-        public static final int menu_settings=0x7f08002a;
-        public static final int progressBar=0x7f08001f;
-        public static final int progressBarWheresMyClass=0x7f080014;
-        public static final int progressText=0x7f080020;
-        public static final int progressTextWheresMyClass=0x7f080015;
-        public static final int room_textfield=0x7f08001b;
-        public static final int timeOfDay=0x7f080023;
-        public static final int timeOfDayWMC=0x7f080027;
-        public static final int timetableResults=0x7f080005;
-        public static final int timetableResultsWMC=0x7f080016;
-        public static final int txtHeader=0x7f080022;
-        public static final int txtHeaderWMC=0x7f080026;
-        public static final int whatIsThisBtnText=0x7f08000c;
-        public static final int wheresMyClassBtn=0x7f08000a;
+        public static final int UQLakesBusBtn=0x7f080002;
+        public static final int WITexplanation=0x7f080016;
+        public static final int WITexplanationTitle=0x7f080015;
+        public static final int authorCredits=0x7f08002d;
+        public static final int buildingRoomInstructionLabel=0x7f080026;
+        public static final int button_findClass=0x7f08001b;
+        public static final int button_send=0x7f08002a;
+        public static final int campusChoiceSpinner=0x7f080025;
+        public static final int campusLabel=0x7f080024;
+        public static final int chancellorsPlaceBusBtn=0x7f080001;
+        public static final int chooseLibraryBtn=0x7f080007;
+        public static final int classType=0x7f080030;
+        public static final int classTypeWMC=0x7f080033;
+        public static final int computerAvailabilityBtn=0x7f080011;
+        public static final int computerAvailabilityOverviewBtn=0x7f080012;
+        public static final int computerOverviewList=0x7f08000a;
+        public static final int courseCode=0x7f080031;
+        public static final int courseCodeTextfield=0x7f080018;
+        public static final int currentAvailableComputers=0x7f080023;
+        public static final int dayLabel=0x7f080028;
+        public static final int dayLabelWMC=0x7f080019;
+        public static final int daysSpinner=0x7f080029;
+        public static final int daysSpinnerWheresMyClass=0x7f08001a;
+        public static final int enterWhatsInThereButton=0x7f08000f;
+        public static final int enterYourCourseCodeLabel=0x7f080017;
+        public static final int errorMessage=0x7f08000c;
+        public static final int errorMessageWMC=0x7f08001f;
+        public static final int header=0x7f080000;
+        public static final int levelChoiceSpinner=0x7f080006;
+        public static final int libraryChoiceLabel=0x7f080003;
+        public static final int libraryChoiceSpinner=0x7f080004;
+        public static final int libraryFloorPlan=0x7f08000d;
+        public static final int libraryLevelLabel=0x7f080005;
+        public static final int liveBusInfoBtn=0x7f080013;
+        public static final int liveBusInfoWebView=0x7f08000e;
+        public static final int locationTextWMC=0x7f080034;
+        public static final int menu_settings=0x7f080035;
+        public static final int progressBar=0x7f08002b;
+        public static final int progressBarCompOverview=0x7f080008;
+        public static final int progressBarWheresMyClass=0x7f08001c;
+        public static final int progressText=0x7f08002c;
+        public static final int progressTextCompOverview=0x7f080009;
+        public static final int progressTextWheresMyClass=0x7f08001d;
+        public static final int roomName=0x7f080021;
+        public static final int room_textfield=0x7f080027;
+        public static final int timeOfDay=0x7f08002f;
+        public static final int timeOfDayWMC=0x7f080032;
+        public static final int timetableResults=0x7f08000b;
+        public static final int timetableResultsWMC=0x7f08001e;
+        public static final int totalAvailableComputers=0x7f080022;
+        public static final int txtHeader=0x7f08002e;
+        public static final int txtHeaderWMC=0x7f080020;
+        public static final int whatIsThisBtnText=0x7f080014;
+        public static final int wheresMyClassBtn=0x7f080010;
     }
     public static final class layout {
-        public static final int activity_computer_availability=0x7f030000;
-        public static final int activity_find_room_contents=0x7f030001;
-        public static final int activity_library_floor_plan=0x7f030002;
-        public static final int activity_main=0x7f030003;
-        public static final int activity_what_is_this=0x7f030004;
-        public static final int activity_wheres_my_class=0x7f030005;
-        public static final int activity_wheres_my_class_results=0x7f030006;
-        public static final int input_wit_class=0x7f030007;
-        public static final int timetable_results_header_row=0x7f030008;
-        public static final int timetable_results_item_row=0x7f030009;
-        public static final int wmc_timetable_results_header_row=0x7f03000a;
-        public static final int wmc_timetable_results_item_row=0x7f03000b;
+        public static final int activity_bus_menu=0x7f030000;
+        public static final int activity_computer_availability=0x7f030001;
+        public static final int activity_computer_availability_overview=0x7f030002;
+        public static final int activity_computer_availability_overview_results=0x7f030003;
+        public static final int activity_find_room_contents=0x7f030004;
+        public static final int activity_library_floor_plan=0x7f030005;
+        public static final int activity_live_bus_info=0x7f030006;
+        public static final int activity_main=0x7f030007;
+        public static final int activity_what_is_this=0x7f030008;
+        public static final int activity_wheres_my_class=0x7f030009;
+        public static final int activity_wheres_my_class_results=0x7f03000a;
+        public static final int availability_overview_header_row=0x7f03000b;
+        public static final int availability_overview_item_row=0x7f03000c;
+        public static final int input_wit_class=0x7f03000d;
+        public static final int timetable_results_header_row=0x7f03000e;
+        public static final int timetable_results_item_row=0x7f03000f;
+        public static final int wmc_timetable_results_header_row=0x7f030010;
+        public static final int wmc_timetable_results_item_row=0x7f030011;
     }
     public static final class menu {
-        public static final int activity_computer_availability=0x7f070000;
-        public static final int activity_find_room_contents=0x7f070001;
-        public static final int activity_library_floor_plan=0x7f070002;
-        public static final int activity_main=0x7f070003;
-        public static final int activity_what_is_this=0x7f070004;
-        public static final int activity_wheres_my_class=0x7f070005;
-        public static final int activity_wheres_my_class_results=0x7f070006;
+        public static final int activity_bus_menu=0x7f070000;
+        public static final int activity_computer_availability=0x7f070001;
+        public static final int activity_computer_availability_overview=0x7f070002;
+        public static final int activity_computer_availability_overview_results=0x7f070003;
+        public static final int activity_find_room_contents=0x7f070004;
+        public static final int activity_library_floor_plan=0x7f070005;
+        public static final int activity_live_bus_info=0x7f070006;
+        public static final int activity_main=0x7f070007;
+        public static final int activity_what_is_this=0x7f070008;
+        public static final int activity_wheres_my_class=0x7f070009;
+        public static final int activity_wheres_my_class_results=0x7f07000a;
     }
     public static final class string {
-        public static final int WITexplanation=0x7f040015;
+        public static final int UQLakesBusBtnText=0x7f040027;
+        public static final int WITexplanation=0x7f040016;
         /**  What is this page 
          */
-        public static final int WITexplanationTitle=0x7f040014;
+        public static final int WITexplanationTitle=0x7f040015;
         public static final int app_name=0x7f040000;
-        public static final int buildingRoomInstructionLabel=0x7f040009;
-        public static final int button_findClass_text=0x7f040018;
+        public static final int buildingRoomInstructionLabel=0x7f04000a;
+        public static final int button_findClass_text=0x7f040019;
         public static final int button_send=0x7f040004;
-        public static final int campusLabel=0x7f04000a;
-        public static final int chooseLibraryBtnText=0x7f04001e;
-        public static final int dayLabel=0x7f04000b;
-        public static final int emileVictorCredits=0x7f04000e;
+        public static final int campusLabel=0x7f04000b;
+        public static final int chancellorsPlaceBusBtnText=0x7f040026;
+        public static final int chooseLibraryBtnText=0x7f04001f;
+        public static final int dayLabel=0x7f04000c;
+        public static final int emileVictorCredits=0x7f04000f;
         /**  Where's My Class? 
          */
-        public static final int enterYourCourseCodeLabelTxt=0x7f040017;
-        public static final int error_course_doesnt_exist=0x7f04001a;
-        public static final int error_message_no_results=0x7f04000d;
-        public static final int floorChoiceText=0x7f04001d;
+        public static final int enterYourCourseCodeLabelTxt=0x7f040018;
+        public static final int error_course_doesnt_exist=0x7f04001b;
+        public static final int error_message_no_results=0x7f04000e;
+        public static final int floorChoiceText=0x7f04001e;
         public static final int gatton_radioButton=0x7f040008;
+        public static final int headerImageContentDescription=0x7f040009;
         public static final int hello_world=0x7f040001;
         public static final int ipswich_radioButton=0x7f040007;
-        /**  Computer availability 
-         */
-        public static final int libraryChoiceText=0x7f04001c;
-        public static final int libraryLevelLabelText=0x7f04001f;
+        public static final int libraryChoiceText=0x7f04001d;
+        public static final int libraryLevelLabelText=0x7f040020;
         public static final int menu_settings=0x7f040002;
         public static final int room_textfield=0x7f040003;
         public static final int stlucia_radioButton=0x7f040006;
-        public static final int title_activity_computer_availability=0x7f04001b;
+        public static final int title_activity_bus_menu=0x7f040025;
+        /**  Computer availability 
+         */
+        public static final int title_activity_computer_availability=0x7f04001c;
+        public static final int title_activity_computer_availability_overview=0x7f040022;
+        public static final int title_activity_computer_availability_overview_results=0x7f040023;
         public static final int title_activity_find_room_contents=0x7f040005;
-        public static final int title_activity_library_floor_plan=0x7f040020;
-        public static final int title_activity_main=0x7f04000f;
-        public static final int title_activity_what_is_this=0x7f040013;
-        public static final int title_activity_wheres_my_class=0x7f040016;
-        public static final int title_activity_wheres_my_class_results=0x7f040019;
-        public static final int waiting_on_connection=0x7f04000c;
-        public static final int whatIsThisBtnText=0x7f040012;
-        public static final int wheresMyClassBtnText=0x7f040011;
+        public static final int title_activity_library_floor_plan=0x7f040021;
+        /**  Bus information 
+         */
+        public static final int title_activity_live_bus_info=0x7f040024;
+        public static final int title_activity_main=0x7f040010;
+        public static final int title_activity_what_is_this=0x7f040014;
+        public static final int title_activity_wheres_my_class=0x7f040017;
+        public static final int title_activity_wheres_my_class_results=0x7f04001a;
+        public static final int waiting_on_connection=0x7f04000d;
+        public static final int whatIsThisBtnText=0x7f040013;
+        public static final int wheresMyClassBtnText=0x7f040012;
         /**  The main page 
          */
-        public static final int witMainPageButtonText=0x7f040010;
+        public static final int witMainPageButtonText=0x7f040011;
     }
     public static final class style {
         /** 

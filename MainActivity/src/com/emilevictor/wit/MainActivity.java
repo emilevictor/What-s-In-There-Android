@@ -1,7 +1,9 @@
 package com.emilevictor.wit;
 
 import com.emilevictor.wit.about_page.WhatIsThis;
-import com.emilevictor.wit.computeravailability.ComputerAvailability;
+import com.emilevictor.wit.buses.BusMenu;
+import com.emilevictor.wit.computeravailability.ComputerAvailabilityLiveFloorPlans;
+import com.emilevictor.wit.computeravailability.ComputerAvailabilityOverview;
 import com.emilevictor.wit.wheres_my_class.WheresMyClass;
 
 import android.app.Activity;
@@ -49,7 +51,21 @@ public class MainActivity extends Activity {
 	
 	public void computerAvailabilityPage(View view)
 	{
-		final Intent intent = new Intent(this, ComputerAvailability.class);
+		final Intent intent = new Intent(this, ComputerAvailabilityLiveFloorPlans.class);
+		
+		startActivity(intent);
+	}
+	
+	public void computerAvailabilityOverviewPage(View view)
+	{
+		final Intent intent = new Intent(this, ComputerAvailabilityOverview.class);
+		
+		startActivity(intent);
+	}
+	
+	public void liveBusInfo(View view)
+	{
+		final Intent intent = new Intent(this, BusMenu.class);
 		
 		startActivity(intent);
 	}

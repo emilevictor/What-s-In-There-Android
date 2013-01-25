@@ -1,51 +1,81 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#000000"
-    android:orientation="vertical"
-    tools:context=".MainActivity" >
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
 
-    <ImageView
-        android:id="@+id/header"
+    <LinearLayout
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal|top"
-        android:adjustViewBounds="true"
-        android:scaleType="fitCenter"
-        android:src="@drawable/bw_logo" />
+        android:layout_height="fill_parent"
+        android:background="#000000"
+        android:orientation="vertical"
+        tools:context=".MainActivity" >
 
-    <Button
-        android:id="@+id/enterWhatsInThereButton"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal|top"
-        android:onClick="openWIT"
-        android:text="@string/witMainPageButtonText" />
+        <ImageView
+            android:id="@+id/header"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|top"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/bw_logo" />
 
-    <Button
-        android:id="@+id/wheresMyClassBtn"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal|top"
-        android:onClick="wheresMyClassPage"
-        android:text="@string/wheresMyClassBtnText" />
-    
         <Button
-        android:id="@+id/computerAvailabilityBtn"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal|top"
-        android:onClick="computerAvailabilityPage"
-        android:text="@string/title_activity_computer_availability" />
+            android:id="@+id/enterWhatsInThereButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|top"
+            android:onClick="openWIT"
+            android:text="@string/witMainPageButtonText" />
 
-    <Button
-        android:id="@+id/whatIsThisBtnText"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal|top"
-        android:layout_marginTop="30dp"
-        android:onClick="whatIsThisPage"
-        android:text="@string/whatIsThisBtnText" />
+        <Button
+            android:id="@+id/wheresMyClassBtn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|top"
+            android:onClick="wheresMyClassPage"
+            android:text="@string/wheresMyClassBtnText" />
 
-</LinearLayout>
+        <Button
+            android:id="@+id/computerAvailabilityBtn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|top"
+            android:onClick="computerAvailabilityPage"
+            android:text="@string/title_activity_computer_availability" />
+
+        <Button
+            android:id="@+id/computerAvailabilityOverviewBtn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|top"
+            android:onClick="computerAvailabilityOverviewPage"
+            android:text="@string/title_activity_computer_availability_overview" />
+        
+                <Button
+            android:id="@+id/liveBusInfoBtn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|top"
+            android:onClick="liveBusInfo"
+            android:text="@string/title_activity_live_bus_info" />
+                
+                
+                
+                
+                
+                
+                
+
+        <Button
+            android:id="@+id/whatIsThisBtnText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|top"
+            android:layout_marginTop="30dp"
+            android:onClick="whatIsThisPage"
+            android:text="@string/whatIsThisBtnText" />
+
+
+    </LinearLayout>
+
+</ScrollView>

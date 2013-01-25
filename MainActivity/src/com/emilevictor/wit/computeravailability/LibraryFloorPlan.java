@@ -17,7 +17,7 @@ public class LibraryFloorPlan extends Activity {
 	@Override
     public boolean onOptionsItemSelected(MenuItem menuItem)
     {       
-        startActivity(new Intent(LibraryFloorPlan.this,ComputerAvailability.class)); 
+        startActivity(new Intent(LibraryFloorPlan.this,ComputerAvailabilityLiveFloorPlans.class)); 
         return true;
     }
 	

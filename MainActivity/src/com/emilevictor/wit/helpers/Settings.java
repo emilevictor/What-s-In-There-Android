@@ -9,6 +9,9 @@ public class Settings {
 	public static String idAPIurlEnd = "%22,%22semester_id%22:%22"+currentSemesterNumber+"%22}";
 	
 	//Library floor plans
-	public static String libraryFloorPlanUrlStart = "http://www.library.uq.edu.au/uqlsm/availablepcsembed.php?branch=";
+	public static String libraryFloorPlanUrlStart = "http://www.library.uq.edu.au/uqlsm/map.php?embed&building=";
 	public static String libraryFloorPlanUrlEnd = "&room=";
+	
+	//Computer availability APIs
+	public static String eaitAvailabilityXMLurl = "https://student.eait.uq.edu.au/data/uqlsm/api.php?key=f8176970-6527-11e2-bcfd-0800200c9a66&cmd=xmlsummary";
 }
