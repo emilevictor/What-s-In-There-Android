@@ -59,5 +59,55 @@ public class BusMenu extends Activity {
 		
 		startActivity(intent);
 	}
+	
+	public void RCHHerstonBus(View view)
+	{
+		final Intent intent = new Intent(this, LiveBusInfo.class);
+		
+		//Let the next screen know that we want the uq lakes page.
+		intent.putExtra("stop", "herston");
+		
+		startActivity(intent);
+	}
+	
+	public void GattonBus(View view)
+	{
+		final Intent intent = new Intent(this, LiveBusInfo.class);
+		
+		//Let the next screen know that we want the uq lakes page.
+		intent.putExtra("stop", "gatton");
+		
+		startActivity(intent);
+	}
+	
+	public void ipswichBus(View view)
+	{
+		final Intent intent = new Intent(this, LiveBusInfo.class);
+		
+		//Let the next screen know that we want the uq lakes page.
+		intent.putExtra("stop", "ipswichBus");
+		
+		startActivity(intent);
+	}
+	
+	public void ipswichTrain(View view)
+	{
+		final Intent intent = new Intent(this, LiveBusInfo.class);
+		
+		//Let the next screen know that we want the uq lakes page.
+		intent.putExtra("stop", "ipswichTrain");
+		
+		startActivity(intent);
+	}
+	
+	public void ToowongTrain(View view)
+	{
+		final Intent intent = new Intent(this, LiveBusInfo.class);
+		
+		//Let the next screen know that we want the uq lakes page.
+		intent.putExtra("stop", "toowongTrain");
+		
+		startActivity(intent);
+	}
 
 }

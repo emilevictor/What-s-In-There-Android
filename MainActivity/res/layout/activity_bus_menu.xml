@@ -16,9 +16,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|top"
             android:adjustViewBounds="true"
+            android:contentDescription="@string/headerImageContentDescription"
             android:scaleType="fitCenter"
-            android:src="@drawable/bw_logo"
-            android:contentDescription="@string/headerImageContentDescription"/>
+            android:src="@drawable/bw_logo" />
 
         <Button
             android:id="@+id/chancellorsPlaceBusBtn"
@@ -33,6 +33,42 @@
             android:layout_height="wrap_content"
             android:onClick="UQLakes"
             android:text="@string/UQLakesBusBtnText" />
+        
+        <Button
+            android:id="@+id/ToowongTrainBtn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:onClick="ToowongTrain"
+            android:text="@string/ToowongTrainBtnText" />
+        
+        <Button
+            android:id="@+id/IpswichBusBtn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:onClick="ipswichBus"
+            android:text="@string/IpswichBusBtnText" />
+        
+        <Button
+            android:id="@+id/IpswichTrainBtn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:onClick="ipswichTrain"
+            android:text="@string/IpswichTrainBtnText" />
+        
+
+        <Button
+            android:id="@+id/RCHHerstonBusBtn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:onClick="RCHHerstonBus"
+            android:text="@string/RCHHerstonBusText" />
+        
+        <Button
+            android:id="@+id/GattonBusBtn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:onClick="GattonBus"
+            android:text="@string/GattonBusText" />
     </LinearLayout>
 
 </ScrollView>

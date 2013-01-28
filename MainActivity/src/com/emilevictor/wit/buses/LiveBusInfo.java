@@ -7,6 +7,7 @@ import android.graphics.Picture;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebView.PictureListener;
@@ -14,49 +15,75 @@ import android.webkit.WebView.PictureListener;
 import com.emilevictor.wit.R;
 
 public class LiveBusInfo extends Activity {
-	
+
 	private WebView liveBusInfoWebView;
 	private String chancellorsPlaceUrl = "http://mobile.jp.translink.com.au/travel-information/network-information/stops-and-stations/stop/uq-chancellors-place";
 	private String UQlakesUrl = "http://mobile.jp.translink.com.au/travel-information/network-information/stops-and-stations/stop/uq-lakes";
+	private String herstonUrl = "http://mobile.jp.translink.com.au/travel-information/network-information/stops-and-stations/stop/rch-herston-station";
+	private String gattonUrl = "http://mobile.jp.translink.com.au/travel-information/network-information/stops-and-stations/stop/310640";
+	private String ipswichTrainUrl = "http://mobile.jp.translink.com.au/travel-information/network-information/stops-and-stations/stop/ipswich-station";
+	private String ipswichBusUrl = "http://mobile.jp.translink.com.au/travel-information/network-information/stops-and-stations/stop/310076";
+	private String toowongTrainUrl = "http://mobile.jp.translink.com.au/travel-information/network-information/stops-and-stations/stop/toowong-station";
 
 	@Override
-    public boolean onOptionsItemSelected(MenuItem menuItem)
-    {       
-        startActivity(new Intent(LiveBusInfo.this,BusMenu.class)); 
-        return true;
-    }
+	public boolean onOptionsItemSelected(MenuItem menuItem)
+	{       
+		startActivity(new Intent(LiveBusInfo.this,BusMenu.class)); 
+		return true;
+	}
 
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		getWindow().requestFeature(Window.FEATURE_PROGRESS);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_live_bus_info);
-		
+
 		//Add a back button to the action bar
 		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
-		
+
 		this.liveBusInfoWebView = (WebView) findViewById(R.id.liveBusInfoWebView);
-		
-		
+
+
 		Bundle extras = getIntent().getExtras();
 		String requestedStop = (String) extras.get("stop");
-		
-		
-		
+
+
 		this.liveBusInfoWebView.getSettings().setJavaScriptEnabled(true);
-		
+
+		//Show a different URL based on the button clicked.
 		if (requestedStop.equals("cp"))
 		{
 			this.liveBusInfoWebView.loadUrl(this.chancellorsPlaceUrl);
 			scrollPastHeader();
-			
+
 		} else if (requestedStop.equals("uql"))
 		{
 			this.liveBusInfoWebView.loadUrl(this.UQlakesUrl);
 			scrollPastHeader();
+		} else if (requestedStop.equals("herston"))
+		{
+			this.liveBusInfoWebView.loadUrl(this.herstonUrl);
+			scrollPastHeader();
+		} else if (requestedStop.equals("gatton"))
+		{
+			this.liveBusInfoWebView.loadUrl(this.gattonUrl);
+			scrollPastHeader();
+		} else if (requestedStop.equals("ipswichTrain"))
+		{
+			this.liveBusInfoWebView.loadUrl(this.ipswichTrainUrl);
+			scrollPastHeader();
+		} else if (requestedStop.equals("ipswichBus"))
+		{
+			this.liveBusInfoWebView.loadUrl(this.ipswichBusUrl);
+			scrollPastHeader();
+		} else if (requestedStop.equals("toowongTrain"))
+		{
+			this.liveBusInfoWebView.loadUrl(this.toowongTrainUrl);
+			scrollPastHeader();
 		}
-		
+
 	}
 
 	@Override
@@ -65,29 +92,33 @@ public class LiveBusInfo extends Activity {
 		getMenuInflater().inflate(R.menu.activity_live_bus_info, menu);
 		return true;
 	}
-	
+
 	private void scrollPastHeader()
 	{
 		//Automatically scroll past the translink header.
-		 try {
-			 this.liveBusInfoWebView.setWebChromeClient(new WebChromeClient() {
+		final Activity activity = this;
+		try {
+			this.liveBusInfoWebView.setWebChromeClient(new WebChromeClient() {
 
-			     @Override
-			     public void onProgressChanged(WebView view,
-			             int newProgress) {
+				@Override
+				public void onProgressChanged(WebView view,
+						int newProgress) {
 
-			         if (newProgress >= 100) {
+					activity.setTitle("Loading... " + String.valueOf(newProgress) + "%");
+					activity.setProgress(newProgress * 100);
+					if(newProgress == 100)
+					{
+						liveBusInfoWebView.scrollTo(0,390);
+						activity.setTitle("Live Bus Information");
+					}
 
-			             liveBusInfoWebView.scrollTo(0,390);
-			         }
+					super.onProgressChanged(view, newProgress);
+				};
 
-			         super.onProgressChanged(view, newProgress);
-			     };
-
-			 });
-			 } catch (Exception e) {
-			 e.printStackTrace();
-			 }
+			});
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }
