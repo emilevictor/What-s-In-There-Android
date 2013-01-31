@@ -1,12 +1,30 @@
 package com.emilevictor.wit.uqrota;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
 import org.apache.http.HttpVersion;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.CookieStore;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.protocol.ClientContext;
+import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.params.HttpParams;
+import org.apache.http.protocol.BasicHttpContext;
+import org.apache.http.protocol.HttpContext;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -16,6 +34,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
@@ -24,6 +43,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.emilevictor.wit.R;
+import com.emilevictor.wit.helpers.Network;
 import com.emilevictor.wit.helpers.Settings;
 
 /**
@@ -206,37 +226,56 @@ public class UQRotaLogin extends Activity {
 		private HttpParams httpParams;
 		private HttpClient httpClient;
 		private HttpPost httpPost;
+		private CookieStore cookieStore;
+		private HttpContext localContext;
+		private HttpGet httpGetLoginStatus;
+		private InputStream isResponse;
 
 		@Override
 		protected Boolean doInBackground(Void... params) {
 			// TODO: attempt authentication against a network service.
 			this.httpParams = new BasicHttpParams();
 			this.httpParams.setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
-
-
-
-
-
+			this.cookieStore = new BasicCookieStore();
+			this.localContext = new BasicHttpContext();
+			this.httpGetLoginStatus = new HttpGet(Settings.uqRotaLoginUrl);
+			
+			// Bind custom cookie store to the local context.
+			this.localContext.setAttribute(ClientContext.COOKIE_STORE,this.cookieStore);
+			
 			try {
 				
 				//POST to UQRota's login service
 				httpClient = new DefaultHttpClient();
 				httpPost = new HttpPost(Settings.uqRotaLoginUrl);
 				
+				List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+				nameValuePairs.add(new BasicNameValuePair("login",mUsername));
+				nameValuePairs.add(new BasicNameValuePair("password",mPassword));
 				
+				httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
 				// Simulate network access.
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				return false;
-			}
-
-			for (String credential : DUMMY_CREDENTIALS) {
-				String[] pieces = credential.split(":");
-				if (pieces[0].equals(mUsername)) {
-					// Account exists, return true if the password matches.
-					return pieces[1].equals(mPassword);
-				}
+				// Execute HTTP Post Request
+	            HttpResponse response = httpClient.execute(this.httpPost,this.localContext);
+	            
+	            HttpResponse getResponse = httpClient.execute(this.httpGetLoginStatus,this.localContext);
+	            
+	            HttpEntity responseEntity = getResponse.getEntity();
+	            isResponse = responseEntity.getContent();
+	            
+	            String responseBody = Network.convertInputStreamToString(isResponse);
+	            Log.d("Response:",responseBody);
+	            
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ClientProtocolException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 
 			// TODO: register the new account here.
