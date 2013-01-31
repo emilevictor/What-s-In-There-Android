@@ -1,16 +1,18 @@
 package com.emilevictor.wit;
 
-import com.emilevictor.wit.about_page.WhatIsThis;
-import com.emilevictor.wit.buses.BusMenu;
-import com.emilevictor.wit.computeravailability.ComputerAvailabilityLiveFloorPlans;
-import com.emilevictor.wit.computeravailability.ComputerAvailabilityOverview;
-import com.emilevictor.wit.wheres_my_class.WheresMyClass;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+
+import com.emilevictor.wit.about_page.WhatIsThis;
+import com.emilevictor.wit.buses.BusMenu;
+import com.emilevictor.wit.computeravailability.ComputerAvailabilityLiveFloorPlans;
+import com.emilevictor.wit.computeravailability.ComputerAvailabilityOverview;
+import com.emilevictor.wit.computeravailability.LibraryAvailabilityOverview;
+import com.emilevictor.wit.uqrota.UQRotaLogin;
+import com.emilevictor.wit.wheres_my_class.WheresMyClass;
 
 public class MainActivity extends Activity {
 
@@ -66,6 +68,20 @@ public class MainActivity extends Activity {
 	public void liveBusInfo(View view)
 	{
 		final Intent intent = new Intent(this, BusMenu.class);
+		
+		startActivity(intent);
+	}
+	
+	public void UQLibraryCAOverview(View view)
+	{
+		final Intent intent = new Intent(this, LibraryAvailabilityOverview.class);
+		
+		startActivity(intent);
+	}
+	
+	public void openRota(View view)
+	{
+		final Intent intent = new Intent(this, UQRotaLogin.class);
 		
 		startActivity(intent);
 	}

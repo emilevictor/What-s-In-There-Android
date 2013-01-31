@@ -43,6 +43,14 @@
             android:onClick="computerAvailabilityPage"
             android:text="@string/title_activity_computer_availability" />
 
+         <Button
+            android:id="@+id/UQLibraryCAOverviewBtn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|top"
+            android:onClick="UQLibraryCAOverview"
+            android:text="@string/title_activity_library_availability_overview" />
+        
         <Button
             android:id="@+id/computerAvailabilityOverviewBtn"
             android:layout_width="fill_parent"

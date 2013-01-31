@@ -8,40 +8,36 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 
+import com.emilevictor.wit.MainActivity;
 import com.emilevictor.wit.R;
 
-public class LibraryFloorPlan extends Activity {
-	private String url;
-	private WebView floorPlanWebView;
+public class LibraryAvailabilityOverview extends Activity {
 
-	@Override
-    public boolean onOptionsItemSelected(MenuItem menuItem)
-    {       
-        startActivity(new Intent(LibraryFloorPlan.this,ComputerAvailabilityLiveFloorPlans.class)); 
-        return true;
-    }
-	
+	private WebView libraryComputerOverviewWebView;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		getWindow().requestFeature(Window.FEATURE_PROGRESS);
-
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_library_floor_plan);
+		setContentView(R.layout.activity_library_availability_overview);
 		
-		this.floorPlanWebView = (WebView) findViewById(R.id.libraryFloorPlan);
+		
+
+		
+		this.libraryComputerOverviewWebView = (WebView) findViewById(R.id.libraryComputerAvailabilityWebView);
 		
 		//Automatically scroll past the translink header.
 				final Activity activity = this;
 				try {
-					this.floorPlanWebView.setWebChromeClient(new WebChromeClient() {
+					this.libraryComputerOverviewWebView.setWebChromeClient(new WebChromeClient() {
 
 						@Override
 						public void onProgressChanged(WebView view,
 								int newProgress) {
 
-							activity.setTitle("Loading floor plan... " + String.valueOf(newProgress) + "%");
+							activity.setTitle("Loading availability... " + String.valueOf(newProgress) + "%");
 							activity.setProgress(newProgress * 100);
 							if(newProgress == 100)
 							{
@@ -56,24 +52,31 @@ public class LibraryFloorPlan extends Activity {
 					e.printStackTrace();
 				}
 		
-		Bundle extras = getIntent().getExtras();
-		this.url = (String) extras.get("URL");
+		this.libraryComputerOverviewWebView.getSettings().setDefaultZoom(WebSettings.ZoomDensity.FAR);
+		this.libraryComputerOverviewWebView.getSettings().setSupportZoom(true);
+		this.libraryComputerOverviewWebView.getSettings().setBuiltInZoomControls(true);
+		this.libraryComputerOverviewWebView.loadUrl("http://www.library.uq.edu.au/uqlsm/availablepcsembed.php?q=ask-it/computer-availability");
 		
-		this.floorPlanWebView.getSettings().setJavaScriptEnabled(true);
-		this.floorPlanWebView.loadUrl(this.url);
 		
 		
 		//Add a back button to the action bar
 		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
-		
-		
 	}
 
 	@Override
+	public boolean onOptionsItemSelected(MenuItem menuItem)
+	{       
+		startActivity(new Intent(LibraryAvailabilityOverview.this,MainActivity.class)); 
+		return true;
+	}
+	
+	
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.activity_library_floor_plan, menu);
+		getMenuInflater().inflate(
+				R.menu.activity_library_availability_overview, menu);
 		return true;
 	}
 

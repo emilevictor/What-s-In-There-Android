@@ -16,9 +16,16 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|top"
             android:adjustViewBounds="true"
-            android:paddingTop="100dp"
             android:scaleType="fitCenter"
             android:src="@drawable/bw_logo" />
+
+        <Button
+            android:id="@+id/openRotaButton"
+            android:layout_width="400dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal|top"
+            android:onClick="openRota"
+            android:text="@string/openRotaButtonText" />
 
         <Button
             android:id="@+id/enterWhatsInThereButton"
@@ -43,6 +50,14 @@
             android:layout_gravity="center_horizontal|top"
             android:onClick="computerAvailabilityPage"
             android:text="@string/title_activity_computer_availability" />
+
+        <Button
+            android:id="@+id/UQLibraryCAOverviewBtn"
+            android:layout_width="400dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal|top"
+            android:onClick="UQLibraryCAOverview"
+            android:text="@string/title_activity_library_availability_overview" />
 
         <Button
             android:id="@+id/computerAvailabilityOverviewBtn"

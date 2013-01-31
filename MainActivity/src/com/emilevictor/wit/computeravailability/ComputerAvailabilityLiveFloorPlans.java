@@ -51,10 +51,20 @@ public class ComputerAvailabilityLiveFloorPlans extends Activity {
 		
 		String[] libraryGETCodes = {"SSAH",
 				"Armus",
+				"Duhig",
+				"PSE",
+				"Law",
+				"Ecob",
 				"Dentistry",
 				"BSL",
 				"HML",
-				"Duhig"};
+				"Duhig",
+				"Gatton",
+				"Mater",
+				"PACE",
+				"PAH",
+				"Yeronga"
+				};
 		
 		this.libraryGetCodes = libraryGETCodes;
 		
@@ -97,6 +107,7 @@ public class ComputerAvailabilityLiveFloorPlans extends Activity {
 		    	{
 		    		levels.clear();
 		    		//Because the default library is SS&H, we'll fill it up with this:
+		    		levels.add("Link");
 		    		levels.add("Lvl1");
 		    		levels.add("Lvl2");
 		    		levels.add("Lvl3");
@@ -110,14 +121,49 @@ public class ComputerAvailabilityLiveFloorPlans extends Activity {
 		    		levels.add("Lvl2");
 		    		ArrayAdapter<String> levelAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, levels);
 		    		libraryLevelSpinner.setAdapter(levelAdapter);
-		    	} else if (position == 2) //Dentistry
+		    	} else if (position == 2) //Duhig
+		    	{
+		    		levels.clear();
+		    		levels.add("Lvl1");
+		    		levels.add("Lvl2");
+		    		levels.add("Fryer");
+		    		ArrayAdapter<String> levelAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, levels);
+		    		libraryLevelSpinner.setAdapter(levelAdapter);
+		    	} else if (position == 3) //Dorothy Hill
+		    	{
+		    		levels.clear();
+		    		//Because the default library is SS&H, we'll fill it up with this:
+		    		levels.add("Lvl1");
+		    		levels.add("Lvl2");
+		    		levels.add("Lvl3");
+		    		levels.add("Lvl4");
+		    		levels.add("Lvl5");
+		    		ArrayAdapter<String> levelAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, levels);
+		    		libraryLevelSpinner.setAdapter(levelAdapter);
+		    	} else if (position == 4) //Law
+		    	{
+		    		levels.clear();
+		    		//Because the default library is SS&H, we'll fill it up with this:
+		    		levels.add("Lvl2");
+		    		levels.add("Lvl3");
+		    		levels.add("Lvl4");
+		    		ArrayAdapter<String> levelAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, levels);
+		    		libraryLevelSpinner.setAdapter(levelAdapter);
+		    	} else if (position == 5) //Ecob
+		    	{
+		    		levels.clear();
+		    		//Because the default library is SS&H, we'll fill it up with this:
+		    		levels.add("Lvl2");
+		    		ArrayAdapter<String> levelAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, levels);
+		    		libraryLevelSpinner.setAdapter(levelAdapter);
+		    	} else if (position == 6) //Dentistry
 		    	{
 		    		levels.clear();
 		    		//Because the default library is SS&H, we'll fill it up with this:
 		    		levels.add("Lvl1");
 		    		ArrayAdapter<String> levelAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, levels);
 		    		libraryLevelSpinner.setAdapter(levelAdapter);
-		    	} else if (position == 3) //BSL
+		    	} else if (position == 7) //Biol Sciences
 		    	{
 		    		levels.clear();
 		    		//Because the default library is SS&H, we'll fill it up with this:
@@ -127,18 +173,47 @@ public class ComputerAvailabilityLiveFloorPlans extends Activity {
 		    		levels.add("Lvl4");
 		    		ArrayAdapter<String> levelAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, levels);
 		    		libraryLevelSpinner.setAdapter(levelAdapter);
-		    	} else if (position == 4) //HML
+		    	} else if (position == 8) //Herston
 		    	{
 		    		levels.clear();
 		    		//Because the default library is SS&H, we'll fill it up with this:
 		    		levels.add("Lvl1");
 		    		ArrayAdapter<String> levelAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, levels);
 		    		libraryLevelSpinner.setAdapter(levelAdapter);
-		    	} else if (position == 5) //Duhig
+		    	} else if (position == 9) //Fryer
 		    	{
 		    		levels.clear();
 		    		//Because the default library is SS&H, we'll fill it up with this:
 		    		levels.add("Fryer");
+		    		ArrayAdapter<String> levelAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, levels);
+		    		libraryLevelSpinner.setAdapter(levelAdapter);
+		    	} else if (position == 10) //Gatton
+		    	{
+		    		levels.clear();
+		    		//Because the default library is SS&H, we'll fill it up with this:
+		    		levels.add("Lvl1");
+		    		levels.add("Lvl2");
+		    		ArrayAdapter<String> levelAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, levels);
+		    		libraryLevelSpinner.setAdapter(levelAdapter);
+		    	} else if (position == 11) //Mater
+		    	{
+		    		levels.clear();
+		    		//Because the default library is SS&H, we'll fill it up with this:
+		    		levels.add("Lvl1");
+		    		ArrayAdapter<String> levelAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, levels);
+		    		libraryLevelSpinner.setAdapter(levelAdapter);
+		    	} else if (position == 12) //PACE
+		    	{
+		    		levels.clear();
+		    		//Because the default library is SS&H, we'll fill it up with this:
+		    		levels.add("Lvl6");
+		    		ArrayAdapter<String> levelAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, levels);
+		    		libraryLevelSpinner.setAdapter(levelAdapter);
+		    	} else if (position == 13) //PAH
+		    	{
+		    		levels.clear();
+		    		//Because the default library is SS&H, we'll fill it up with this:
+		    		levels.add("Lvl1");
 		    		ArrayAdapter<String> levelAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, levels);
 		    		libraryLevelSpinner.setAdapter(levelAdapter);
 		    	}

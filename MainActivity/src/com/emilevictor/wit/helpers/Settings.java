@@ -14,4 +14,7 @@ public class Settings {
 	
 	//Computer availability APIs
 	public static String eaitAvailabilityXMLurl = "https://student.eait.uq.edu.au/data/uqlsm/api.php?key=f8176970-6527-11e2-bcfd-0800200c9a66&cmd=xmlsummary";
+
+	//UQRota login url
+	public static String uqRotaLoginUrl = "https://www.uqrota.net/login";
 }

@@ -68,14 +68,21 @@
     <string name="libraryLevelLabelText">Choose a floor level:</string>
 
     <string-array name="libraries">
-        <item>SS&amp;H</item>
+        <item>Social Sciences &amp; Humanities</item>
         <item>Architecture &amp; Music</item>
-
+        <item>Duhig</item>
+        <item>Dorothy Hill Engineering and Sciences</item>
+        <item>Law</item>
+        <item>Graduate Economics &amp; Business Library</item>
         <!-- <item>Dorothy Hill Engineering &amp; Sciences </item> -->
         <item>Dentistry</item>
         <item>Biol Sciences</item>
         <item>Herston Health Sciences</item>
         <item>Fryer Postgraduate</item>
+        <item>Gatton</item>
+        <item>Mater</item>
+        <item>PACE Health Sciences</item>
+        <item>Princess Alexandra Hospital</item>
         <!-- <item>Fryer</item> -->
         <!-- <item>Gatton</item> -->
         <!-- <item>Graduate Economics &amp; Business </item> -->
@@ -113,5 +120,14 @@
     <string name="IpswichBusBtnText">UQ Ipswich Buses (Live)</string>
     <string name="IpswichTrainBtnText">Ipswich Trains (Live)</string>
     <string name="ToowongTrainBtnText">Toowong Trains (Live)</string>
+    
+    
+    
+    <string name="title_activity_library_availability_overview">UQ Library Computer Availability Overview</string>
 
+    <!-- UQ Rota -->
+    <string name="openRotaButtonText">My UQRota Timetable</string>
+    <string name="uqRotaInstructionText">In order for UQ Student Assistant to display your rota timetables, you must log into UQRota.</string>
+    <string name="prompt_username">UQRota.net Username</string>
+    
 </resources>
