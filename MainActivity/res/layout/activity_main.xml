@@ -20,6 +20,22 @@
             android:src="@drawable/bw_logo" />
 
         <Button
+            android:id="@+id/signInUQRotaButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|top"
+            android:onClick="signInRota"
+            android:text="@string/loginUQRotaText" />
+
+        <Button
+            android:id="@+id/accessUQRotaButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|top"
+            android:onClick="openRota"
+            android:text="@string/openRotaButtonText" />
+
+        <Button
             android:id="@+id/enterWhatsInThereButton"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -43,14 +59,14 @@
             android:onClick="computerAvailabilityPage"
             android:text="@string/title_activity_computer_availability" />
 
-         <Button
+        <Button
             android:id="@+id/UQLibraryCAOverviewBtn"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|top"
             android:onClick="UQLibraryCAOverview"
             android:text="@string/title_activity_library_availability_overview" />
-        
+
         <Button
             android:id="@+id/computerAvailabilityOverviewBtn"
             android:layout_width="fill_parent"
@@ -58,21 +74,14 @@
             android:layout_gravity="center_horizontal|top"
             android:onClick="computerAvailabilityOverviewPage"
             android:text="@string/title_activity_computer_availability_overview" />
-        
-                <Button
+
+        <Button
             android:id="@+id/liveBusInfoBtn"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|top"
             android:onClick="liveBusInfo"
             android:text="@string/title_activity_live_bus_info" />
-                
-                
-                
-                
-                
-                
-                
 
         <Button
             android:id="@+id/whatIsThisBtnText"
@@ -82,8 +91,6 @@
             android:layout_marginTop="30dp"
             android:onClick="whatIsThisPage"
             android:text="@string/whatIsThisBtnText" />
-
-
     </LinearLayout>
 
 </ScrollView>

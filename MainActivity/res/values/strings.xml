@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <string name="app_name">Student Assistant - UQ</string>
     <string name="hello_world">Hello world!</string>
@@ -120,14 +120,25 @@
     <string name="IpswichBusBtnText">UQ Ipswich Buses (Live)</string>
     <string name="IpswichTrainBtnText">Ipswich Trains (Live)</string>
     <string name="ToowongTrainBtnText">Toowong Trains (Live)</string>
-    
-    
-    
     <string name="title_activity_library_availability_overview">UQ Library Computer Availability Overview</string>
 
     <!-- UQ Rota -->
+    <string name="loginUQRotaText">Log into UQRota for timetable access</string>
     <string name="openRotaButtonText">My UQRota Timetable</string>
     <string name="uqRotaInstructionText">In order for UQ Student Assistant to display your rota timetables, you must log into UQRota.</string>
     <string name="prompt_username">UQRota.net Username</string>
+    <string name="error_incorrect_password_or_username">Incorrect password or username.</string>
+    <string name="title_activity_choose_rota_timetable">Choose timetable</string>
+    <string name="UQRotaTimetableLoadingStatusInformation">Loading your timetables from UQRota...</string>
+    <item name="uqRotaTimetableId" type="id"/>
+    <string name="uqRotaTimetableSet">Set default timetable successfully.</string>
+    <string name="title_activity_show_default_timetable">Your UQRota Timetable</string>
     
+    <!-- UQRota loading progress text -->
+    <string name="uqRotaProgress1">Getting some information on your timetable from UQRota.</string>
+    <string name="uqRotaProgress2">Getting some more information...</string>
+
+    <!-- Error strings for UQRota -->
+    <string name="InterruptedExceptionRotaFetch">There was a problem fetching your rota timetable. If you need support, email me: e@emilevictor.com.</string>
+
 </resources>

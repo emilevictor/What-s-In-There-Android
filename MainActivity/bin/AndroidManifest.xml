@@ -78,6 +78,14 @@
             android:label="@string/title_activity_uqrota_login"
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
+        <activity
+            android:name="com.emilevictor.wit.uqrota.ChooseRotaTimetable"
+            android:label="@string/title_activity_choose_rota_timetable" >
+        </activity>
+        <activity
+            android:name="com.emilevictor.wit.uqrota.ShowDefaultTimetable"
+            android:label="@string/title_activity_show_default_timetable" >
+        </activity>
     </application>
 
 </manifest>

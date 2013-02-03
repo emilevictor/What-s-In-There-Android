@@ -1,5 +1,9 @@
 package com.emilevictor.wit.helpers;
 
+import android.content.SharedPreferences;
+
+import com.emilevictor.wit.uqrota.NoDefaultTimetableSetYetException;
+
 public class Settings {
 
 	public static String currentSemesterNumber = "6220";
@@ -17,4 +21,10 @@ public class Settings {
 
 	//UQRota login url
 	public static String uqRotaLoginUrl = "https://www.uqrota.net/login";
+	public static String uqRotaTimetableSearchUrl = "https://www.uqrota.net/timetables/search?mine=yes&_dc=1234"; //Fake DC...
+	public static String uqRotaTimetableFetchUrl = "https://www.uqrota.net/timetables/get?timetable_id=";
+	public static String UQRotaBaseUrl = "https://www.uqrota.net/";
+	//Preferences file name
+	public static String preferencesFilename = "prefsFile";
+	
 }

@@ -1,26 +1,34 @@
 package com.emilevictor.wit.computeravailability;
 
+import java.security.KeyManagementException;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.CertificateException;
+import java.security.cert.CertificateExpiredException;
+import java.security.cert.X509Certificate;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-import com.emilevictor.wit.MainActivity;
-import com.emilevictor.wit.R;
-import com.emilevictor.wit.R.layout;
-import com.emilevictor.wit.R.menu;
-import com.emilevictor.wit.helpers.Settings;
-import com.emilevictor.wit.whats_in_there.FindRoomContentsActivity;
-import com.emilevictor.wit.whats_in_there.RetreiveBuildingIdTask;
-import com.emilevictor.wit.whats_in_there.buildingXMLParser.Building;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.TrustManagerFactory;
+import javax.net.ssl.X509TrustManager;
 
-import android.os.Bundle;
-import android.os.Handler;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.emilevictor.wit.MainActivity;
+import com.emilevictor.wit.R;
+import com.emilevictor.wit.helpers.Settings;
 
 public class ComputerAvailabilityOverview extends Activity {
 
@@ -71,6 +79,71 @@ public class ComputerAvailabilityOverview extends Activity {
 					List<Room> eaitRooms = null;
 					GetEAITAvailabilityTask eaitTask = new GetEAITAvailabilityTask();
 
+					/**
+					 * The following HACK is intended to ignore the expired certificate
+					 * currently residing in UQ's CA.
+					 */
+					
+					TrustManagerFactory tmf = null;
+					try {
+						tmf = TrustManagerFactory.getInstance(
+							    TrustManagerFactory.getDefaultAlgorithm());
+					} catch (NoSuchAlgorithmException e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					}
+						// Initialise the TMF as you normally would, for example:
+						try {
+							tmf.init((KeyStore)null);
+						} catch (KeyStoreException e2) {
+							// TODO Auto-generated catch block
+							e2.printStackTrace();
+						} 
+
+						TrustManager[] trustManagers = tmf.getTrustManagers();
+						final X509TrustManager origTrustmanager = (X509TrustManager)trustManagers[0];
+
+						TrustManager[] wrappedTrustManagers = new TrustManager[]{
+						   new X509TrustManager() {
+						       public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+						          return origTrustmanager.getAcceptedIssuers();
+						       }
+
+						       public void checkClientTrusted(X509Certificate[] certs, String authType) {
+						           try {
+									origTrustmanager.checkClientTrusted(certs, authType);
+								} catch (CertificateException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+						       }
+
+						       public void checkServerTrusted(X509Certificate[] certs, String authType) {
+						           try {
+									origTrustmanager.checkServerTrusted(certs, authType);
+								} catch (CertificateException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+						       }
+						   }
+						};
+
+						SSLContext sc = null;
+						try {
+							sc = SSLContext.getInstance("TLS");
+						} catch (NoSuchAlgorithmException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						try {
+							sc.init(null, wrappedTrustManagers, null);
+						} catch (KeyManagementException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+					
 					try {
 						eaitRooms = eaitTask.execute(Settings.eaitAvailabilityXMLurl).get();
 					} catch (InterruptedException e1) {

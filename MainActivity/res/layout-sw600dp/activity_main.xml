@@ -20,7 +20,15 @@
             android:src="@drawable/bw_logo" />
 
         <Button
-            android:id="@+id/openRotaButton"
+            android:id="@+id/signInUQRotaButton"
+            android:layout_width="400dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal|top"
+            android:onClick="signInRota"
+            android:text="@string/loginUQRotaText" />
+        
+        <Button
+            android:id="@+id/accessUQRotaButton"
             android:layout_width="400dp"
             android:layout_height="100dp"
             android:layout_gravity="center_horizontal|top"

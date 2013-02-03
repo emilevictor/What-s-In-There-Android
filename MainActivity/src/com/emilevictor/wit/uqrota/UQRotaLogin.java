@@ -25,16 +25,19 @@ import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
@@ -43,8 +46,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.emilevictor.wit.R;
+import com.emilevictor.wit.helpers.JSONParser;
 import com.emilevictor.wit.helpers.Network;
 import com.emilevictor.wit.helpers.Settings;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.PersistentCookieStore;
 
 /**
  * Activity which displays a login screen to the user, offering registration as
@@ -79,11 +85,26 @@ public class UQRotaLogin extends Activity {
 	private View mLoginStatusView;
 	private TextView mLoginStatusMessageView;
 
+	protected AsyncHttpClient myAsyncClient;
+	protected PersistentCookieStore myCookieStore;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_uqrota_login);
+
+		//Create persistent cookie store
+		this.myAsyncClient = new AsyncHttpClient();
+		this.myCookieStore = new PersistentCookieStore(this);
+		if (this.myCookieStore.getCookies().size() > 0)
+		{
+			//We are logged in already
+			//Open the timetable selection activity.
+			final Intent intent = new Intent(this, ChooseRotaTimetable.class);
+			startActivity(intent);
+
+		}
 
 		// Set up the login form.
 		mUsername = getIntent().getStringExtra(EXTRA_EMAIL);
@@ -174,6 +195,10 @@ public class UQRotaLogin extends Activity {
 			showProgress(true);
 			mAuthTask = new UserLoginTask();
 			mAuthTask.execute((Void) null);
+
+			//Open the timetable selection activity.
+			final Intent intent = new Intent(this, ChooseRotaTimetable.class);
+			startActivity(intent);
 		}
 	}
 
@@ -230,6 +255,7 @@ public class UQRotaLogin extends Activity {
 		private HttpContext localContext;
 		private HttpGet httpGetLoginStatus;
 		private InputStream isResponse;
+		private JSONParser jsonParser;
 
 		@Override
 		protected Boolean doInBackground(Void... params) {
@@ -239,34 +265,62 @@ public class UQRotaLogin extends Activity {
 			this.cookieStore = new BasicCookieStore();
 			this.localContext = new BasicHttpContext();
 			this.httpGetLoginStatus = new HttpGet(Settings.uqRotaLoginUrl);
-			
+			this.jsonParser = new JSONParser();
+
 			// Bind custom cookie store to the local context.
 			this.localContext.setAttribute(ClientContext.COOKIE_STORE,this.cookieStore);
-			
+
 			try {
-				
+
 				//POST to UQRota's login service
 				httpClient = new DefaultHttpClient();
 				httpPost = new HttpPost(Settings.uqRotaLoginUrl);
-				
+
 				List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 				nameValuePairs.add(new BasicNameValuePair("login",mUsername));
 				nameValuePairs.add(new BasicNameValuePair("password",mPassword));
-				
+
 				httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
 				// Simulate network access.
 				// Execute HTTP Post Request
-	            HttpResponse response = httpClient.execute(this.httpPost,this.localContext);
-	            
-	            HttpResponse getResponse = httpClient.execute(this.httpGetLoginStatus,this.localContext);
-	            
-	            HttpEntity responseEntity = getResponse.getEntity();
-	            isResponse = responseEntity.getContent();
-	            
-	            String responseBody = Network.convertInputStreamToString(isResponse);
-	            Log.d("Response:",responseBody);
-	            
+				HttpResponse response = httpClient.execute(this.httpPost,this.localContext);
+
+				HttpResponse getResponse = httpClient.execute(this.httpGetLoginStatus,this.localContext);
+
+				HttpEntity responseEntity = getResponse.getEntity();
+				isResponse = responseEntity.getContent();
+
+				String responseBody = Network.convertInputStreamToString(isResponse);
+
+
+
+				//Parse JSON from login GET check
+				JSONObject loginJSONResponse = (JSONObject)JSONValue.parse(responseBody);
+
+				//Log.d("JSONresponse",loginJSONResponse.get("logged_in").);
+
+				if ((Boolean) loginJSONResponse.get("logged_in"))
+				{
+
+					//SAVE COOKIES IN PERSISTENT COOKIE STORE
+					myAsyncClient.setCookieStore(myCookieStore);
+					myCookieStore.addCookie(this.cookieStore.getCookies().get(0));
+
+					// Restore preferences
+					SharedPreferences settings = getSharedPreferences(Settings.preferencesFilename, 0);
+					SharedPreferences.Editor editor = settings.edit();
+					editor.putString("rotaUsername", mUsername);
+					editor.apply();
+
+					return true;
+				} else {
+
+					return false;
+				}
+
+
+
 			} catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -291,7 +345,7 @@ public class UQRotaLogin extends Activity {
 				finish();
 			} else {
 				mPasswordView
-				.setError(getString(R.string.error_incorrect_password));
+				.setError(getString(R.string.error_incorrect_password_or_username));
 				mPasswordView.requestFocus();
 			}
 		}
