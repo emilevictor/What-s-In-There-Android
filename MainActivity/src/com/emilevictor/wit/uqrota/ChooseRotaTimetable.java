@@ -29,6 +29,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
@@ -123,6 +124,8 @@ public class ChooseRotaTimetable extends Activity {
 						new addButtonsToUITask().execute(object);
 
 					}
+					
+					
 
 					// Hide progress bar and text
 					UIHandler.post(new Runnable() {
@@ -205,6 +208,8 @@ public class ChooseRotaTimetable extends Activity {
 				@Override
 				public void run() {
 					thisPageLayout.addView(row);
+					//Invalidate the view
+					thisPageLayout.invalidate();
 				}
 
 			});

@@ -24,6 +24,7 @@ public class Settings {
 	public static String uqRotaTimetableSearchUrl = "https://www.uqrota.net/timetables/search?mine=yes&_dc=1234"; //Fake DC...
 	public static String uqRotaTimetableFetchUrl = "https://www.uqrota.net/timetables/get?timetable_id=";
 	public static String UQRotaBaseUrl = "https://www.uqrota.net/";
+	public static String rotaCacheFilename = "/uqRotaTimetable.rota";
 	//Preferences file name
 	public static String preferencesFilename = "prefsFile";
 	

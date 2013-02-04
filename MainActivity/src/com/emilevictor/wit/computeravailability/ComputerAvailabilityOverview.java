@@ -79,6 +79,45 @@ public class ComputerAvailabilityOverview extends Activity {
 					List<Room> eaitRooms = null;
 					GetEAITAvailabilityTask eaitTask = new GetEAITAvailabilityTask();
 
+					ignoreExpiredCertificatesHack();
+					
+					try {
+						eaitRooms = eaitTask.execute(Settings.eaitAvailabilityXMLurl).get();
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (ExecutionException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+
+					progressStatus = 100;
+					progressBarHandler.post(new Runnable() {
+						@Override
+						public void run() {
+							// This gets executed on the UI thread so it can safely modify Views
+
+							progressText.setText("Fetching EAIT computers");
+						}
+					});
+					progressBarHandler.postDelayed(animationRunnable,10);
+
+
+					//Current room
+					int thisRoomIndex = 0;
+					//Set the number of rooms
+					for (Room room : eaitRooms)
+					{
+						intent.putExtra("ROOM"+String.valueOf(thisRoomIndex),room);
+						thisRoomIndex++;
+					}
+
+					intent.putExtra("numberOfRooms", thisRoomIndex);
+
+					startActivity(intent);
+				}
+
+				private void ignoreExpiredCertificatesHack() {
 					/**
 					 * The following HACK is intended to ignore the expired certificate
 					 * currently residing in UQ's CA.
@@ -143,41 +182,6 @@ public class ComputerAvailabilityOverview extends Activity {
 							e.printStackTrace();
 						}
 						HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
-					
-					try {
-						eaitRooms = eaitTask.execute(Settings.eaitAvailabilityXMLurl).get();
-					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (ExecutionException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-
-					progressStatus = 100;
-					progressBarHandler.post(new Runnable() {
-						@Override
-						public void run() {
-							// This gets executed on the UI thread so it can safely modify Views
-
-							progressText.setText("Fetching EAIT computers");
-						}
-					});
-					progressBarHandler.postDelayed(animationRunnable,10);
-
-
-					//Current room
-					int thisRoomIndex = 0;
-					//Set the number of rooms
-					for (Room room : eaitRooms)
-					{
-						intent.putExtra("ROOM"+String.valueOf(thisRoomIndex),room);
-						thisRoomIndex++;
-					}
-
-					intent.putExtra("numberOfRooms", thisRoomIndex);
-
-					startActivity(intent);
 				}
 
 

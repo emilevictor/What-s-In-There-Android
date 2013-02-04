@@ -6,6 +6,8 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
+import junit.framework.Assert;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpVersion;
@@ -284,6 +286,7 @@ public class UQRotaLogin extends Activity {
 
 				// Simulate network access.
 				// Execute HTTP Post Request
+				
 				HttpResponse response = httpClient.execute(this.httpPost,this.localContext);
 
 				HttpResponse getResponse = httpClient.execute(this.httpGetLoginStatus,this.localContext);
@@ -292,19 +295,19 @@ public class UQRotaLogin extends Activity {
 				isResponse = responseEntity.getContent();
 
 				String responseBody = Network.convertInputStreamToString(isResponse);
+				Assert.assertNotNull(responseBody);
 
 
 
 				//Parse JSON from login GET check
 				JSONObject loginJSONResponse = (JSONObject)JSONValue.parse(responseBody);
 
-				//Log.d("JSONresponse",loginJSONResponse.get("logged_in").);
-
 				if ((Boolean) loginJSONResponse.get("logged_in"))
 				{
 
 					//SAVE COOKIES IN PERSISTENT COOKIE STORE
 					myAsyncClient.setCookieStore(myCookieStore);
+					assert this.cookieStore.getCookies().size() > 0;
 					myCookieStore.addCookie(this.cookieStore.getCookies().get(0));
 
 					// Restore preferences

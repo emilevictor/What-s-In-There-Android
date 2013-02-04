@@ -133,6 +133,7 @@
     <item name="uqRotaTimetableId" type="id"/>
     <string name="uqRotaTimetableSet">Set default timetable successfully.</string>
     <string name="title_activity_show_default_timetable">Your UQRota Timetable</string>
+    <string name="UQRotaHeaderRow">Your UQRota Timetable</string>
     
     <!-- UQRota loading progress text -->
     <string name="uqRotaProgress1">Getting some information on your timetable from UQRota.</string>

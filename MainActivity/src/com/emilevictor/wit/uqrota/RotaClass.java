@@ -1,6 +1,12 @@
 package com.emilevictor.wit.uqrota;
 
-public class RotaClass {
+import java.io.Serializable;
+
+public class RotaClass implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9013941395728050073L;
 	private Long startTime;
 	private Long finishTime;
 	private String day;

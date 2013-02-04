@@ -6,6 +6,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
 
     <uses-sdk
         android:minSdkVersion="11"
@@ -84,6 +85,10 @@
         </activity>
         <activity
             android:name="com.emilevictor.wit.uqrota.ShowDefaultTimetable"
+            android:label="@string/title_activity_show_default_timetable" >
+        </activity>
+        <activity
+            android:name="com.emilevictor.wit.uqrota.DisplayRotaTimetableActivity"
             android:label="@string/title_activity_show_default_timetable" >
         </activity>
     </application>

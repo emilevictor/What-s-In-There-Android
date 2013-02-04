@@ -9,6 +9,7 @@
         android:id="@+id/uqrotaLoadingTimetableProgress"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        style="@android:style/Widget.ProgressBar.Horizontal"
         />
     <TextView 
         android:id="@+id/uqRotaLoadingTimetableProgressText"

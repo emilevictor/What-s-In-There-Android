@@ -60,15 +60,22 @@ public class MainActivity extends Activity {
 		} else {
 			//There is a timetable set. Now check for a valid cookie.
 			this.mPersistentCookies = new PersistentCookieStore(this);
-			//If this cookie is valid
-			if (this.mPersistentCookies.getCookies().get(0).getExpiryDate().after(new Date()))
+			//Check that we actually have any cookies.
+			if (this.mPersistentCookies.getCookies().size() > 0)
 			{
-				return true;
+				//If this cookie is valid
+				if (this.mPersistentCookies.getCookies().get(0).getExpiryDate().after(new Date()))
+				{
+					return true;
+				} else {
+					//Remove cookie
+					this.mPersistentCookies.getCookies().remove(0);
+					return false;
+				}
 			} else {
-				//Remove cookie
-				this.mPersistentCookies.getCookies().remove(0);
 				return false;
 			}
+			
 		}
 	}
 
