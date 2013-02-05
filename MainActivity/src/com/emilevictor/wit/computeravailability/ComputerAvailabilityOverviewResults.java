@@ -2,20 +2,18 @@ package com.emilevictor.wit.computeravailability;
 
 import com.emilevictor.wit.MainActivity;
 import com.emilevictor.wit.R;
-import com.emilevictor.wit.R.layout;
-import com.emilevictor.wit.R.menu;
-import com.emilevictor.wit.helpers.Class;
-import com.emilevictor.wit.whats_in_there.TimetableResultsAdapter;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.TextView;
 
 public class ComputerAvailabilityOverviewResults extends Activity {
 
@@ -29,13 +27,34 @@ public class ComputerAvailabilityOverviewResults extends Activity {
 	}
 	
 	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event)  {
+		if (keyCode == KeyEvent.KEYCODE_BACK ) {
+			startActivity(new Intent(ComputerAvailabilityOverviewResults.this,MainActivity.class)); 
+			return true;
+		}
+
+		return super.onKeyDown(keyCode, event);
+	}
+	
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+	@Override
+	protected void onStart() {
+	    int versionNumber = android.os.Build.VERSION.SDK_INT;
+	    if (versionNumber >= 11) {
+	            super.onStart();
+	            ActionBar actionBar = this.getActionBar();
+	            actionBar.setDisplayHomeAsUpEnabled(true);
+	    }
+	    else {
+	            super.onStart();
+	    }
+	}
+	
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_computer_availability_overview_results);
 		
-		//Add a back button to the action bar
-		ActionBar actionBar = getActionBar();
-		actionBar.setDisplayHomeAsUpEnabled(true);
 		
 		//Unpack the rooms
 		Bundle extras = getIntent().getExtras();

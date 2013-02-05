@@ -1,17 +1,16 @@
 package com.emilevictor.wit.buses;
 
+import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Picture;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
-import android.webkit.WebView.PictureListener;
-
 import com.emilevictor.wit.R;
 
 public class LiveBusInfo extends Activity {
@@ -32,6 +31,19 @@ public class LiveBusInfo extends Activity {
 		return true;
 	}
 
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+	@Override
+	protected void onStart() {
+	    int versionNumber = android.os.Build.VERSION.SDK_INT;
+	    if (versionNumber >= 11) {
+	            super.onStart();
+	            ActionBar actionBar = this.getActionBar();
+	            actionBar.setDisplayHomeAsUpEnabled(true);
+	    }
+	    else {
+	            super.onStart();
+	    }
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +51,6 @@ public class LiveBusInfo extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_live_bus_info);
 
-		//Add a back button to the action bar
-		ActionBar actionBar = getActionBar();
-		actionBar.setDisplayHomeAsUpEnabled(true);
 
 		this.liveBusInfoWebView = (WebView) findViewById(R.id.liveBusInfoWebView);
 

@@ -124,7 +124,8 @@
 
     <!-- UQ Rota -->
     <string name="loginUQRotaText">Log into UQRota for timetable access</string>
-    <string name="openRotaButtonText">My UQRota Timetable</string>
+    <string name="openRotaDayButtonText">UQRota (Today)</string>
+    <string name="openRotaWeekButtonText">UQRota (Week)</string>
     <string name="uqRotaInstructionText">In order for UQ Student Assistant to display your rota timetables, you must log into UQRota.</string>
     <string name="prompt_username">UQRota.net Username</string>
     <string name="error_incorrect_password_or_username">Incorrect password or username.</string>
@@ -134,6 +135,8 @@
     <string name="uqRotaTimetableSet">Set default timetable successfully.</string>
     <string name="title_activity_show_default_timetable">Your UQRota Timetable</string>
     <string name="UQRotaHeaderRow">Your UQRota Timetable</string>
+    <string name="uqRotaPageNoClassesToday">There are no classes today.</string>
+    <string name="logoutOfUQRota">Logout UQRota</string>
     
     <!-- UQRota loading progress text -->
     <string name="uqRotaProgress1">Getting some information on your timetable from UQRota.</string>

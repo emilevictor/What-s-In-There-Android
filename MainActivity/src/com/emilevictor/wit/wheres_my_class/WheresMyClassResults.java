@@ -3,9 +3,11 @@ package com.emilevictor.wit.wheres_my_class;
 import java.util.HashMap;
 import java.util.Map;
 
+import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,6 +33,20 @@ public class WheresMyClassResults extends Activity {
         return true;
     }
 	
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+	@Override
+	protected void onStart() {
+	    int versionNumber = android.os.Build.VERSION.SDK_INT;
+	    if (versionNumber >= 11) {
+	            super.onStart();
+	            ActionBar actionBar = this.getActionBar();
+	            actionBar.setDisplayHomeAsUpEnabled(true);
+	    }
+	    else {
+	            super.onStart();
+	    }
+	}
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -40,9 +56,6 @@ public class WheresMyClassResults extends Activity {
 		currentCourseCode = "";
 		currentDay = "";
 		
-		//Add a back button to the action bar
-		ActionBar actionBar = getActionBar();
-		actionBar.setDisplayHomeAsUpEnabled(true);
 		
 		//Setting up map datatypes for various uses.
 		String[] daysStringArray = {"Sunday", "Monday", "Tuesday", "Wednesday",

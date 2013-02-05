@@ -2,7 +2,10 @@ package com.emilevictor.wit.about_page;
 
 import com.emilevictor.wit.MainActivity;
 import com.emilevictor.wit.R;
+
+import android.os.Build;
 import android.os.Bundle;
+import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
@@ -11,14 +14,26 @@ import android.view.MenuItem;
 
 public class WhatIsThis extends Activity {
 
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+	@Override
+	protected void onStart() {
+	    int versionNumber = android.os.Build.VERSION.SDK_INT;
+	    if (versionNumber >= 11) {
+	            super.onStart();
+	            ActionBar actionBar = this.getActionBar();
+	            actionBar.setDisplayHomeAsUpEnabled(true);
+	    }
+	    else {
+	            super.onStart();
+	    }
+	}
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_what_is_this);
 		
-		//Add a back button to the action bar
-		ActionBar actionBar = getActionBar();
-		actionBar.setDisplayHomeAsUpEnabled(true);
+
 	}
 	
 	@Override

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.emilevictor.wit.about_page.WhatIsThis;
 import com.emilevictor.wit.buses.BusMenu;
@@ -24,7 +25,8 @@ import com.loopj.android.http.PersistentCookieStore;
 public class MainActivity extends Activity {
 	private PersistentCookieStore mPersistentCookies;
 	private Button mUqRotaLoginButton;
-	private Button mAccessUqRotaButton;
+	private LinearLayout mRotaAccessLayout;
+	private Button logoutUQRotaButton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,17 +34,20 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		
 		//By default, hide both buttons
+		this.mRotaAccessLayout = (LinearLayout) this.findViewById(R.id.UQRotaFilterLayout);
 		this.mUqRotaLoginButton = (Button) findViewById(R.id.signInUQRotaButton);
-		this.mAccessUqRotaButton = (Button) findViewById(R.id.accessUQRotaButton);
+		this.logoutUQRotaButton = (Button) findViewById(R.id.logoutUQrotaButton);
 		this.mUqRotaLoginButton.setVisibility(View.GONE);
-		this.mAccessUqRotaButton.setVisibility(View.GONE);
+		this.mRotaAccessLayout.setVisibility(View.GONE);
+		
 
 		//We need to check whether we have a current UQRota cookie, and whether a default timetable has been set.
 		if (userHasSetDefaultTimetableAndValidCookieExists())
 		{
-			this.mAccessUqRotaButton.setVisibility(View.VISIBLE);
+			this.mRotaAccessLayout.setVisibility(View.VISIBLE);
 		} else {
 			this.mUqRotaLoginButton.setVisibility(View.VISIBLE);
+			this.logoutUQRotaButton.setVisibility(View.GONE);
 		}
 
 
@@ -136,16 +141,32 @@ public class MainActivity extends Activity {
 		startActivity(intent);
 	}
 
-	public void openRota(View view)
+	public void openRotaDay(View view)
 	{
 		final Intent intent = new Intent(this, ShowDefaultTimetable.class);
+		intent.putExtra("filterType", 0);
 
+		startActivity(intent);
+	}
+	
+	public void openRotaWeek(View view)
+	{
+		final Intent intent = new Intent(this, ShowDefaultTimetable.class);
+		intent.putExtra("filterType",1);
 		startActivity(intent);
 	}
 	
 	public void signInRota(View view)
 	{
 		final Intent intent = new Intent(this, UQRotaLogin.class);
+
+		startActivity(intent);
+	}
+	
+	public void logMeOutOfRota(View view)
+	{
+		this.mPersistentCookies.clear();
+		final Intent intent = new Intent(this, MainActivity.class);
 
 		startActivity(intent);
 	}

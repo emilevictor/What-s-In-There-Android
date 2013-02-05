@@ -19,6 +19,7 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.protocol.ClientContext;
+import org.apache.http.cookie.Cookie;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
@@ -35,7 +36,6 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -48,7 +48,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.emilevictor.wit.R;
-import com.emilevictor.wit.helpers.JSONParser;
 import com.emilevictor.wit.helpers.Network;
 import com.emilevictor.wit.helpers.Settings;
 import com.loopj.android.http.AsyncHttpClient;
@@ -59,13 +58,6 @@ import com.loopj.android.http.PersistentCookieStore;
  * well.
  */
 public class UQRotaLogin extends Activity {
-	/**
-	 * A dummy authentication store containing known user names and passwords.
-	 * TODO: remove after connecting to a real authentication system.
-	 */
-	private static final String[] DUMMY_CREDENTIALS = new String[] {
-		"foo@example.com:hello", "bar@example.com:world" };
-
 	/**
 	 * The default email to populate the email field with.
 	 */
@@ -198,9 +190,7 @@ public class UQRotaLogin extends Activity {
 			mAuthTask = new UserLoginTask();
 			mAuthTask.execute((Void) null);
 
-			//Open the timetable selection activity.
-			final Intent intent = new Intent(this, ChooseRotaTimetable.class);
-			startActivity(intent);
+			
 		}
 	}
 
@@ -249,7 +239,7 @@ public class UQRotaLogin extends Activity {
 	 * Represents an asynchronous login/registration task used to authenticate
 	 * the user.
 	 */
-	public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+	public class UserLoginTask extends AsyncTask<Void, Void, Cookie> {
 		private HttpParams httpParams;
 		private HttpClient httpClient;
 		private HttpPost httpPost;
@@ -257,17 +247,16 @@ public class UQRotaLogin extends Activity {
 		private HttpContext localContext;
 		private HttpGet httpGetLoginStatus;
 		private InputStream isResponse;
-		private JSONParser jsonParser;
 
 		@Override
-		protected Boolean doInBackground(Void... params) {
+		protected Cookie doInBackground(Void... params) {
 			// TODO: attempt authentication against a network service.
 			this.httpParams = new BasicHttpParams();
 			this.httpParams.setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
 			this.cookieStore = new BasicCookieStore();
 			this.localContext = new BasicHttpContext();
 			this.httpGetLoginStatus = new HttpGet(Settings.uqRotaLoginUrl);
-			this.jsonParser = new JSONParser();
+
 
 			// Bind custom cookie store to the local context.
 			this.localContext.setAttribute(ClientContext.COOKIE_STORE,this.cookieStore);
@@ -288,6 +277,8 @@ public class UQRotaLogin extends Activity {
 				// Execute HTTP Post Request
 				
 				HttpResponse response = httpClient.execute(this.httpPost,this.localContext);
+				response.getEntity().consumeContent();
+				
 
 				HttpResponse getResponse = httpClient.execute(this.httpGetLoginStatus,this.localContext);
 
@@ -308,18 +299,13 @@ public class UQRotaLogin extends Activity {
 					//SAVE COOKIES IN PERSISTENT COOKIE STORE
 					myAsyncClient.setCookieStore(myCookieStore);
 					assert this.cookieStore.getCookies().size() > 0;
-					myCookieStore.addCookie(this.cookieStore.getCookies().get(0));
+					
 
-					// Restore preferences
-					SharedPreferences settings = getSharedPreferences(Settings.preferencesFilename, 0);
-					SharedPreferences.Editor editor = settings.edit();
-					editor.putString("rotaUsername", mUsername);
-					editor.apply();
 
-					return true;
+					return this.cookieStore.getCookies().get(0);
 				} else {
 
-					return false;
+					return null;
 				}
 
 
@@ -336,15 +322,20 @@ public class UQRotaLogin extends Activity {
 			}
 
 			// TODO: register the new account here.
-			return true;
+			return null;
 		}
 
 		@Override
-		protected void onPostExecute(final Boolean success) {
+		protected void onPostExecute(final Cookie ck) {
 			mAuthTask = null;
 			showProgress(false);
-
-			if (success) {
+			
+			if (ck != null) {
+				myCookieStore.clear();
+				myCookieStore.addCookie(ck);
+				//Open the timetable selection activity.
+				final Intent intent = new Intent(getApplicationContext(), ChooseRotaTimetable.class);
+				startActivity(intent);
 				finish();
 			} else {
 				mPasswordView

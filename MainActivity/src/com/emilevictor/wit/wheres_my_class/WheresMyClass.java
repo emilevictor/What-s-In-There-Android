@@ -8,10 +8,12 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
+import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -60,6 +62,19 @@ public class WheresMyClass extends Activity {
 			}
 		}};
 		
+		@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+		@Override
+		protected void onStart() {
+		    int versionNumber = android.os.Build.VERSION.SDK_INT;
+		    if (versionNumber >= 11) {
+		            super.onStart();
+		            ActionBar actionBar = this.getActionBar();
+		            actionBar.setDisplayHomeAsUpEnabled(true);
+		    }
+		    else {
+		            super.onStart();
+		    }
+		}
 		@Override
 	    public boolean onOptionsItemSelected(MenuItem menuItem)
 	    {       
@@ -72,9 +87,6 @@ public class WheresMyClass extends Activity {
 			super.onCreate(savedInstanceState);
 			setContentView(R.layout.activity_wheres_my_class);
 
-			//Add a back button to the action bar
-			ActionBar actionBar = getActionBar();
-			actionBar.setDisplayHomeAsUpEnabled(true);
 			
 			this.progressText = (TextView) findViewById(R.id.progressTextWheresMyClass);
 			this.progressBar = (ProgressBar) findViewById(R.id.progressBarWheresMyClass);

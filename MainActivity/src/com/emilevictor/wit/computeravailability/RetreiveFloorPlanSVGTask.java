@@ -4,13 +4,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.List;
-
-import org.xmlpull.v1.XmlPullParserException;
-
 import android.os.AsyncTask;
 
-import com.emilevictor.wit.helpers.Class;
 import com.larvalabs.svgandroid.SVG;
 import com.larvalabs.svgandroid.SVGParser;
 

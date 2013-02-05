@@ -5,7 +5,6 @@ import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
-import java.security.cert.CertificateExpiredException;
 import java.security.cert.X509Certificate;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -16,11 +15,14 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
 import javax.net.ssl.X509TrustManager;
 
+import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ProgressBar;
@@ -47,6 +49,31 @@ public class ComputerAvailabilityOverview extends Activity {
 
 			}
 		}};
+		
+		@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+		@Override
+		protected void onStart() {
+		    int versionNumber = android.os.Build.VERSION.SDK_INT;
+		    if (versionNumber >= 11) {
+		            super.onStart();
+		            ActionBar actionBar = this.getActionBar();
+		            actionBar.setDisplayHomeAsUpEnabled(true);
+		    }
+		    else {
+		            super.onStart();
+		    }
+		}
+
+		@Override
+		public boolean onKeyDown(int keyCode, KeyEvent event)  {
+			if (keyCode == KeyEvent.KEYCODE_BACK ) {
+				startActivity(new Intent(ComputerAvailabilityOverview.this,MainActivity.class)); 
+				return true;
+			}
+
+			return super.onKeyDown(keyCode, event);
+		}
+
 
 		@Override
 		public boolean onOptionsItemSelected(MenuItem menuItem)
@@ -64,9 +91,6 @@ public class ComputerAvailabilityOverview extends Activity {
 			final Intent intent = new Intent(this, ComputerAvailabilityOverviewResults.class);
 
 
-			//Add a back button to the action bar
-			ActionBar actionBar = getActionBar();
-			actionBar.setDisplayHomeAsUpEnabled(true);
 
 			new Thread(new Runnable() {
 
@@ -80,7 +104,7 @@ public class ComputerAvailabilityOverview extends Activity {
 					GetEAITAvailabilityTask eaitTask = new GetEAITAvailabilityTask();
 
 					ignoreExpiredCertificatesHack();
-					
+
 					try {
 						eaitRooms = eaitTask.execute(Settings.eaitAvailabilityXMLurl).get();
 					} catch (InterruptedException e1) {
@@ -122,66 +146,66 @@ public class ComputerAvailabilityOverview extends Activity {
 					 * The following HACK is intended to ignore the expired certificate
 					 * currently residing in UQ's CA.
 					 */
-					
+
 					TrustManagerFactory tmf = null;
 					try {
 						tmf = TrustManagerFactory.getInstance(
-							    TrustManagerFactory.getDefaultAlgorithm());
+								TrustManagerFactory.getDefaultAlgorithm());
 					} catch (NoSuchAlgorithmException e2) {
 						// TODO Auto-generated catch block
 						e2.printStackTrace();
 					}
-						// Initialise the TMF as you normally would, for example:
-						try {
-							tmf.init((KeyStore)null);
-						} catch (KeyStoreException e2) {
-							// TODO Auto-generated catch block
-							e2.printStackTrace();
-						} 
+					// Initialise the TMF as you normally would, for example:
+					try {
+						tmf.init((KeyStore)null);
+					} catch (KeyStoreException e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					} 
 
-						TrustManager[] trustManagers = tmf.getTrustManagers();
-						final X509TrustManager origTrustmanager = (X509TrustManager)trustManagers[0];
+					TrustManager[] trustManagers = tmf.getTrustManagers();
+					final X509TrustManager origTrustmanager = (X509TrustManager)trustManagers[0];
 
-						TrustManager[] wrappedTrustManagers = new TrustManager[]{
-						   new X509TrustManager() {
-						       public java.security.cert.X509Certificate[] getAcceptedIssuers() {
-						          return origTrustmanager.getAcceptedIssuers();
-						       }
-
-						       public void checkClientTrusted(X509Certificate[] certs, String authType) {
-						           try {
-									origTrustmanager.checkClientTrusted(certs, authType);
-								} catch (CertificateException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
+					TrustManager[] wrappedTrustManagers = new TrustManager[]{
+							new X509TrustManager() {
+								public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+									return origTrustmanager.getAcceptedIssuers();
 								}
-						       }
 
-						       public void checkServerTrusted(X509Certificate[] certs, String authType) {
-						           try {
-									origTrustmanager.checkServerTrusted(certs, authType);
-								} catch (CertificateException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
+								public void checkClientTrusted(X509Certificate[] certs, String authType) {
+									try {
+										origTrustmanager.checkClientTrusted(certs, authType);
+									} catch (CertificateException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
 								}
-						       }
-						   }
-						};
 
-						SSLContext sc = null;
-						try {
-							sc = SSLContext.getInstance("TLS");
-						} catch (NoSuchAlgorithmException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-						try {
-							sc.init(null, wrappedTrustManagers, null);
-						} catch (KeyManagementException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-						HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+								public void checkServerTrusted(X509Certificate[] certs, String authType) {
+									try {
+										origTrustmanager.checkServerTrusted(certs, authType);
+									} catch (CertificateException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
+								}
+							}
+					};
+
+					SSLContext sc = null;
+					try {
+						sc = SSLContext.getInstance("TLS");
+					} catch (NoSuchAlgorithmException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					try {
+						sc.init(null, wrappedTrustManagers, null);
+					} catch (KeyManagementException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
 				}
 
 

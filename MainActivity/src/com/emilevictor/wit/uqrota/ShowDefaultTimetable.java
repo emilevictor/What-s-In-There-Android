@@ -11,8 +11,6 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpVersion;
@@ -31,8 +29,6 @@ import org.apache.http.protocol.HttpContext;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
-import org.json.simple.parser.JSONParser;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -44,8 +40,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.emilevictor.wit.R;
 import com.emilevictor.wit.helpers.Network;
 import com.emilevictor.wit.helpers.Settings;
@@ -87,18 +81,13 @@ public class ShowDefaultTimetable extends Activity {
 			FetchUQRotaTimetableTask lFetchTask = new FetchUQRotaTimetableTask(this,
 					this.progressBarHandler);
 
+			lFetchTask.execute();
 
-			try {
-				this.mRotaClasses = lFetchTask.execute().get();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-				Toast.makeText(getApplicationContext(), R.string.InterruptedExceptionRotaFetch, Toast.LENGTH_LONG).show();
+		}
 
-			} catch (ExecutionException e) {
-				e.printStackTrace();
-				Toast.makeText(getApplicationContext(), R.string.InterruptedExceptionRotaFetch, Toast.LENGTH_LONG).show();
-			}
-			
+		private void afterClassesHaveBeenReturnedFromTask(List<RotaClass> classes)
+		{
+			this.mRotaClasses = classes;
 			List<RotaClass> todaysClasses = new ArrayList<RotaClass>();
 
 			Map<String,Integer> dayMap = new HashMap<String,Integer>();
@@ -110,41 +99,46 @@ public class ShowDefaultTimetable extends Activity {
 			dayMap.put("Thu", 4);
 			dayMap.put("Fri", 5);
 			dayMap.put("Sat", 6);
-			
-			
+
+
 			//Filter Rota Classes to only handle today.
 
 			filterClassesByTodayOnly(todaysClasses, dayMap);
-			
+
 			Intent intent = new Intent(this, DisplayRotaTimetableActivity.class);
-			
+
 			int numberOfClassesToday = 0;
 			for (RotaClass rc: todaysClasses)
 			{
-				
+
 				intent.putExtra("ROTACLASS"+String.valueOf(numberOfClassesToday),
 						rc);
 				++numberOfClassesToday;
 			}
-			
+
+
+			//Get filtertype from the bundle
+			Bundle extras = getIntent().getExtras();
+			int filterType = extras.getInt("filterType");
+
 			intent.putExtra("numberOfClasses",numberOfClassesToday);
-			
+			intent.putExtra("filterType", filterType);
+
 			startActivity(intent);
 		}
 
 		private void filterClassesByTodayOnly(List<RotaClass> todaysClasses,
 				Map<String, Integer> dayMap) {
 			Calendar rightNow = Calendar.getInstance();
-			int day = rightNow.get(Calendar.DAY_OF_WEEK);
-			day -=1;
+			rightNow.get(Calendar.DAY_OF_WEEK);
 			for (RotaClass rc : mRotaClasses)
 			{
 				todaysClasses.add(rc);
 
-//				if (rc.getDay().equals(dayMap.get(day)))
-//				{
-//					todaysClasses.add(rc);
-//				}
+				//				if (rc.getDay().equals(dayMap.get(day)))
+				//				{
+				//					todaysClasses.add(rc);
+				//				}
 			}
 		}
 
@@ -166,7 +160,6 @@ public class ShowDefaultTimetable extends Activity {
 			//HTTP stuff
 			private HttpGet httpGetter;
 			private InputStream isResponse;
-			private JSONParser jsonParser;
 			private HttpContext localContext;
 			private CookieStore cookieStore;
 			private HttpParams httpParams;
@@ -186,7 +179,6 @@ public class ShowDefaultTimetable extends Activity {
 				this.progressBarHandler = progressBarHandler;
 				this.cookieStore = new BasicCookieStore();
 				this.localContext = new BasicHttpContext();
-				this.jsonParser = new JSONParser();
 				this.httpParams = new BasicHttpParams();
 				this.httpParams.setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
 				this.mPersistentCookieStore = new PersistentCookieStore(this.mAppContext);
@@ -196,11 +188,17 @@ public class ShowDefaultTimetable extends Activity {
 
 			}
 
+			@Override
+			protected void onPostExecute(List<RotaClass> rotaClasses)
+			{
+				afterClassesHaveBeenReturnedFromTask(rotaClasses);
+			}
+
 
 			@Override
 			protected List<RotaClass> doInBackground(Void... params) {
-
-				setBarProgress(20);
+				
+				setBarProgress(20,"Getting current timetable from memory.");
 
 				try {
 					mCurrentTimetable = checkForAndLoadCurrentTimetable();
@@ -209,34 +207,41 @@ public class ShowDefaultTimetable extends Activity {
 					e.printStackTrace();
 				}
 
-				setBarProgress(50);
-				
+				setBarProgress(50,"Getting classes");
+
 
 				//One call to the server to get appropriate group numbers.
 				mGroupNumbers = getGroupNumbers();
 
 				enumerateRotaClasses();
-				
+
 				//CACHE the results as a file
-				
+
 				//TEMPORARILY DISABLED UNTIL WE CAN FIGURE OUT WHERE TO WRITE THINGS.
-				
+
 				//cacheRotaClasses();
-				
+
 				//Filter out any classes not on today.
+
+
 				
-				
-			
-				setBarProgress(100);
-				
+				setBarProgress(100,"Done.");
+
 
 				return mRotaClasses;
 			}
 
-			private void setBarProgress(int i) {
+			private void setBarProgress(int i,final String message) {
 				// TODO Auto-generated method stub
 				superProgress = i;
-				progressText.setText(R.string.uqRotaProgress1);
+				progressBarHandler.post(new Runnable(){
+
+					@Override
+					public void run() {
+						progressText.setText(message);
+					}
+					
+				});
 				progressBarHandler.postDelayed(animationRunnable,10);
 			}
 
@@ -249,9 +254,9 @@ public class ShowDefaultTimetable extends Activity {
 						lOOS.writeObject(rc);
 					}
 					lOOS.flush();
-					
+
 					lOOS.close();
-					
+
 				} catch (StreamCorruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -262,7 +267,7 @@ public class ShowDefaultTimetable extends Activity {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
+
 			}
 
 

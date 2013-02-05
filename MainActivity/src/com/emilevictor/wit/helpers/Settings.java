@@ -1,9 +1,5 @@
 package com.emilevictor.wit.helpers;
 
-import android.content.SharedPreferences;
-
-import com.emilevictor.wit.uqrota.NoDefaultTimetableSetYetException;
-
 public class Settings {
 
 	public static String currentSemesterNumber = "6220";

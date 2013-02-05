@@ -1,23 +1,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/chooseRotaTimetableLayout"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/chooseRotaTimetableLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".ChooseRotaTimetable" >
+    tools:context=".ChooseRotaTimetable"
+    android:configChanges="keyboardHidden|orientation">
 
     <TextView
         android:id="@+id/UQRotaTimetableLoadingStatusInformation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        
         android:text="@string/UQRotaTimetableLoadingStatusInformation" />
 
     <ProgressBar
         android:id="@+id/UQRotaTimetableLoadingStatusProgressBar"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

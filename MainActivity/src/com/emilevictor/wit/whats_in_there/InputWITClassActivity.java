@@ -9,10 +9,12 @@ import java.util.concurrent.ExecutionException;
 
 import org.xmlpull.v1.XmlPullParserException;
 
+import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -73,6 +75,20 @@ public class InputWITClassActivity extends Activity {
 		}};
 
 
+		@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+		@Override
+		protected void onStart() {
+		    int versionNumber = android.os.Build.VERSION.SDK_INT;
+		    if (versionNumber >= 11) {
+		            super.onStart();
+		            ActionBar actionBar = this.getActionBar();
+		            actionBar.setDisplayHomeAsUpEnabled(true);
+		    }
+		    else {
+		            super.onStart();
+		    }
+		}
+		
 		@Override
 	    public boolean onOptionsItemSelected(MenuItem menuItem)
 	    {       
@@ -89,9 +105,6 @@ public class InputWITClassActivity extends Activity {
 
 			setContentView(R.layout.input_wit_class);
 
-			//Add a back button to the action bar
-			ActionBar actionBar = getActionBar();
-			actionBar.setDisplayHomeAsUpEnabled(true);
 			
 			//Make all objects available for 
 			this.progressBar = (ProgressBar) findViewById(R.id.progressBar);

@@ -1,8 +1,6 @@
 package com.emilevictor.wit.computeravailability;
 
 import com.emilevictor.wit.R;
-import com.emilevictor.wit.helpers.Class;
-
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;

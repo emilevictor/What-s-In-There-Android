@@ -78,6 +78,7 @@ public class EAITXMLParser {
 		return rooms;
 	}
 
+	@SuppressWarnings({ "rawtypes"})
 	public static List parse (InputStream in) throws XmlPullParserException, IOException {
 		try {
 			XmlPullParser parser = Xml.newPullParser();

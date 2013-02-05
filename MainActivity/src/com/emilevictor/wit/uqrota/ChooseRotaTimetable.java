@@ -2,6 +2,8 @@ package com.emilevictor.wit.uqrota;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpVersion;
@@ -22,14 +24,15 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
@@ -37,6 +40,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.emilevictor.wit.MainActivity;
 import com.emilevictor.wit.R;
 import com.emilevictor.wit.helpers.JSONParser;
 import com.emilevictor.wit.helpers.Network;
@@ -65,12 +69,12 @@ public class ChooseRotaTimetable extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_choose_rota_timetable);
-
+		
+		
 		this.UIHandler = new Handler();
 		this.idIndex = 0;
 
 		// get the persistent cookie store so that we can easily hit up UQRota
-		this.myAsyncClient = new AsyncHttpClient();
 		this.mPersistentCookieStore = new PersistentCookieStore(this);
 
 		this.httpParams = new BasicHttpParams();
@@ -95,129 +99,149 @@ public class ChooseRotaTimetable extends Activity {
 		// Bind custom cookie store to the local context.
 		this.localContext.setAttribute(ClientContext.COOKIE_STORE,
 				this.cookieStore);
+		
+		
+		GetTimetablesAndAddButtonsTask btnTask = new GetTimetablesAndAddButtonsTask();
 
-		new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				try {
-					HttpResponse response = httpClient.execute(
-							httpGetTimetables, localContext);
-					isResponse = response.getEntity().getContent();
-
-					String responseBody = Network
-							.convertInputStreamToString(isResponse);
-
-					Log.w("responsebody", responseBody);
-
-					// Parse JSON from login GET check
-					JSONObject timetableJSONResponse = (JSONObject) JSONValue
-							.parse(responseBody);
-
-					JSONArray timetablesArray = (JSONArray) timetableJSONResponse
-							.get("timetables");
-
-					for (Object obj : timetablesArray) {
-						JSONObject object = (JSONObject) obj;
-
-						new addButtonsToUITask().execute(object);
-
-					}
-					
-					
-
-					// Hide progress bar and text
-					UIHandler.post(new Runnable() {
-
-						@Override
-						public void run() {
-							// TODO Auto-generated method stub
-							progressBar.setVisibility(View.GONE);
-							progressText.setVisibility(View.GONE);
-						}
-
-					});
-
-				} catch (ClientProtocolException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-
-		}).start();
+		btnTask.execute();
+		
 
 	}
-
-	// Sync task to add buttons to the UI when a timetable is fetched.
-	class addButtonsToUITask extends AsyncTask<JSONObject, Void, Void> {
-
-		@SuppressWarnings("deprecation")
-		@Override
-		protected Void doInBackground(JSONObject... params) {
-			final LinearLayout row = new LinearLayout(getApplicationContext());
-			row.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+	  super.onConfigurationChanged(newConfig);
+	  setContentView(R.layout.activity_choose_rota_timetable);
+	}
+	
+	private void addButtonsToUI(List<Button> buttons)
+	{
+		progressBar.setVisibility(View.GONE);
+		progressText.setVisibility(View.GONE);
+		
+		for (Button btn : buttons)
+		{
+			LinearLayout row = new LinearLayout(getApplicationContext());
+			row.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
 					LayoutParams.WRAP_CONTENT));
-
-			Button btn = new Button(getApplicationContext());
-			btn.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
-					LayoutParams.WRAP_CONTENT));
-			
-			//Get current default timetable (if it exists)
-			SharedPreferences settings = getSharedPreferences(Settings.preferencesFilename, 0);
-			Long defaultTimetableFromPrefs = settings.getLong("rotaDefaultTimetableId", -1);
-			if (defaultTimetableFromPrefs == -1)
-			{
-				btn.setText((String) params[0].get("name"));
-			} else if (String.valueOf(defaultTimetableFromPrefs).equals(String.valueOf(params[0].get("id")))){
-				btn.setText(((String) params[0].get("name")) + " (currently selected)");
-			} else {
-				btn.setText((String) params[0].get("name"));
-			}
-			
-			
-			btn.setId(idIndex++);
-			btn.setTag(R.id.uqRotaTimetableId, params[0].get("id").toString());
 			row.addView(btn);
-			
-			//Add listener for button
-			btn.setOnClickListener(new View.OnClickListener() {
-	             public void onClick(View v) {
-	         		// Set the default uqRota timetable ID in sharedpreferences
-	         		Button myClickedButton = (Button) v;
-	         		// Get the value of the hidden tag for the button.
-	         		Long timetableId = Long.valueOf((String)myClickedButton
-	         				.getTag(R.id.uqRotaTimetableId));
+			thisPageLayout.addView(row);
+			Log.w("Childlayoutcount",String.valueOf(thisPageLayout.getChildCount()));
+		}
+		
+		Log.w("Childlayoutcount",String.valueOf(thisPageLayout.getChildCount()));
+		
+		
+		
+		
+	}
+	
+	class GetTimetablesAndAddButtonsTask extends AsyncTask<Void,Void,List<Button>> {
+		private String responseBody;
+		private List<Button> returnedButtons;
 
-	         		SharedPreferences settings = getSharedPreferences(
-	         				Settings.preferencesFilename, 0);
-	         		SharedPreferences.Editor editor = settings.edit();
-	         		editor.putLong("rotaDefaultTimetableId", timetableId);
-	         		editor.apply();
-	         		
-	             	Toast.makeText(getApplicationContext(), R.string.uqRotaTimetableSet, Toast.LENGTH_LONG).show();
-	             }
-	         });
-
-			// Hide progress bar and text
-			UIHandler.post(new Runnable() {
-
-				@Override
-				public void run() {
-					thisPageLayout.addView(row);
-					//Invalidate the view
-					thisPageLayout.invalidate();
-				}
-
-			});
-
-			return null;
+		
+		@Override
+		protected void onPreExecute()
+		{
+			returnedButtons = new ArrayList<Button>();
+		}
+		
+		@Override
+		protected void onPostExecute(List<Button> buttons)
+		{
+			addButtonsToUI(buttons);
 		}
 
+		@Override
+		protected List<Button> doInBackground(Void... params) {
+			HttpResponse response;
+			try {
+				response = httpClient.execute(
+						httpGetTimetables, localContext);
+				
+				isResponse = response.getEntity().getContent();
+				
+				
+				
+
+				responseBody = Network
+						.convertInputStreamToString(isResponse);
+			} catch (ClientProtocolException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+
+			// Parse JSON from login GET check
+			JSONObject timetableJSONResponse = (JSONObject) JSONValue
+					.parse(responseBody);
+
+			JSONArray timetablesArray = (JSONArray) timetableJSONResponse
+					.get("timetables");
+
+			for (Object obj : timetablesArray) {
+				JSONObject object = (JSONObject) obj;
+				
+
+				Button btn = new Button(getApplicationContext());
+				btn.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
+						LayoutParams.WRAP_CONTENT));
+				
+				//Get current default timetable (if it exists)
+				SharedPreferences settings = getSharedPreferences(Settings.preferencesFilename, 0);
+				Long defaultTimetableFromPrefs = settings.getLong("rotaDefaultTimetableId", -1);
+
+				if (defaultTimetableFromPrefs == -1)
+				{
+					btn.setText((String) object.get("name"));
+				} else if (String.valueOf(defaultTimetableFromPrefs).equals(String.valueOf(object.get("id")))){
+					btn.setText(((String) object.get("name")) + " (currently selected)");
+				} else {
+					btn.setText((String) object.get("name"));
+				}
+				
+				
+				btn.setId(idIndex++);
+				btn.setTag(R.id.uqRotaTimetableId, object.get("id").toString());
+				
+				
+				//Add listener for button
+				btn.setOnClickListener(new View.OnClickListener() {
+		             public void onClick(View v) {
+		         		// Set the default uqRota timetable ID in sharedpreferences
+		         		Button myClickedButton = (Button) v;
+		         		// Get the value of the hidden tag for the button.
+		         		Long timetableId = Long.valueOf((String)myClickedButton
+		         				.getTag(R.id.uqRotaTimetableId));
+
+		         		SharedPreferences settings = getSharedPreferences(
+		         				Settings.preferencesFilename, 0);
+		         		SharedPreferences.Editor editor = settings.edit();
+		         		editor.putLong("rotaDefaultTimetableId", timetableId);
+		         		editor.commit();
+		         		
+		        		
+		         		
+		             	Toast.makeText(getApplicationContext(), R.string.uqRotaTimetableSet, Toast.LENGTH_LONG).show();
+		             	
+		             	final Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+
+		        		startActivity(intent);
+		             }
+		         });
+
+				returnedButtons.add(btn);
+
+			}
+			return returnedButtons;
+		}
+		
 	}
+
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

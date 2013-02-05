@@ -26,14 +26,41 @@
             android:layout_gravity="center_horizontal|top"
             android:onClick="signInRota"
             android:text="@string/loginUQRotaText" />
-        
-        <Button
-            android:id="@+id/accessUQRotaButton"
+
+        <LinearLayout
+            android:id="@+id/UQRotaFilterLayout"
             android:layout_width="400dp"
             android:layout_height="100dp"
             android:layout_gravity="center_horizontal|top"
-            android:onClick="openRota"
-            android:text="@string/openRotaButtonText" />
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/accessUQRotaButtonToday"
+                android:layout_width="fill_parent"
+                android:layout_height="100dp"
+                android:layout_gravity="center_horizontal|top"
+                android:layout_weight="1"
+                android:onClick="openRotaDay"
+                android:text="@string/openRotaDayButtonText" />
+
+            <Button
+                android:id="@+id/accessUQRotaButtonWeek"
+                android:layout_width="fill_parent"
+                android:layout_height="100dp"
+                android:layout_gravity="center_horizontal|top"
+                android:layout_weight="1"
+                android:onClick="openRotaWeek"
+                android:text="@string/openRotaWeekButtonText" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/logoutUQrotaButton"
+            
+            android:layout_gravity="center_horizontal|top"
+            android:layout_width="400dp"
+            android:layout_height="100dp"
+            android:onClick="logMeOutOfRota"
+            android:text="@string/logoutOfUQRota" />
 
         <Button
             android:id="@+id/enterWhatsInThereButton"

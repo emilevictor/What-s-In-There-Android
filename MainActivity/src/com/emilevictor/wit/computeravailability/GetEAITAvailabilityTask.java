@@ -10,8 +10,6 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import android.os.AsyncTask;
 
-import com.emilevictor.wit.whats_in_there.buildingXMLParser.Building;
-
 
 public class GetEAITAvailabilityTask extends AsyncTask<String, Void, List<Room>> {
 
