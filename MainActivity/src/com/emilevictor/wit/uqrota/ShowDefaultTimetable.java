@@ -1,16 +1,23 @@
 package com.emilevictor.wit.uqrota;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OptionalDataException;
 import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpVersion;
@@ -29,6 +36,7 @@ import org.apache.http.protocol.HttpContext;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -40,7 +48,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import com.emilevictor.wit.R;
+import com.emilevictor.wit.helpers.FileCache;
 import com.emilevictor.wit.helpers.Network;
 import com.emilevictor.wit.helpers.Settings;
 import com.loopj.android.http.PersistentCookieStore;
@@ -65,27 +75,82 @@ public class ShowDefaultTimetable extends Activity {
 		protected void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
 			setContentView(R.layout.activity_show_default_timetable);
+			
+			
 
 			//Initialize members
 			this.progressText = (TextView) findViewById(R.id.uqRotaLoadingTimetableProgressText);
 			this.progressBar = (ProgressBar) findViewById(R.id.uqrotaLoadingTimetableProgress);
 			this.superProgress = 10;
+			this.mRotaClasses = new ArrayList<RotaClass>();
 
 			this.progressBar.setProgress(this.superProgress);
 			this.progressText.setText(R.string.uqRotaProgress1);
 			//Animate the progress bar.
 			progressBarHandler.postDelayed(animationRunnable,10);
 
+			//Check that the cache exists AND that we haven't changed the number of the timetable. If we have, attempt to fetch it.
+			if (!FileCache.checkExistenceOfCachedTimetable(this) || !FileCache.checkCacheValidityAgainstCurrentTimetable(this))
+			{
+				FetchUQRotaTimetableTask lFetchTask = new FetchUQRotaTimetableTask(this,
+						this.progressBarHandler);
 
+				lFetchTask.execute();
+			} else {
+				//Fetch the timetables from the cache instead, hide progress bars, etc.
+				File cacheDir = new File(getCacheDir(), "rotaTimetableCaches");
+				File cacheFile = new File(cacheDir,"rotaTimetable");
+				
+				
+				if (cacheFile.exists())
+				{
+					try {
+						FileInputStream fis = new FileInputStream(cacheFile.getAbsolutePath());
+						
+						ObjectInputStream ois = new ObjectInputStream(fis);
+						
+						Object obj = null;
+						
+						while (ois.available() != -1)
+						{
+							obj = ois.readObject();
+							if (obj instanceof RotaClass)
+							{
+								mRotaClasses.add((RotaClass)obj);
+							}
+						}
+//						while ((obj = ois.readObject()) != null) {
+//
+//						}
+						
+						ois.close();
+						
+						
+					} catch (FileNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (OptionalDataException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (ClassNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+				
+				handleClasses(this.mRotaClasses);
+			}
 
-			FetchUQRotaTimetableTask lFetchTask = new FetchUQRotaTimetableTask(this,
-					this.progressBarHandler);
-
-			lFetchTask.execute();
+			
 
 		}
+	
 
-		private void afterClassesHaveBeenReturnedFromTask(List<RotaClass> classes)
+		private void handleClasses(List<RotaClass> classes)
 		{
 			this.mRotaClasses = classes;
 			List<RotaClass> todaysClasses = new ArrayList<RotaClass>();
@@ -191,7 +256,7 @@ public class ShowDefaultTimetable extends Activity {
 			@Override
 			protected void onPostExecute(List<RotaClass> rotaClasses)
 			{
-				afterClassesHaveBeenReturnedFromTask(rotaClasses);
+				handleClasses(rotaClasses);
 			}
 
 
@@ -217,12 +282,8 @@ public class ShowDefaultTimetable extends Activity {
 
 				//CACHE the results as a file
 
-				//TEMPORARILY DISABLED UNTIL WE CAN FIGURE OUT WHERE TO WRITE THINGS.
 
-				//cacheRotaClasses();
-
-				//Filter out any classes not on today.
-
+				cacheRotaClasses();
 
 				
 				setBarProgress(100,"Done.");
@@ -247,8 +308,18 @@ public class ShowDefaultTimetable extends Activity {
 
 
 			private void cacheRotaClasses() {
+				//Create rotaTimetableCache
+				File cacheDir = new File(getCacheDir(), "rotaTimetableCaches");
+				cacheDir.mkdirs();
+				File cacheFile = new File(cacheDir,"rotaTimetable");
 				try {
-					ObjectOutputStream lOOS = new ObjectOutputStream(new FileOutputStream(Settings.rotaCacheFilename));
+					cacheFile.createNewFile();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				
+				try {
+					ObjectOutputStream lOOS = new ObjectOutputStream(new FileOutputStream(cacheFile));
 					for (RotaClass rc : mRotaClasses)
 					{
 						lOOS.writeObject(rc);
@@ -260,6 +331,34 @@ public class ShowDefaultTimetable extends Activity {
 				} catch (StreamCorruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				
+				//At the same time, write the current timetableId to the cache.
+				File cacheDirId = new File(getCacheDir(), "rotaTimetableCaches");
+				cacheDirId.mkdirs();
+				File cacheFileId = new File(cacheDir,"rotaTimetableId");
+				if (!cacheFileId.exists())
+				{
+					try {
+						cacheFileId.createNewFile();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+				try {
+					DataOutputStream out = 
+					        new DataOutputStream(new FileOutputStream(cacheFileId.getAbsolutePath()));
+					
+					out.writeLong(mCurrentTimetable);
+					out.flush();
+					out.close();
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

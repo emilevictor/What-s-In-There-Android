@@ -223,6 +223,7 @@ public class ChooseRotaTimetable extends Activity {
 		         		editor.putLong("rotaDefaultTimetableId", timetableId);
 		         		editor.commit();
 		         		
+		         		
 		        		
 		         		
 		             	Toast.makeText(getApplicationContext(), R.string.uqRotaTimetableSet, Toast.LENGTH_LONG).show();

@@ -22,51 +22,73 @@
 
         <Button
             android:id="@+id/chancellorsPlaceBusBtn"
+            style="@style/ButtonTextNormal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
             android:onClick="chancellorsPlace"
             android:text="@string/chancellorsPlaceBusBtnText" />
 
         <Button
             android:id="@+id/UQLakesBusBtn"
+            style="@style/ButtonTextNormal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
             android:onClick="UQLakes"
             android:text="@string/UQLakesBusBtnText" />
-        
+
+        <Button
+            android:id="@+id/parkRdTrains"
+            style="@style/ButtonTextNormal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button"
+            android:onClick="ParkRdTrains"
+            android:text="@string/parkRdTrainsText" />
+
         <Button
             android:id="@+id/ToowongTrainBtn"
+            style="@style/ButtonTextNormal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
             android:onClick="ToowongTrain"
             android:text="@string/ToowongTrainBtnText" />
-        
+
         <Button
             android:id="@+id/IpswichBusBtn"
+            style="@style/ButtonTextNormal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
             android:onClick="ipswichBus"
             android:text="@string/IpswichBusBtnText" />
-        
+
         <Button
             android:id="@+id/IpswichTrainBtn"
+            style="@style/ButtonTextNormal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
             android:onClick="ipswichTrain"
             android:text="@string/IpswichTrainBtnText" />
-        
 
         <Button
             android:id="@+id/RCHHerstonBusBtn"
+            style="@style/ButtonTextNormal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
             android:onClick="RCHHerstonBus"
             android:text="@string/RCHHerstonBusText" />
-        
+
         <Button
             android:id="@+id/GattonBusBtn"
+            style="@style/ButtonTextNormal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
             android:onClick="GattonBus"
             android:text="@string/GattonBusText" />
     </LinearLayout>

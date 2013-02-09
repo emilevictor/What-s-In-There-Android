@@ -26,8 +26,7 @@ public class UQRotaTimetableAdapter extends ArrayAdapter<RotaClass>{
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
         RoomHolder holder = null;
-        
-        
+
         if(row == null)
         {
             LayoutInflater inflater = ((Activity)context).getLayoutInflater();

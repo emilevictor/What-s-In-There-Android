@@ -108,6 +108,16 @@ public class BusMenu extends Activity {
 		startActivity(intent);
 	}
 	
+	public void ParkRdTrains(View view)
+	{
+		final Intent intent = new Intent(this, LiveBusInfo.class);
+		
+		//Let the next screen know that we want the uq lakes page.
+		intent.putExtra("stop", "parkRdTrain");
+		
+		startActivity(intent);
+	}
+	
 	public void ToowongTrain(View view)
 	{
 		final Intent intent = new Intent(this, LiveBusInfo.class);

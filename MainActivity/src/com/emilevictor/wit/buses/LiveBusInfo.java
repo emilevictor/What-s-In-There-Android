@@ -23,7 +23,7 @@ public class LiveBusInfo extends Activity {
 	private String ipswichTrainUrl = "http://mobile.jp.translink.com.au/travel-information/network-information/stops-and-stations/stop/ipswich-station";
 	private String ipswichBusUrl = "http://mobile.jp.translink.com.au/travel-information/network-information/stops-and-stations/stop/310076";
 	private String toowongTrainUrl = "http://mobile.jp.translink.com.au/travel-information/network-information/stops-and-stations/stop/toowong-station";
-
+	private String parkRdTrainUrl = "http://mobile.jp.translink.com.au/travel-information/network-information/stops-and-stations/stop/park-road-station";
 	@Override
 	public boolean onOptionsItemSelected(MenuItem menuItem)
 	{       
@@ -90,6 +90,10 @@ public class LiveBusInfo extends Activity {
 		} else if (requestedStop.equals("toowongTrain"))
 		{
 			this.liveBusInfoWebView.loadUrl(this.toowongTrainUrl);
+			scrollPastHeader();
+		} else if (requestedStop.equals("parkRdTrain"))
+		{
+			this.liveBusInfoWebView.loadUrl(this.parkRdTrainUrl);
 			scrollPastHeader();
 		}
 

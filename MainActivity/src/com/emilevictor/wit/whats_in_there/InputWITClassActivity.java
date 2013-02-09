@@ -61,7 +61,7 @@ public class InputWITClassActivity extends Activity {
 	public int selectedDay;
 	private int day;
 
-	private Handler progressBarHandler = new Handler();
+	private Handler progressBarHandler;
 	private int progressStatus = 0;
 
 	private Runnable animationRunnable = new Runnable() {
@@ -116,6 +116,7 @@ public class InputWITClassActivity extends Activity {
 			this.dayLabel = (TextView) findViewById(R.id.dayLabel);
 			this.daysSpinner = (Spinner) findViewById(R.id.daysSpinner);
 			this.buttonSend = (Button) findViewById(R.id.button_send);
+			this.progressBarHandler = new Handler();
 
 
 			//Hide the progress bar and its text.

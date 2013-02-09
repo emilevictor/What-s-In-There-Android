@@ -23,25 +23,27 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:hint="e.g. CSSE2310"
-        android:inputType="textPersonName"/>
-    
-        <TextView
-        android:paddingTop="17dp"
+        android:inputType="textPersonName" />
+
+    <TextView
         android:id="@+id/dayLabelWMC"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="17dp"
         android:text="@string/dayLabel"
         android:textAppearance="?android:attr/textAppearanceMedium" />
-    
-        <Spinner android:id="@+id/daysSpinnerWheresMyClass"
+
+    <Spinner
+        android:id="@+id/daysSpinnerWheresMyClass"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        />
+        android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/button_findClass"
+        style="@style/ButtonTextNormal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/button"
         android:onClick="findClass"
         android:text="@string/button_findClass_text" />
 

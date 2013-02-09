@@ -32,6 +32,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/chooseLibraryBtnText"
-        android:onClick="getFloorplanPage" />
+        android:onClick="getFloorplanPage"
+                    style="@style/ButtonTextNormal"
+            android:background="@drawable/button"/>
 
 </LinearLayout>

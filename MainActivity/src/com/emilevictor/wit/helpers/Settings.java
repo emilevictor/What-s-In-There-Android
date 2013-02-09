@@ -8,6 +8,9 @@ public class Settings {
 	public static String idAPIurlStart = "http://rota.eait.uq.edu.au/offerings/find.xml?with={%22course_code%22:%22";
 	public static String idAPIurlEnd = "%22,%22semester_id%22:%22"+currentSemesterNumber+"%22}";
 	
+	//Library overview
+	public static String libraryComputerOverviewUrl = "http://www.library.uq.edu.au/uqlsm/availablepcsembed.php?q=ask-it/computer-availability";
+	
 	//Library floor plans
 	public static String libraryFloorPlanUrlStart = "http://www.library.uq.edu.au/uqlsm/map.php?embed&building=";
 	public static String libraryFloorPlanUrlEnd = "&room=";

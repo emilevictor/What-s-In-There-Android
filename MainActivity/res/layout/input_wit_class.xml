@@ -60,7 +60,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="findRoomButtonPressed"
-        android:text="@+string/button_send" />
+        android:text="@+string/button_send"
+                    style="@style/ButtonTextNormal"
+            android:background="@drawable/button"/>
 
     <ProgressBar
         android:id="@+id/progressBar"

@@ -15,6 +15,7 @@ import android.webkit.WebView;
 
 import com.emilevictor.wit.MainActivity;
 import com.emilevictor.wit.R;
+import com.emilevictor.wit.helpers.Settings;
 
 public class LibraryAvailabilityOverview extends Activity {
 
@@ -72,7 +73,7 @@ public class LibraryAvailabilityOverview extends Activity {
 		this.libraryComputerOverviewWebView.getSettings().setDefaultZoom(WebSettings.ZoomDensity.FAR);
 		this.libraryComputerOverviewWebView.getSettings().setSupportZoom(true);
 		this.libraryComputerOverviewWebView.getSettings().setBuiltInZoomControls(true);
-		this.libraryComputerOverviewWebView.loadUrl("http://www.library.uq.edu.au/uqlsm/availablepcsembed.php?q=ask-it/computer-availability");
+		this.libraryComputerOverviewWebView.loadUrl(Settings.libraryComputerOverviewUrl);
 		
 		
 		

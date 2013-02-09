@@ -7,7 +7,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#000000"
+        android:background="#c90000"
         android:orientation="vertical" >
 
         <ImageView
@@ -21,9 +21,11 @@
 
         <Button
             android:id="@+id/signInUQRotaButton"
+            style="@style/ButtonTextTablets"
             android:layout_width="400dp"
             android:layout_height="100dp"
             android:layout_gravity="center_horizontal|top"
+            android:background="@drawable/button"
             android:onClick="signInRota"
             android:text="@string/loginUQRotaText" />
 
@@ -36,86 +38,106 @@
 
             <Button
                 android:id="@+id/accessUQRotaButtonToday"
+                style="@style/ButtonTextTablets"
                 android:layout_width="fill_parent"
                 android:layout_height="100dp"
                 android:layout_gravity="center_horizontal|top"
                 android:layout_weight="1"
+                android:background="@drawable/button"
                 android:onClick="openRotaDay"
                 android:text="@string/openRotaDayButtonText" />
 
             <Button
                 android:id="@+id/accessUQRotaButtonWeek"
+                style="@style/ButtonTextTablets"
                 android:layout_width="fill_parent"
                 android:layout_height="100dp"
                 android:layout_gravity="center_horizontal|top"
                 android:layout_weight="1"
+                android:background="@drawable/button"
                 android:onClick="openRotaWeek"
                 android:text="@string/openRotaWeekButtonText" />
         </LinearLayout>
 
         <Button
             android:id="@+id/logoutUQrotaButton"
-            
-            android:layout_gravity="center_horizontal|top"
+            style="@style/ButtonTextTablets"
             android:layout_width="400dp"
             android:layout_height="100dp"
+            android:layout_gravity="center_horizontal|top"
+            android:background="@drawable/button"
             android:onClick="logMeOutOfRota"
             android:text="@string/logoutOfUQRota" />
 
         <Button
             android:id="@+id/enterWhatsInThereButton"
+            style="@style/ButtonTextTablets"
             android:layout_width="400dp"
             android:layout_height="100dp"
             android:layout_gravity="center_horizontal|top"
+            android:background="@drawable/button"
             android:onClick="openWIT"
             android:text="@string/witMainPageButtonText" />
 
         <Button
             android:id="@+id/wheresMyClassBtn"
+            style="@style/ButtonTextTablets"
             android:layout_width="400dp"
             android:layout_height="100dp"
             android:layout_gravity="center_horizontal|top"
+            android:background="@drawable/button"
             android:onClick="wheresMyClassPage"
             android:text="@string/wheresMyClassBtnText" />
 
         <Button
             android:id="@+id/computerAvailabilityBtn"
+            style="@style/ButtonTextTablets"
             android:layout_width="400dp"
             android:layout_height="100dp"
             android:layout_gravity="center_horizontal|top"
+            android:background="@drawable/button"
             android:onClick="computerAvailabilityPage"
             android:text="@string/title_activity_computer_availability" />
 
         <Button
             android:id="@+id/UQLibraryCAOverviewBtn"
+            style="@style/ButtonTextTablets"
             android:layout_width="400dp"
             android:layout_height="100dp"
             android:layout_gravity="center_horizontal|top"
+            android:background="@drawable/button"
             android:onClick="UQLibraryCAOverview"
             android:text="@string/title_activity_library_availability_overview" />
 
         <Button
             android:id="@+id/computerAvailabilityOverviewBtn"
+            style="@style/ButtonTextTablets"
             android:layout_width="400dp"
             android:layout_height="100dp"
             android:layout_gravity="center_horizontal|top"
+            android:background="@drawable/button"
             android:onClick="computerAvailabilityOverviewPage"
             android:text="@string/title_activity_computer_availability_overview" />
 
         <Button
             android:id="@+id/liveBusInfoBtn"
+            
             android:layout_width="400dp"
             android:layout_height="100dp"
             android:layout_gravity="center_horizontal|top"
+            android:background="@drawable/button"
+            style="@style/ButtonTextTablets"
             android:onClick="liveBusInfo"
             android:text="@string/title_activity_live_bus_info" />
 
         <Button
             android:id="@+id/whatIsThisBtnText"
+            style="@style/ButtonTextTablets"
             android:layout_width="400dp"
             android:layout_height="100dp"
             android:layout_gravity="center_horizontal|top"
             android:layout_marginTop="50dp"
+            android:background="@drawable/button"
             android:onClick="whatIsThisPage"
             android:text="@string/whatIsThisBtnText" />
     </LinearLayout>

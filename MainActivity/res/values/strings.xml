@@ -27,6 +27,10 @@
         <item>Saturday</item>
         <item>Sunday</item>
     </string-array>
+    
+    <string name="roomAvailabilityAndClassesText">Room Availability and Classes:</string>
+    <string name="computerAvailabilityHeadingText">Computer Availability:</string>
+    <string name="transportText">Transport:</string>
 
     <string name="buildingRoomInstructionLabel">Building number and room, e.g. 78-116</string>
     <string name="campusLabel">Choose your campus:</string>
@@ -115,6 +119,7 @@
     <string name="title_activity_bus_menu">Bus Menu</string>
     <string name="chancellorsPlaceBusBtnText">Chancellor\'s Place Buses (Live)</string>
     <string name="UQLakesBusBtnText">UQ Lakes Buses (Live)</string>
+    <string name="parkRdTrainsText">Park Road Trains (Live)</string>
     <string name="RCHHerstonBusText">RCH Herston Buses (Live)</string>
     <string name="GattonBusText">Gatton (Warrego Hwy) Buses (Live)</string>
     <string name="IpswichBusBtnText">UQ Ipswich Buses (Live)</string>
@@ -137,6 +142,7 @@
     <string name="UQRotaHeaderRow">Your UQRota Timetable</string>
     <string name="uqRotaPageNoClassesToday">There are no classes today.</string>
     <string name="logoutOfUQRota">Logout UQRota</string>
+    <string name="rotaHeadingText">UQRota:</string>
     
     <!-- UQRota loading progress text -->
     <string name="uqRotaProgress1">Getting some information on your timetable from UQRota.</string>

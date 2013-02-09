@@ -29,7 +29,9 @@ import com.emilevictor.wit.R;
 public class DisplayRotaTimetableActivity extends Activity {
 
 	private ListView listView;
-	private Map<String,Integer> dayMap = new HashMap<String,Integer>();
+	private Map<Integer,String> dayMap = new HashMap<Integer,String>();
+	Map<String,Integer> reverseDayMap = new HashMap<String,Integer>();
+
 	private int FILTER_DAY = 0;
 	private TextView errorMessage;
 	private ListView results;
@@ -67,11 +69,12 @@ public class DisplayRotaTimetableActivity extends Activity {
 	
 	private Comparator<RotaClass> mComparator = new Comparator<RotaClass>()
 			{
-
+				
 				@Override
 				public int compare(RotaClass lhs, RotaClass rhs) {
+
 					int compared;
-					if ((compared = (dayMap.get(lhs.getDay()).compareTo(dayMap.get(rhs.getDay())))) == 0)
+					if ((compared = (reverseDayMap.get(lhs.getDay()).compareTo(reverseDayMap.get(rhs.getDay())))) == 0)
 					{
 						//same day
 						return lhs.getStartTime().compareTo(rhs.getStartTime());
@@ -88,13 +91,21 @@ public class DisplayRotaTimetableActivity extends Activity {
 		setContentView(R.layout.activity_uq_rota_timetable_results);
 		
 		//make daymap available.
-		dayMap.put("Sun", 0);
-		dayMap.put("Mon",1);
-		dayMap.put("Tue",2);
-		dayMap.put("Wed", 3);
-		dayMap.put("Thu", 4);
-		dayMap.put("Fri", 5);
-		dayMap.put("Sat", 6);
+		dayMap.put(0,"Sun");
+		dayMap.put(1,"Mon");
+		dayMap.put(2,"Tue");
+		dayMap.put(3,"Wed");
+		dayMap.put(4,"Thu");
+		dayMap.put(5,"Fri");
+		dayMap.put(6,"Sat");
+		
+		reverseDayMap.put("Sun", 0);
+		reverseDayMap.put("Mon",1);
+		reverseDayMap.put("Tue",2);
+		reverseDayMap.put("Wed",3);
+		reverseDayMap.put("Thu",4);
+		reverseDayMap.put("Fri",5);
+		reverseDayMap.put("Sat",6);
 		
 		this.errorMessage = (TextView) findViewById(R.id.uqRotaErrorMessage);
 		this.errorMessage.setVisibility(View.GONE);
@@ -112,7 +123,7 @@ public class DisplayRotaTimetableActivity extends Activity {
 		//Unsorted list of rota classes. We need a comparator to sort these.
 		List<RotaClass> unsortedRotaClasses = new ArrayList<RotaClass>();
 		
-		RotaClass[] RotaClass = new RotaClass[numberOfRotaClass];
+		
 		
 		//Get all of the bundled classes from the main activity.
 		for (int i = 0; i < numberOfRotaClass; i++)
@@ -148,9 +159,11 @@ public class DisplayRotaTimetableActivity extends Activity {
 		
 		if (numberOfRotaClass > 0)
 		{
+			
+			RotaClass[] classesArray = new RotaClass[numberOfRotaClass];
 			for (int i = 0; i < numberOfRotaClass; i++)
 			{
-				RotaClass[i] = unsortedRotaClasses.get(i);
+				classesArray[i] = unsortedRotaClasses.get(i);
 			}
 			
 			
@@ -159,7 +172,9 @@ public class DisplayRotaTimetableActivity extends Activity {
 			
 			//Create the adapter for our listview
 			UQRotaTimetableAdapter adapter = new UQRotaTimetableAdapter(this, 
-					R.layout.uqrota_item_row, RotaClass);
+					R.layout.uqrota_item_row, classesArray);
+			
+			
 
 			ListView listView = (ListView)findViewById(R.id.uqRotaTimetableList);
 

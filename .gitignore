@@ -12,7 +12,7 @@ local.properties
 .classpath
 .settings/
 .loadpath
-
+./advertising/
 *.class
 
 # External tool builders

@@ -18,12 +18,24 @@
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
             android:src="@drawable/bw_logo" />
+        
+        <TextView
+            android:id="@+id/rotaHeadingText"
+            android:text="@string/rotaHeadingText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            style="@style/ButtonTextNormal"
+            />
 
         <Button
             android:id="@+id/signInUQRotaButton"
+            style="@style/ButtonTextNormal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|top"
+            android:background="@drawable/button"
             android:onClick="signInRota"
             android:text="@string/loginUQRotaText" />
 
@@ -35,85 +47,136 @@
 
             <Button
                 android:id="@+id/accessUQRotaButtonToday"
+                style="@style/ButtonTextNormal"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|top"
                 android:layout_weight="1"
+                android:background="@drawable/button"
                 android:onClick="openRotaDay"
                 android:text="@string/openRotaDayButtonText" />
 
             <Button
                 android:id="@+id/accessUQRotaButtonWeek"
+                style="@style/ButtonTextNormal"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|top"
                 android:layout_weight="1"
+                android:background="@drawable/button"
                 android:onClick="openRotaWeek"
                 android:text="@string/openRotaWeekButtonText" />
         </LinearLayout>
-        
-        <Button
-            android:id="@+id/logoutUQrotaButton"
-            android:text="@string/logoutOfUQRota"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:onClick="logMeOutOfRota"
-            />
 
         <Button
+            android:id="@+id/logoutUQrotaButton"
+            style="@style/ButtonTextNormal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button"
+            android:onClick="logMeOutOfRota"
+            android:text="@string/logoutOfUQRota" />
+
+       <TextView
+            android:id="@+id/roomAvailabilityAndClasses"
+            android:text="@string/roomAvailabilityAndClassesText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            style="@style/ButtonTextNormal"
+            />
+        
+        <Button
             android:id="@+id/enterWhatsInThereButton"
+            style="@style/ButtonTextNormal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|top"
+            android:background="@drawable/button"
             android:onClick="openWIT"
             android:text="@string/witMainPageButtonText" />
 
         <Button
             android:id="@+id/wheresMyClassBtn"
+            style="@style/ButtonTextNormal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|top"
+            android:background="@drawable/button"
             android:onClick="wheresMyClassPage"
             android:text="@string/wheresMyClassBtnText" />
+        
+        <TextView
+            android:id="@+id/computerAvailabilityHeadingText"
+            android:text="@string/computerAvailabilityHeadingText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            style="@style/ButtonTextNormal"
+            />
 
         <Button
             android:id="@+id/computerAvailabilityBtn"
+            style="@style/ButtonTextNormal"
+            android:background="@drawable/button"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|top"
+            
             android:onClick="computerAvailabilityPage"
             android:text="@string/title_activity_computer_availability" />
 
         <Button
             android:id="@+id/UQLibraryCAOverviewBtn"
+            style="@style/ButtonTextNormal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|top"
+            android:background="@drawable/button"
             android:onClick="UQLibraryCAOverview"
             android:text="@string/title_activity_library_availability_overview" />
 
         <Button
             android:id="@+id/computerAvailabilityOverviewBtn"
+            style="@style/ButtonTextNormal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|top"
+            android:background="@drawable/button"
             android:onClick="computerAvailabilityOverviewPage"
             android:text="@string/title_activity_computer_availability_overview" />
+        
+                <TextView
+            android:id="@+id/transportText"
+            android:text="@string/transportText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            style="@style/ButtonTextNormal"
+            />
+        
 
         <Button
             android:id="@+id/liveBusInfoBtn"
+            style="@style/ButtonTextNormal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|top"
+            android:background="@drawable/button"
             android:onClick="liveBusInfo"
             android:text="@string/title_activity_live_bus_info" />
 
         <Button
             android:id="@+id/whatIsThisBtnText"
+            style="@style/ButtonTextNormal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|top"
             android:layout_marginTop="30dp"
+            android:background="@drawable/button"
             android:onClick="whatIsThisPage"
             android:text="@string/whatIsThisBtnText" />
     </LinearLayout>

@@ -16,6 +16,7 @@ import com.emilevictor.wit.buses.BusMenu;
 import com.emilevictor.wit.computeravailability.ComputerAvailabilityLiveFloorPlans;
 import com.emilevictor.wit.computeravailability.ComputerAvailabilityOverview;
 import com.emilevictor.wit.computeravailability.LibraryAvailabilityOverview;
+import com.emilevictor.wit.helpers.FileCache;
 import com.emilevictor.wit.helpers.Settings;
 import com.emilevictor.wit.uqrota.ShowDefaultTimetable;
 import com.emilevictor.wit.uqrota.UQRotaLogin;
@@ -45,6 +46,14 @@ public class MainActivity extends Activity {
 		if (userHasSetDefaultTimetableAndValidCookieExists())
 		{
 			this.mRotaAccessLayout.setVisibility(View.VISIBLE);
+		} else if (FileCache.checkExistenceOfCachedTimetable(this) &&
+				FileCache.checkCacheValidityAgainstCurrentTimetable(this) &&
+				!userHasSetDefaultTimetableAndValidCookieExists())
+		{
+			//User logged out, but cache exists.
+			this.mRotaAccessLayout.setVisibility(View.VISIBLE);
+			this.mUqRotaLoginButton.setVisibility(View.VISIBLE);
+			this.logoutUQRotaButton.setVisibility(View.GONE);
 		} else {
 			this.mUqRotaLoginButton.setVisibility(View.VISIBLE);
 			this.logoutUQRotaButton.setVisibility(View.GONE);
