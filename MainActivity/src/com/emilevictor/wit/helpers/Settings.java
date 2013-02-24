@@ -10,6 +10,7 @@ public class Settings {
 	
 	//Library overview
 	public static String libraryComputerOverviewUrl = "http://www.library.uq.edu.au/uqlsm/availablepcsembed.php?q=ask-it/computer-availability";
+	public static String libraryHourInfoPageUrl = "http://www.library.uq.edu.au/hours/";
 	
 	//Library floor plans
 	public static String libraryFloorPlanUrlStart = "http://www.library.uq.edu.au/uqlsm/map.php?embed&building=";

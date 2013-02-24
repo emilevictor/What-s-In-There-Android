@@ -8,7 +8,9 @@
         android:layout_height="fill_parent"
         android:background="#000000"
         android:orientation="vertical"
-        tools:context=".MainActivity" >
+        tools:context=".MainActivity"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp" >
 
         <ImageView
             android:id="@+id/header"
@@ -18,6 +20,16 @@
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
             android:src="@drawable/bw_logo" />
+        
+        <TextView
+                    android:text="@string/marqueeMessage"
+                    android:id="@+id/MarqueeText" android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" android:singleLine="true"
+                    android:textColor="#00cc00"
+                    android:ellipsize="marquee" android:marqueeRepeatLimit="marquee_forever"
+                    android:scrollHorizontally="true" android:paddingLeft="15dip"
+                    android:paddingRight="15dip" android:focusable="true"
+                    android:focusableInTouchMode="true" android:freezesText="true"></TextView>
         
         <TextView
             android:id="@+id/rotaHeadingText"

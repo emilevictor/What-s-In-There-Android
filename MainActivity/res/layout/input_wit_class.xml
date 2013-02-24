@@ -35,12 +35,30 @@
         android:text="@string/buildingRoomInstructionLabel"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <EditText
-        android:id="@+id/room_textfield"
+    <LinearLayout
+        android:id="@+id/horizontalRoomAndBuildingLayout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:inputType="text"
-        android:paddingTop="17dp" />
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/building_textfield"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:hint="@string/buildingInputHint"
+            android:inputType="text"
+            android:paddingTop="17dp" />
+
+        <EditText
+            android:id="@+id/room_textfield"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:hint="@string/roomInputHint"
+            android:inputType="text"
+            android:paddingTop="17dp" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/dayLabel"
@@ -57,12 +75,12 @@
 
     <Button
         android:id="@+id/button_send"
+        style="@style/ButtonTextNormal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/button"
         android:onClick="findRoomButtonPressed"
-        android:text="@+string/button_send"
-                    style="@style/ButtonTextNormal"
-            android:background="@drawable/button"/>
+        android:text="@+string/button_send" />
 
     <ProgressBar
         android:id="@+id/progressBar"

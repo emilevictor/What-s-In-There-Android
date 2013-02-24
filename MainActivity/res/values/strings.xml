@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <string name="marqueeMessage">UQRota users please note that timetable may not be 100% accurate for week 1 | 
+        Student Assistant - better than sitting on Si-net mashing F5 | Android version by Emile Victor</string>
     <string name="app_name">Student Assistant - UQ</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
@@ -27,12 +29,13 @@
         <item>Saturday</item>
         <item>Sunday</item>
     </string-array>
-    
+
     <string name="roomAvailabilityAndClassesText">Room Availability and Classes:</string>
     <string name="computerAvailabilityHeadingText">Computer Availability:</string>
     <string name="transportText">Transport:</string>
-
     <string name="buildingRoomInstructionLabel">Building number and room, e.g. 78-116</string>
+    <string name="buildingInputHint">building (e.g. 78)</string>
+    <string name="roomInputHint">room (e.g. 116)</string>
     <string name="campusLabel">Choose your campus:</string>
     <string name="dayLabel">Choose which day to search for:</string>
     <string name="waiting_on_connection">Wait a second, I\'m not connected to the internet yet. Check your settings.</string>
@@ -115,6 +118,7 @@
     <string name="title_activity_computer_availability_overview_results">EAIT Computer Availability</string>
 
     <!-- Bus information -->
+    <string name="stLuciaBusesHeader">St Lucia Transport</string>
     <string name="title_activity_live_bus_info">Live Bus Information</string>
     <string name="title_activity_bus_menu">Bus Menu</string>
     <string name="chancellorsPlaceBusBtnText">Chancellor\'s Place Buses (Live)</string>
@@ -136,19 +140,22 @@
     <string name="error_incorrect_password_or_username">Incorrect password or username.</string>
     <string name="title_activity_choose_rota_timetable">Choose timetable</string>
     <string name="UQRotaTimetableLoadingStatusInformation">Loading your timetables from UQRota...</string>
+
     <item name="uqRotaTimetableId" type="id"/>
+
     <string name="uqRotaTimetableSet">Set default timetable successfully.</string>
     <string name="title_activity_show_default_timetable">Your UQRota Timetable</string>
     <string name="UQRotaHeaderRow">Your UQRota Timetable</string>
     <string name="uqRotaPageNoClassesToday">There are no classes today.</string>
     <string name="logoutOfUQRota">Logout UQRota</string>
     <string name="rotaHeadingText">UQRota:</string>
-    
+
     <!-- UQRota loading progress text -->
     <string name="uqRotaProgress1">Getting some information on your timetable from UQRota.</string>
     <string name="uqRotaProgress2">Getting some more information...</string>
 
     <!-- Error strings for UQRota -->
     <string name="InterruptedExceptionRotaFetch">There was a problem fetching your rota timetable. If you need support, email me: e@emilevictor.com.</string>
+    <string name="title_activity_scrape_uqlibrary_info">Loading UQ Library Data</string>
 
 </resources>

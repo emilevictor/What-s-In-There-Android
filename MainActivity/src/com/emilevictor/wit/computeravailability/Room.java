@@ -27,7 +27,7 @@ public class Room implements Serializable{
 	{
 		this.roomNumber = rn;
 		this.totalAvailable = tA;
-		this.currentAvailable = tA;
+		this.currentAvailable = cA;
 	}
 
 }

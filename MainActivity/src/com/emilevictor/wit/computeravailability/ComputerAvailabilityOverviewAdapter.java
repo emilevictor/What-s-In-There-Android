@@ -53,16 +53,13 @@ public class ComputerAvailabilityOverviewAdapter extends ArrayAdapter<Room>{
         //Calculate the ratio
         double ratio = (double)rm.currentAvailable/(double)rm.totalAvailable;
         
-        if (ratio < 0.25d)
+        if (rm.currentAvailable == 0)
         {
         	holder.currentAvailable.setBackgroundColor(0xFFc80000);
-        } else if (ratio >= 0.25d && ratio < 0.5d)
+        } else if (rm.currentAvailable < 4 && rm.totalAvailable > 7)
         {
         	holder.currentAvailable.setBackgroundColor(0xFFffc000);
-        } else if (ratio >= 0.5d && ratio < 0.75d)
-        {
-        	holder.currentAvailable.setBackgroundColor(0xFF00a2ff);
-        } else if (ratio >= 0.75d)
+        } else
         {
         	holder.currentAvailable.setBackgroundColor(0xFF01860a);
         }

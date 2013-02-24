@@ -53,6 +53,7 @@ public class InputWITClassActivity extends Activity {
 	public Spinner campusChoiceSpinner;
 	private TextView buildingRoomInstructionLabel;
 	private EditText roomTextfield;
+	private EditText buildingTextfield;
 	private TextView dayLabel;
 	private Spinner daysSpinner;
 	private Button buttonSend;
@@ -113,6 +114,7 @@ public class InputWITClassActivity extends Activity {
 			this.campusChoiceSpinner = (Spinner) findViewById(R.id.campusChoiceSpinner);
 			this.buildingRoomInstructionLabel = (TextView) findViewById(R.id.buildingRoomInstructionLabel);
 			this.roomTextfield = (EditText) findViewById(R.id.room_textfield);
+			this.buildingTextfield = (EditText) findViewById(R.id.building_textfield);
 			this.dayLabel = (TextView) findViewById(R.id.dayLabel);
 			this.daysSpinner = (Spinner) findViewById(R.id.daysSpinner);
 			this.buttonSend = (Button) findViewById(R.id.button_send);
@@ -201,6 +203,7 @@ public class InputWITClassActivity extends Activity {
 			this.campusLabel.setVisibility(View.INVISIBLE);
 			this.campusChoiceSpinner.setVisibility(View.INVISIBLE);
 			this.buildingRoomInstructionLabel.setVisibility(View.INVISIBLE);
+			this.buildingTextfield.setVisibility(View.INVISIBLE);
 			this.roomTextfield.setVisibility(View.INVISIBLE);
 			this.dayLabel.setVisibility(View.INVISIBLE);
 			this.daysSpinner.setVisibility(View.INVISIBLE);
@@ -210,6 +213,7 @@ public class InputWITClassActivity extends Activity {
 			InputMethodManager imm = (InputMethodManager)getSystemService(
 					Context.INPUT_METHOD_SERVICE);
 			imm.hideSoftInputFromWindow(this.roomTextfield.getWindowToken(), 0);
+			imm.hideSoftInputFromInputMethod(this.buildingTextfield.getWindowToken(), 0);
 
 
 			selectedDay = this.daysSpinner.getSelectedItemPosition();
@@ -268,7 +272,17 @@ public class InputWITClassActivity extends Activity {
 						progressBarHandler.postDelayed(animationRunnable,10);
 
 						EditText roomInput = (EditText) findViewById(R.id.room_textfield);
-						RoomBuildingParser rbp = new RoomBuildingParser(roomInput.getText().toString());
+						EditText buildingInput = (EditText) findViewById(R.id.building_textfield);
+						
+						//Get strings, capitalize, concatenate and then pass to RBP.
+						String roomInputString = roomInput.getText().toString();
+						String buildingInputString = buildingInput.getText().toString();
+						roomInputString = roomInputString.toUpperCase().trim();
+						buildingInputString = buildingInputString.toUpperCase().trim();
+						
+						
+						
+						RoomBuildingParser rbp = new RoomBuildingParser(buildingInputString + "-" + roomInputString);
 						// Update the progress bar
 
 						progressBarHandler.post(new Runnable() {
@@ -405,6 +419,7 @@ public class InputWITClassActivity extends Activity {
 									campusChoiceSpinner.setVisibility(View.VISIBLE);
 									buildingRoomInstructionLabel.setVisibility(View.VISIBLE);
 									roomTextfield.setVisibility(View.VISIBLE);
+									buildingTextfield.setVisibility(View.VISIBLE);
 									dayLabel.setVisibility(View.VISIBLE);
 									daysSpinner.setVisibility(View.VISIBLE);
 									buttonSend.setVisibility(View.VISIBLE);
