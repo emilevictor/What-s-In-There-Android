@@ -116,7 +116,8 @@
     <string name="title_activity_library_floor_plan">Computer Availability</string>
     <string name="title_activity_computer_availability_overview">EAIT Computer Availability</string>
     <string name="title_activity_computer_availability_overview_results">EAIT Computer Availability</string>
-
+	<string name="UQ_library_data_overview">UQ Library overview</string>
+    
     <!-- Bus information -->
     <string name="stLuciaBusesHeader">St Lucia Transport</string>
     <string name="title_activity_live_bus_info">Live Bus Information</string>
@@ -129,7 +130,7 @@
     <string name="IpswichBusBtnText">UQ Ipswich Buses (Live)</string>
     <string name="IpswichTrainBtnText">Ipswich Trains (Live)</string>
     <string name="ToowongTrainBtnText">Toowong Trains (Live)</string>
-    <string name="title_activity_library_availability_overview">UQ Library Computer Availability Overview</string>
+    <string name="title_activity_library_availability_overview">UQ Library Overview</string>
 
     <!-- UQ Rota -->
     <string name="loginUQRotaText">Log into UQRota for timetable access</string>

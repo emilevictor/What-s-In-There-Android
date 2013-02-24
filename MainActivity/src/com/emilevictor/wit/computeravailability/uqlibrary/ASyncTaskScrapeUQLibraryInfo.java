@@ -43,16 +43,64 @@ public class ASyncTaskScrapeUQLibraryInfo  extends AsyncTask<String, Void, List<
 		
 		
 		
-		return null;
+		return libraries;
 	}
 
 	private List<Library> getLibraryComputerAvailabilities(List<Library> libraries,
 			Document availabilityDoc) {
 		
-		Elements libraryRows = availabilityDoc.select(".left");
+		Elements libraryRows = availabilityDoc.select("tr");
 		
-		for (Element lib : libraryRows)
+		for (Element row : libraryRows)
 		{
+			//Get the title, then identify the index of the current library (if it exists)
+			//Then update info.
+			
+			String currentLibrary = row.select("[href]").text();
+			int currentLibraryNumber = -1;
+			
+			if (currentLibrary.equals("Architecture & Music Library"))
+			{
+				currentLibrary = "Architecture / Music Library";
+			} else if (currentLibrary.equals("Herston Medical Library"))
+			{
+				currentLibrary = "Herston Health Sciences Library";
+			} else if (currentLibrary.equals("D.H. Engineering & Sciences Library"))
+			{
+				currentLibrary = "Dorothy Hill Engineering & Sciences Library";
+			} else if (currentLibrary.equals("Mater Hospital Library"))
+			{
+				currentLibrary = "Mater McAuley Library";
+			} else if (currentLibrary.equals("Gatton Campus Library"))
+			{
+				currentLibrary = "Gatton Library";
+			} else if (currentLibrary.equals("Duhig Building"))
+			{
+				currentLibrary = "Study Areas in the Duhig Library Building";
+			}
+			
+			//Check which library this matches.
+			for (int i = 0; i < libraries.size(); i++)
+			{
+				if (libraries.get(i).getName().equals(currentLibrary))
+				{
+					currentLibraryNumber = i;
+					break;
+				}
+			}
+			
+			if (currentLibraryNumber >= 0)
+			{
+				//Get current and total pc availability
+				String pcAvailability = row.select(".right").text();
+				String [] splitAvailability = pcAvailability.split(" ");
+				
+				//Update library.
+				libraries.get(currentLibraryNumber).setNumberComputersAvailable(Integer.valueOf(splitAvailability[0]));
+				libraries.get(currentLibraryNumber).setNumberComputersTotal(Integer.valueOf(splitAvailability[3]));
+			}
+			
+			
 			
 		}
 		
@@ -84,7 +132,11 @@ public class ASyncTaskScrapeUQLibraryInfo  extends AsyncTask<String, Void, List<
 				Log.w("Library name", libraryName.get(0).text());
 				increaseRowIndex = true;
 			} else {
-				
+				Elements elems = hoursTableRows.get(i).select(".uqtext");
+				if (elems.size() > 0)
+				{
+					libraries.get(libraries.size()-1).setExtraComments(elems.get(0).text());
+				}
 			}
 			
 			

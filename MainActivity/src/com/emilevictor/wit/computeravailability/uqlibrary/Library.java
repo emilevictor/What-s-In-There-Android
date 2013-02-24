@@ -1,12 +1,18 @@
 package com.emilevictor.wit.computeravailability.uqlibrary;
 
+import java.io.Serializable;
+
 /**
  * Stores a UQ library and all information that can be gathered for today.
  * @author emilevictor
  *
  */
-public class Library {
+public class Library implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1483400271656587330L;
 	private String name;
 	private boolean openToday;
 	private String openTimesToday;

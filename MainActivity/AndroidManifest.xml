@@ -95,6 +95,12 @@
             android:name="com.emilevictor.wit.computeravailability.uqlibrary.ScrapeUQLibraryInfo"
             android:label="@string/title_activity_scrape_uqlibrary_info" >
         </activity>
+        
+        <activity
+            android:name="com.emilevictor.wit.computeravailability.uqlibrary.UQLibraryScrapeResults"
+            android:label="@string/UQ_library_data_overview" >
+        </activity>
+        
     </application>
 
 </manifest>
