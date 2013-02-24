@@ -8,11 +8,9 @@ package com.emilevictor.wit.computeravailability.uqlibrary;
 public class Library {
 
 	private String name;
-	private String openToday;
+	private boolean openToday;
 	private String openTimesToday;
 	
-	private String openingHour;
-	private String closingHour;
 	
 	private Integer numberComputersAvailable;
 	private Integer numberComputersTotal;
@@ -53,21 +51,7 @@ public class Library {
 		this.numberComputersAvailable = numberComputersAvailable;
 	}
 
-	public String getClosingHour() {
-		return closingHour;
-	}
-
-	public void setClosingHour(String closingHour) {
-		this.closingHour = closingHour;
-	}
-
-	public String getOpeningHour() {
-		return openingHour;
-	}
-
-	public void setOpeningHour(String openingHour) {
-		this.openingHour = openingHour;
-	}
+	
 
 	public String getOpenTimesToday() {
 		return openTimesToday;
@@ -77,11 +61,11 @@ public class Library {
 		this.openTimesToday = openTimesToday;
 	}
 
-	public String getOpenToday() {
+	public boolean getOpenToday() {
 		return openToday;
 	}
 
-	public void setOpenToday(String openToday) {
+	public void setOpenToday(boolean openToday) {
 		this.openToday = openToday;
 	}
 

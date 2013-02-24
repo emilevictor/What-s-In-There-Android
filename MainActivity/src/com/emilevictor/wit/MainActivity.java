@@ -16,6 +16,7 @@ import com.emilevictor.wit.buses.BusMenu;
 import com.emilevictor.wit.computeravailability.ComputerAvailabilityLiveFloorPlans;
 import com.emilevictor.wit.computeravailability.ComputerAvailabilityOverview;
 import com.emilevictor.wit.computeravailability.LibraryAvailabilityOverview;
+import com.emilevictor.wit.computeravailability.uqlibrary.ScrapeUQLibraryInfo;
 import com.emilevictor.wit.helpers.FileCache;
 import com.emilevictor.wit.helpers.Settings;
 import com.emilevictor.wit.uqrota.ShowDefaultTimetable;
@@ -145,7 +146,7 @@ public class MainActivity extends Activity {
 
 	public void UQLibraryCAOverview(View view)
 	{
-		final Intent intent = new Intent(this, LibraryAvailabilityOverview.class);
+		final Intent intent = new Intent(this, ScrapeUQLibraryInfo.class);
 
 		startActivity(intent);
 	}
